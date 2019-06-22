@@ -40,42 +40,50 @@ class _HomeScreenState extends State<HomeScreen>
 
     _controller.forward();
 
+    Widget _pageBuilder() {
+      return Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.max,
+        children: <Widget>[
+          Expanded(
+            child: PageView.builder(
+              controller: _pageController,
+              itemBuilder: (BuildContext context, int index) {
+                if (index == 3) {
+                  return PageClean();
+                } else {
+                  return PageScreen();
+                }
+              },
+              itemCount: 3 + 1,
+            ),
+          ),
+        ],
+      );
+    }
+
+    FadeTransition _fadeTransition() {
+      return FadeTransition(
+        opacity: _animation,
+        child: NotificationListener<ScrollNotification>(
+          onNotification: (notification) {
+            if (notification is ScrollEndNotification) {
+              int currentPage = _pageController.page.round().toInt();
+              if (_currentPageIndex != currentPage) {
+                setState(() => _currentPageIndex = currentPage);
+              }
+            }
+          },
+          child: _pageBuilder(),
+        ),
+      );
+    }
+
     return GradientBackground(
       color: backgroundColor,
       child: Scaffold(
         backgroundColor: Colors.transparent,
-        body: FadeTransition(
-          opacity: _animation,
-          child: NotificationListener<ScrollNotification>(
-            onNotification: (notification) {
-              if (notification is ScrollEndNotification) {
-                int currentPage = _pageController.page.round().toInt();
-                if (_currentPageIndex != currentPage) {
-                  setState(() => _currentPageIndex = currentPage);
-                }
-              }
-            },
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              mainAxisSize: MainAxisSize.max,
-              children: <Widget>[
-                Expanded(
-                  child: PageView.builder(
-                    controller: _pageController,
-                    itemBuilder: (BuildContext context, int index) {
-                      if (index == 3) {
-                        return PageClean();
-                      } else {
-                        return PageScreen();
-                      }
-                    },
-                    itemCount: 3 + 1,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
+        body: _fadeTransition(),
       ),
     );
   }
