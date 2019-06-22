@@ -5,7 +5,6 @@ import 'package:projetcx/app/routes.dart';
 import 'package:projetcx/app/ui/home/home.dart';
 
 class App extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -13,7 +12,7 @@ class App extends StatelessWidget {
       title: Strings.appName,
       theme: themeData,
       routes: Routes.routes,
-      home: HomeScreen(Strings.appName),
+      home: HomeScreen(),
     );
   }
 }
