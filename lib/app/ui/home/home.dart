@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:projetcx/app/ui/page/clean.dart';
 import 'package:projetcx/app/ui/page/screen.dart';
-import 'package:projetcx/app/widgets/gradient_background.dart';
+import 'package:projetcx/app/widgets/utils/gradient_background.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -81,9 +81,14 @@ class _HomeScreenState extends State<HomeScreen>
 
     return GradientBackground(
       color: backgroundColor,
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        body: _fadeTransition(),
+      child: WillPopScope(
+        onWillPop: () async {
+          return false;
+        },
+        child: Scaffold(
+          backgroundColor: Colors.transparent,
+          body: _fadeTransition(),
+        ),
       ),
     );
   }
