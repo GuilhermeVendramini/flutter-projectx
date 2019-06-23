@@ -16,6 +16,7 @@ class FieldColorPicker extends StatelessWidget {
           context: context,
           builder: (BuildContext context) {
             return AlertDialog(
+              titlePadding: EdgeInsets.only(top: 40.0),
               backgroundColor: Colors.transparent,
               title: Text(
                 'CHOOSE A COLOR',

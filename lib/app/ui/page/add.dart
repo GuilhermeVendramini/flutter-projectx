@@ -30,6 +30,10 @@ class _PageAdd extends State<PageAdd> {
             ),
           );
         }),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {},
+          child: Icon(Icons.done, size: 40.0,),
+        ),
       ),
     );
   }
