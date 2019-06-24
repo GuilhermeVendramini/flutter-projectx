@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:projetcx/app/controllers/page.dart' as p;
+import 'package:projetcx/app/models/page.dart';
 import 'package:projetcx/app/ui/page/clean.dart';
 import 'package:projetcx/app/ui/page/screen.dart';
+import 'package:projetcx/app/utils/dynamic_color.dart';
 import 'package:projetcx/app/widgets/utils/gradient_background.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -28,15 +32,16 @@ class _HomeScreenState extends State<HomeScreen>
 
   @override
   Widget build(BuildContext context) {
-    Color backgroundColor = Colors.blueGrey;
+    final p.PageService _page = Provider.of<p.PageService>(context);
 
-    if (_currentPageIndex == 0) {
-      backgroundColor = Colors.orange;
-    } else if (_currentPageIndex == 1) {
-      backgroundColor = Colors.deepPurple;
-    } else if (_currentPageIndex == 2) {
-      backgroundColor = Colors.teal;
+    if (_page.isItemsLoaded == null) {
+      _page.loadItems();
     }
+
+    final List<PageModel> _pages = _page.getItems;
+
+    Color _backgroundColor =
+        DynamicColor.getBackground(_pages, _currentPageIndex);
 
     _controller.forward();
 
@@ -49,13 +54,13 @@ class _HomeScreenState extends State<HomeScreen>
             child: PageView.builder(
               controller: _pageController,
               itemBuilder: (BuildContext context, int index) {
-                if (index == 3) {
+                if (index == _pages.length) {
                   return PageClean();
                 } else {
                   return PageScreen();
                 }
               },
-              itemCount: 3 + 1,
+              itemCount: _pages.length + 1,
             ),
           ),
         ],
@@ -80,7 +85,7 @@ class _HomeScreenState extends State<HomeScreen>
     }
 
     return GradientBackground(
-      color: backgroundColor,
+      color: _backgroundColor,
       child: WillPopScope(
         onWillPop: () async {
           return false;

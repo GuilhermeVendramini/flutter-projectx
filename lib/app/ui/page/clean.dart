@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:projetcx/app/ui/page/add.dart';
+import 'package:projetcx/app/ui/page/add_form.dart';
 
 class PageClean extends StatefulWidget {
   @override
@@ -21,7 +21,7 @@ class _PageCleanState extends State<PageClean> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => PageAdd(),
+                  builder: (context) => PageAddForm(),
                 ),
               );
             },
