@@ -4,6 +4,7 @@ import 'package:projetcx/app/models/page.dart';
 import 'package:projetcx/app/ui/page/clean.dart';
 import 'package:projetcx/app/ui/page/screen.dart';
 import 'package:projetcx/app/utils/dynamic_color.dart';
+import 'package:projetcx/app/utils/full_screen.dart';
 import 'package:projetcx/app/widgets/utils/gradient_background.dart';
 import 'package:provider/provider.dart';
 
@@ -18,6 +19,7 @@ class _HomeScreenState extends State<HomeScreen>
   Animation<double> _animation;
   PageController _pageController;
   int _currentPageIndex = 0;
+  bool _fullScreen = true;
 
   @override
   void initState() {
@@ -79,7 +81,13 @@ class _HomeScreenState extends State<HomeScreen>
               }
             }
           },
-          child: _pageBuilder(),
+          child: GestureDetector(
+            child: _pageBuilder(),
+            onDoubleTap: () {
+              _fullScreen = _fullScreen ? false : true;
+              FullScreen.setFullScreen(_fullScreen);
+            },
+          ),
         ),
       );
     }
@@ -88,6 +96,7 @@ class _HomeScreenState extends State<HomeScreen>
       color: _backgroundColor,
       child: WillPopScope(
         onWillPop: () async {
+          FullScreen.setFullScreen(false);
           return false;
         },
         child: Scaffold(
