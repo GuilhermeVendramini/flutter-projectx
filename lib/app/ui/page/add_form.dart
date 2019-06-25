@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:projetcx/app/constants/app_colors.dart';
+import 'package:projetcx/app/constants/strings.dart';
 import 'package:projetcx/app/controllers/page.dart';
 import 'package:projetcx/app/ui/home/home.dart';
 import 'package:projetcx/app/widgets/fields/color_picker.dart';
@@ -90,7 +91,7 @@ class _PageAddForm extends State<PageAddForm> {
                 height: 20.0,
               ),
               FieldTextField(
-                hintText: 'Page name...',
+                hintText: Strings.fieldPageName,
                 autoFocus: true,
                 onSaved: (name) {
                   setState(() {

@@ -10,8 +10,14 @@ class DBPage {
     return result.map((it) => PageModel.fromJson(it)).toList();
   }
 
-  Future<int> insertItem(PageModel page) async {
+  Future<int> insert(PageModel page) async {
     final db = await dbProvider.database;
     return db.insert('page', page.toJson());
+  }
+
+  Future<int> update(PageModel page) async {
+    final db = await dbProvider.database;
+    return db
+        .update('page', page.toJson(), where: 'id = ?', whereArgs: [page.id]);
   }
 }

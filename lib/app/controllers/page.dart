@@ -9,7 +9,10 @@ class PageController with ChangeNotifier {
 
 class Page extends PageController {
   List<PageModel> get getItems {
-    return _items.toList();
+    _items.sort((a, b) {
+      return a.weight.compareTo(b.weight);
+    });
+    return _items;
   }
 
   bool get isItemsLoaded {
@@ -32,14 +35,25 @@ class PageService extends Page {
   }
 
   addItem(Map<String, dynamic> page) {
-    db.insertItem(
+    db.insert(
       PageModel(
-        name: page['name'] != null ? page['name'] : 'Page',
+        name: page['name'] != '' ? page['name'] : 'Page',
         color: page['color'],
         weight: 0,
       ),
     );
     _isItemsLoaded = null;
     notifyListeners();
+  }
+
+  updateItem(Map<String, dynamic> page) {
+    db.update(
+      PageModel(
+        id: page['id'],
+        name: page['name'] != null ? page['name'] : 'Page',
+        color: page['color'],
+        weight: page['weight'],
+      ),
+    );
   }
 }

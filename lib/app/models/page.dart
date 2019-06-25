@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 class PageModel {
   final int id;
-  final String name;
-  final int color;
-  final int weight;
+  String name;
+  int color;
+  int weight;
 
   PageModel({
     this.id,

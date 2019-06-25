@@ -12,6 +12,9 @@ final ThemeData themeData = new ThemeData(
       color: Colors.white,
     ),
   ),
+  appBarTheme: AppBarTheme(
+    color: Colors.blueGrey,
+  ),
   textTheme: TextTheme(
     body1: TextStyle(color: Colors.white),
     body2: TextStyle(color: Colors.white),

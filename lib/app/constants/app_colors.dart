@@ -21,6 +21,7 @@ class AppColors {
     Colors.deepOrange,
     Colors.brown,
     Colors.grey,
+    Colors.black54,
   ];
 
   static Map<int, Color> _colors = Map();

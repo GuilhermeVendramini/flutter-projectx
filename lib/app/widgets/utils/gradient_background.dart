@@ -11,10 +11,11 @@ class GradientBackground extends StatelessWidget {
     return AnimatedContainer(
       decoration: BoxDecoration(
         gradient: LinearGradient(
-            begin: Alignment.topRight,
-            end: Alignment.bottomLeft,
-            stops: [0.3, 0.5, 0.7, 0.9],
-            colors: getColorList(color)),
+          begin: Alignment.topRight,
+          end: Alignment.bottomLeft,
+          stops: [0.3, 0.5, 0.7, 0.9],
+          colors: getColorList(color),
+        ),
       ),
       curve: Curves.linear,
       child: child,
@@ -25,9 +26,9 @@ class GradientBackground extends StatelessWidget {
   List<Color> getColorList(Color color) {
     if (color is MaterialColor) {
       return [
-        color[300],
         color[600],
         color[700],
+        color[800],
         color[900],
       ];
     } else {
