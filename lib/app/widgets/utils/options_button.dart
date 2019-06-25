@@ -29,7 +29,7 @@ class OptionsButton extends StatelessWidget {
                 transform: Matrix4.rotationZ(controller.value * 0.5 * math.pi),
                 child: Icon(
                   controller.isDismissed ? Icons.more_vert : Icons.close,
-                  color: Colors.white.withOpacity(0.6),
+                  color: Colors.white.withOpacity(0.8),
                 ),
               );
             },
@@ -58,7 +58,7 @@ class OptionEditButton extends StatelessWidget {
                 curve: Interval(0.0, 1.0, curve: Curves.easeOut)),
             child: Icon(
               Icons.edit,
-              color: Colors.white.withOpacity(0.6),
+              color: Colors.white.withOpacity(0.8),
             ),
           ),
         ),
@@ -86,7 +86,7 @@ class OptionReorderButton extends StatelessWidget {
                 curve: Interval(0.0, 1.0, curve: Curves.easeOut)),
             child: Icon(
               Icons.reorder,
-              color: Colors.white.withOpacity(0.6),
+              color: Colors.white.withOpacity(0.8),
             ),
           ),
         ),
