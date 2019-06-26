@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:projetcx/app/constants/strings.dart';
 import 'package:projetcx/app/controllers/page.dart' as p;
 import 'package:projetcx/app/models/page.dart';
-import 'package:projetcx/app/ui/home/home.dart';
 import 'package:projetcx/app/ui/page/reorder.dart';
 import 'package:provider/provider.dart';
 
@@ -172,12 +171,8 @@ class OptionDeleteButton extends StatelessWidget {
         ),
         onPressed: () async {
           await _page.deleteItem(_item);
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => HomeScreen(),
-            ),
-          );
+          _page.notifyChange();
+          Navigator.of(context).pop();
         },
       ),
     );

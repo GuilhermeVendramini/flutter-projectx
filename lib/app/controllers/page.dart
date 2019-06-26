@@ -9,7 +9,7 @@ class PageController with ChangeNotifier {
 
 class Page extends PageController {
   List<PageModel> get getItems {
-    if(_items != null) {
+    if (_items != null) {
       _items.sort((a, b) {
         return a.weight.compareTo(b.weight);
       });
@@ -61,5 +61,9 @@ class PageService extends Page {
       _items.removeWhere((item) => item.id == page.id);
     });
     return result;
+  }
+
+  void notifyChange() {
+    notifyListeners();
   }
 }
