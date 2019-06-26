@@ -20,4 +20,9 @@ class DBPage {
     return db
         .update('page', page.toJson(), where: 'id = ?', whereArgs: [page.id]);
   }
+
+  Future<int> delete(PageModel page) async {
+    final db = await dbProvider.database;
+    return db.delete('page', where: 'id = ?', whereArgs: [page.id]);
+  }
 }

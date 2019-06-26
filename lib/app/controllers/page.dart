@@ -3,15 +3,17 @@ import 'package:projetcx/app/db/page.dart';
 import 'package:projetcx/app/models/page.dart';
 
 class PageController with ChangeNotifier {
-  List<PageModel> _items = [];
+  List<PageModel> _items;
   bool _isItemsLoaded;
 }
 
 class Page extends PageController {
   List<PageModel> get getItems {
-    _items.sort((a, b) {
-      return a.weight.compareTo(b.weight);
-    });
+    if(_items != null) {
+      _items.sort((a, b) {
+        return a.weight.compareTo(b.weight);
+      });
+    }
     return _items;
   }
 
@@ -34,26 +36,30 @@ class PageService extends Page {
     return null;
   }
 
-  addItem(Map<String, dynamic> page) {
-    db.insert(
-      PageModel(
-        name: page['name'] != '' ? page['name'] : 'Page',
-        color: page['color'],
-        weight: 0,
-      ),
+  Future<int> addItem(Map<String, dynamic> item) {
+    PageModel page = PageModel(
+      name: item['name'] != '' ? item['name'] : 'Page',
+      color: item['color'],
+      weight: 0,
     );
-    _isItemsLoaded = null;
-    notifyListeners();
+    Future<int> result = db.insert(page);
+    result.then((itemId) {
+      page.id = itemId;
+      _items.add(page);
+    });
+    return result;
   }
 
-  updateItem(Map<String, dynamic> page) {
-    db.update(
-      PageModel(
-        id: page['id'],
-        name: page['name'] != null ? page['name'] : 'Page',
-        color: page['color'],
-        weight: page['weight'],
-      ),
-    );
+  Future<int> updateItem(PageModel item) {
+    Future<int> result = db.update(item);
+    return result;
+  }
+
+  Future<int> deleteItem(PageModel page) {
+    Future<int> result = db.delete(page);
+    result.then((itemId) {
+      _items.removeWhere((item) => item.id == page.id);
+    });
+    return result;
   }
 }

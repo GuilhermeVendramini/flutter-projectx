@@ -1,8 +1,8 @@
 import 'dart:io';
 
-import 'package:sqflite/sqflite.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' as p;
+import 'package:path_provider/path_provider.dart';
+import 'package:sqflite/sqflite.dart';
 
 class DBProvider {
   static Database _database;
@@ -27,7 +27,6 @@ class DBProvider {
     String path = await dbPath;
     return await openDatabase(path, version: 1, onOpen: (db) {},
         onCreate: (Database db, int version) async {
-      print("DBProvider:: onCreate()");
       await db.execute("CREATE TABLE page ("
           "id INTEGER PRIMARY KEY AUTOINCREMENT,"
           "name TEXT,"

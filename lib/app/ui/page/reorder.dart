@@ -2,10 +2,10 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:projetcx/app/constants/strings.dart';
+import 'package:projetcx/app/controllers/page.dart' as p;
 import 'package:projetcx/app/models/page.dart';
 import 'package:projetcx/app/utils/device_media_query.dart';
 import 'package:provider/provider.dart';
-import 'package:projetcx/app/controllers/page.dart' as p;
 
 class PageReorder extends StatefulWidget {
   @override
@@ -28,7 +28,7 @@ class _PageReorderState extends State<PageReorder> {
       _pages.remove(item);
       _pages.insert(newIndex, item);
     });
-    _page.updateItem(item.toJson());
+    _page.updateItem(item);
   }
 
   @override

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:projetcx/app/ui/page/add_form.dart';
 
 class PageClean extends StatefulWidget {
+
   @override
   _PageCleanState createState() => _PageCleanState();
 }

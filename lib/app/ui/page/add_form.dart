@@ -107,7 +107,8 @@ class _PageAddForm extends State<PageAddForm> {
     );
   }
 
-  void _submitForm(PageService page, BuildContext context) async {
+  void _submitForm(
+      PageService page, BuildContext context) async {
     _formKey.currentState.save();
     await page.addItem(_formData);
     Route route = MaterialPageRoute(

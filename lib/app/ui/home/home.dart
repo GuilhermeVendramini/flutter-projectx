@@ -18,7 +18,7 @@ class _HomeScreenState extends State<HomeScreen>
   AnimationController _controller;
   Animation<double> _animation;
   PageController _pageController;
-  int _currentPageIndex = 0;
+  int _pageIndex = 0;
   bool _fullScreen = true;
 
   @override
@@ -36,14 +36,17 @@ class _HomeScreenState extends State<HomeScreen>
   Widget build(BuildContext context) {
     final p.PageService _page = Provider.of<p.PageService>(context);
 
+    Color _backgroundColor = Colors.blueGrey;
+
     if (_page.isItemsLoaded == null) {
       _page.loadItems();
     }
 
     final List<PageModel> _pages = _page.getItems;
 
-    Color _backgroundColor =
-        DynamicColor.getBackground(_pages, _currentPageIndex);
+    if (_pages != null && _pages.length + 1 != _pageIndex) {
+      _backgroundColor = DynamicColor.getBackground(_pages, _pageIndex);
+    }
 
     _controller.forward();
 
@@ -59,7 +62,7 @@ class _HomeScreenState extends State<HomeScreen>
                 if (index == _pages.length) {
                   return PageClean();
                 } else {
-                  return PageScreen();
+                  return PageScreen(_pages[index]);
                 }
               },
               itemCount: _pages.length + 1,
@@ -76,8 +79,8 @@ class _HomeScreenState extends State<HomeScreen>
           onNotification: (notification) {
             if (notification is ScrollEndNotification) {
               int currentPage = _pageController.page.round().toInt();
-              if (_currentPageIndex != currentPage) {
-                setState(() => _currentPageIndex = currentPage);
+              if (_pageIndex != currentPage) {
+                setState(() => _pageIndex = currentPage);
               }
             }
           },
@@ -101,7 +104,11 @@ class _HomeScreenState extends State<HomeScreen>
         },
         child: Scaffold(
           backgroundColor: Colors.transparent,
-          body: _fadeTransition(),
+          body: _pages != null
+              ? _fadeTransition()
+              : Center(
+                  child: CircularProgressIndicator(),
+                ),
         ),
       ),
     );
