@@ -6,5 +6,6 @@ class Strings {
   static const String pageTitleReorder = "Reorder pages";
   static const String confirmDeleteBox = "Confirm delete";
   static const String managerItemsButton = "Manager items";
+  static const String colorTitleBox = "CHOOSE A COLOR";
   static const String yes = "Yes";
 }
