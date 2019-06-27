@@ -138,7 +138,7 @@ class _PageManageFormState extends State<PageManageForm> {
               SizedBox(
                 height: 20.0,
               ),
-              _managerItems(context),
+              _addItems(context),
               Spacer(),
               SizedBox(
                 height: 20.0,
@@ -150,14 +150,14 @@ class _PageManageFormState extends State<PageManageForm> {
     );
   }
 
-  Widget _managerItems(BuildContext context) {
+  Widget _addItems(BuildContext context) {
     return Center(
       child: Container(
         height: 50.0,
         width: 300.0,
         child: RaisedButton(
           child: Text(
-            Strings.managerItemsButton,
+            Strings.itemsButton,
           ),
           shape:
           RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
