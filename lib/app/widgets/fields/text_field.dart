@@ -26,10 +26,6 @@ class FieldTextField extends StatelessWidget {
         border: InputBorder.none,
         hintText: hintText,
       ),
-      style: TextStyle(
-        fontWeight: FontWeight.w500,
-        fontSize: 36.0,
-      ),
       onSaved: onSaved,
     );
   }

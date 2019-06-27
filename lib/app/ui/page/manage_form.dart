@@ -135,9 +135,33 @@ class _PageManageFormState extends State<PageManageForm> {
                   });
                 },
               ),
+              SizedBox(
+                height: 20.0,
+              ),
+              _managerItems(context),
               Spacer(),
+              SizedBox(
+                height: 20.0,
+              ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+
+  Widget _managerItems(BuildContext context) {
+    return Center(
+      child: Container(
+        height: 50.0,
+        width: 300.0,
+        child: RaisedButton(
+          child: Text(
+            Strings.managerItemsButton,
+          ),
+          shape:
+          RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
+          onPressed: () => {},
         ),
       ),
     );

@@ -43,7 +43,7 @@ class _PageContentState extends State<PageContent>
     return Positioned(
       child: Container(
         padding: EdgeInsets.all(40.0),
-        child: Text('Body'),
+        child: Text('Items display'),
       ),
     );
   }
