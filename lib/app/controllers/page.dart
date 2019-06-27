@@ -50,9 +50,15 @@ class PageService extends Page {
     return result;
   }
 
-  Future<int> updateItem(PageModel item) {
-    Future<int> result = db.update(item);
+  Future<int> updateItem(PageModel page) {
+    Future<int> result = db.update(page);
     return result;
+  }
+
+  updateItemList(PageModel page){
+    int index =_items.indexWhere((item) => item.id == page.id);
+    _items.removeWhere((item) => item.id == page.id);
+    _items.insert(index, page);
   }
 
   Future<int> deleteItem(PageModel page) {

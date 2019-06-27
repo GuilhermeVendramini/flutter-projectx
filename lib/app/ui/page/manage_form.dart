@@ -17,11 +17,15 @@ class PageManageForm extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
-    return _PageManageFormState();
+    return _PageManageFormState(item);
   }
 }
 
 class _PageManageFormState extends State<PageManageForm> {
+  PageModel _item;
+
+  _PageManageFormState(this._item);
+
   final Map<String, dynamic> _formData = {
     'name': null,
     'color': null,
@@ -34,7 +38,11 @@ class _PageManageFormState extends State<PageManageForm> {
   void initState() {
     super.initState();
     setState(() {
-      _pageColor = AppColors.defaultColors[0];
+      if (_item != null) {
+        _pageColor = AppColors.getColorFrom(id: _item.color);
+      } else {
+        _pageColor = AppColors.defaultColors[0];
+      }
     });
   }
 
@@ -111,13 +119,14 @@ class _PageManageFormState extends State<PageManageForm> {
                   onColorChanged: (color) {
                     setState(() {
                       _pageColor = color;
-                      _formData['color'] = color.value;
+                      _formData['color'] = _pageColor.value;
                     });
                   }),
               SizedBox(
                 height: 20.0,
               ),
               FieldTextField(
+                value: widget.item != null ? widget.item.name : null,
                 hintText: Strings.fieldPageName,
                 autoFocus: true,
                 onSaved: (name) {
@@ -136,7 +145,18 @@ class _PageManageFormState extends State<PageManageForm> {
 
   void _submitForm(PageService page, BuildContext context) async {
     _formKey.currentState.save();
-    await page.addItem(_formData);
+    if (widget.item != null) {
+      PageModel updatedItem = PageModel(
+        id: widget.item.id,
+        name: _formData['name'],
+        color: _pageColor.value,
+        weight: widget.item.weight,
+      );
+      await page.updateItem(updatedItem);
+      page.updateItemList(updatedItem);
+    } else {
+      await page.addItem(_formData);
+    }
     Route route = MaterialPageRoute(
       builder: (context) => HomeScreen(),
     );

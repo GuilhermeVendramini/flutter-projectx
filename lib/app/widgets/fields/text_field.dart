@@ -6,6 +6,7 @@ class FieldTextField extends StatelessWidget {
   final String hintText;
   final bool autoFocus;
   final Function onSaved;
+  final dynamic value;
 
   FieldTextField({
     this.formData,
@@ -13,12 +14,14 @@ class FieldTextField extends StatelessWidget {
     this.hintText,
     this.autoFocus: false,
     this.onSaved,
+    this.value,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       autofocus: autoFocus,
+      initialValue: value,
       decoration: InputDecoration(
         border: InputBorder.none,
         hintText: hintText,
