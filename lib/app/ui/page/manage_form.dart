@@ -2,20 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:projetcx/app/constants/app_colors.dart';
 import 'package:projetcx/app/constants/strings.dart';
 import 'package:projetcx/app/controllers/page.dart';
+import 'package:projetcx/app/models/page.dart';
 import 'package:projetcx/app/ui/home/home.dart';
 import 'package:projetcx/app/widgets/fields/color_picker.dart';
 import 'package:projetcx/app/widgets/fields/text_field.dart';
+import 'package:projetcx/app/widgets/page/options_button.dart';
 import 'package:projetcx/app/widgets/utils/gradient_background.dart';
 import 'package:provider/provider.dart';
 
-class PageAddForm extends StatefulWidget {
+class PageManageForm extends StatefulWidget {
+  final PageModel item;
+
+  PageManageForm({this.item});
+
   @override
   State<StatefulWidget> createState() {
-    return _PageAddForm();
+    return _PageManageFormState();
   }
 }
 
-class _PageAddForm extends State<PageAddForm> {
+class _PageManageFormState extends State<PageManageForm> {
   final Map<String, dynamic> _formData = {
     'name': null,
     'color': null,
@@ -54,13 +60,34 @@ class _PageAddForm extends State<PageAddForm> {
             ),
           );
         }),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () => _submitForm(_page, context),
-          child: Icon(
-            Icons.done,
-            size: 40.0,
-          ),
+        floatingActionButton: Stack(
+          children: <Widget>[
+            widget.item != null
+                ? Padding(
+                    padding: EdgeInsets.only(left: 31),
+                    child: Align(
+                      alignment: Alignment.bottomLeft,
+                      child: PageDeleteButton(widget.item),
+                    ),
+                  )
+                : Container(),
+            Align(
+              alignment: Alignment.bottomRight,
+              child: _saveButton(_page),
+            ),
+          ],
         ),
+      ),
+    );
+  }
+
+  Widget _saveButton(PageService _page) {
+    return FloatingActionButton(
+      heroTag: 'save',
+      onPressed: () => _submitForm(_page, context),
+      child: Icon(
+        Icons.done,
+        size: 40.0,
       ),
     );
   }
@@ -107,8 +134,7 @@ class _PageAddForm extends State<PageAddForm> {
     );
   }
 
-  void _submitForm(
-      PageService page, BuildContext context) async {
+  void _submitForm(PageService page, BuildContext context) async {
     _formKey.currentState.save();
     await page.addItem(_formData);
     Route route = MaterialPageRoute(

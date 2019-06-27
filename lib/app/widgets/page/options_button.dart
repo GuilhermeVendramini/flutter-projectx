@@ -4,15 +4,17 @@ import 'package:flutter/material.dart';
 import 'package:projetcx/app/constants/strings.dart';
 import 'package:projetcx/app/controllers/page.dart' as p;
 import 'package:projetcx/app/models/page.dart';
+import 'package:projetcx/app/ui/home/home.dart';
+import 'package:projetcx/app/ui/page/manage_form.dart';
 import 'package:projetcx/app/ui/page/reorder.dart';
 import 'package:provider/provider.dart';
 
 const Color color = Colors.white;
 
-class OptionsButton extends StatelessWidget {
+class PageOptionsButton extends StatelessWidget {
   final AnimationController _controller;
 
-  OptionsButton(this._controller);
+  PageOptionsButton(this._controller);
 
   @override
   Widget build(BuildContext context) {
@@ -46,10 +48,11 @@ class OptionsButton extends StatelessWidget {
   }
 }
 
-class OptionEditButton extends StatelessWidget {
+class PageOptionEditButton extends StatelessWidget {
   final Animation<double> _controller;
+  final PageModel _item;
 
-  OptionEditButton(this._controller);
+  PageOptionEditButton(this._controller, this._item);
 
   @override
   Widget build(BuildContext context) {
@@ -68,16 +71,23 @@ class OptionEditButton extends StatelessWidget {
             ),
           ),
         ),
-        onTap: () {},
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => PageManageForm(item: _item),
+            ),
+          );
+        },
       ),
     );
   }
 }
 
-class OptionReorderButton extends StatelessWidget {
+class PageOptionReorderButton extends StatelessWidget {
   final Animation<double> controller;
 
-  OptionReorderButton(this.controller);
+  PageOptionReorderButton(this.controller);
 
   @override
   Widget build(BuildContext context) {
@@ -109,12 +119,17 @@ class OptionReorderButton extends StatelessWidget {
   }
 }
 
-class OptionDeleteButton extends StatelessWidget {
+class PageOptionDeleteButton extends StatefulWidget {
   final Animation<double> _controller;
   final PageModel _item;
 
-  OptionDeleteButton(this._controller, this._item);
+  PageOptionDeleteButton(this._controller, this._item);
 
+  @override
+  _PageOptionDeleteButtonState createState() => _PageOptionDeleteButtonState();
+}
+
+class _PageOptionDeleteButtonState extends State<PageOptionDeleteButton> {
   @override
   Widget build(BuildContext context) {
     return Positioned(
@@ -124,7 +139,7 @@ class OptionDeleteButton extends StatelessWidget {
         child: Container(
           child: ScaleTransition(
             scale: CurvedAnimation(
-                parent: _controller,
+                parent: widget._controller,
                 curve: Interval(0.0, 1.0, curve: Curves.easeOut)),
             child: Icon(
               Icons.delete,
@@ -133,34 +148,63 @@ class OptionDeleteButton extends StatelessWidget {
           ),
         ),
         onTap: () {
-          _showDialog(context);
+          _pageShowDialog(context, _actionDelete);
         },
       ),
     );
   }
 
-  void _showDialog(context) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          backgroundColor: Colors.black.withOpacity(0.2),
-          title: Center(
-            child: Text(Strings.confirmDeleteBox),
-          ),
-          content: Wrap(
-            alignment: WrapAlignment.center,
-            children: <Widget>[
-              _yesAction(context),
-            ],
-          ),
-        );
+  void _actionDelete() async {
+    final p.PageService _page = Provider.of<p.PageService>(context);
+    await _page.deleteItem(widget._item);
+    _page.notifyChange();
+    Navigator.of(context).pop();
+  }
+}
+
+class PageDeleteButton extends StatefulWidget {
+  final PageModel item;
+
+  PageDeleteButton(this.item);
+
+  @override
+  _PageDeleteButtonState createState() => _PageDeleteButtonState();
+}
+
+class _PageDeleteButtonState extends State<PageDeleteButton> {
+  @override
+  Widget build(BuildContext context) {
+    return FloatingActionButton(
+      heroTag: 'delete',
+      onPressed: () {
+        _pageShowDialog(context, _actionDelete);
       },
+      child: Icon(
+        Icons.delete_outline,
+        size: 40.0,
+      ),
     );
   }
 
-  Widget _yesAction(BuildContext context) {
+  void _actionDelete() async {
     final p.PageService _page = Provider.of<p.PageService>(context);
+    await _page.deleteItem(widget.item);
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => HomeScreen(),
+      ),
+    );
+  }
+}
+
+class PageActionDelete extends StatelessWidget {
+  final Function _action;
+
+  PageActionDelete(this._action);
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
       height: 50.0,
       width: 100.0,
@@ -169,12 +213,28 @@ class OptionDeleteButton extends StatelessWidget {
         child: Text(
           Strings.yes,
         ),
-        onPressed: () async {
-          await _page.deleteItem(_item);
-          _page.notifyChange();
-          Navigator.of(context).pop();
-        },
+        onPressed: _action,
       ),
     );
   }
+}
+
+void _pageShowDialog(context, actionDelete) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        backgroundColor: Colors.black.withOpacity(0.2),
+        title: Center(
+          child: Text(Strings.confirmDeleteBox),
+        ),
+        content: Wrap(
+          alignment: WrapAlignment.center,
+          children: <Widget>[
+            PageActionDelete(actionDelete),
+          ],
+        ),
+      );
+    },
+  );
 }
