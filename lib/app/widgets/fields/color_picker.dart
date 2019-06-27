@@ -40,7 +40,7 @@ class FieldColorPicker extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(24.0),
           border: Border.all(
-            color: Colors.white.withOpacity(0.8),
+            color: Colors.white,
             width: 4.0,
           ),
           color: color,

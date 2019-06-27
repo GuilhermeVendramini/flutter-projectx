@@ -4,13 +4,13 @@ final ThemeData themeData = new ThemeData(
   fontFamily: 'ProductSans',
   cursorColor: Colors.white,
   floatingActionButtonTheme: FloatingActionButtonThemeData(
-    backgroundColor: Colors.black.withOpacity(0.4),
+    backgroundColor: Colors.blueGrey.withOpacity(0.4),
   ),
   buttonTheme: ButtonThemeData(
     textTheme: ButtonTextTheme.primary,
     buttonColor: Colors.blueGrey.withOpacity(0.4),
   ),
-  buttonColor: Colors.white.withOpacity(0.4),
+  buttonColor: Colors.blueGrey.withOpacity(0.4),
   inputDecorationTheme: InputDecorationTheme(
     hintStyle: TextStyle(
       color: Colors.white,
