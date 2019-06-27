@@ -3,7 +3,7 @@ import 'package:projetcx/app/constants/app_theme.dart';
 import 'package:projetcx/app/constants/strings.dart';
 import 'package:projetcx/app/controllers/page.dart';
 import 'package:projetcx/app/routes.dart';
-import 'package:projetcx/app/ui/home/home.dart';
+import 'package:projetcx/app/ui/home/screen.dart';
 import 'package:provider/provider.dart';
 
 class App extends StatelessWidget {

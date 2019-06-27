@@ -3,7 +3,8 @@ import 'package:projetcx/app/constants/app_colors.dart';
 import 'package:projetcx/app/constants/strings.dart';
 import 'package:projetcx/app/controllers/page.dart';
 import 'package:projetcx/app/models/page.dart';
-import 'package:projetcx/app/ui/home/home.dart';
+import 'package:projetcx/app/plugins/ui/screen.dart';
+import 'package:projetcx/app/ui/home/screen.dart';
 import 'package:projetcx/app/widgets/fields/color_picker.dart';
 import 'package:projetcx/app/widgets/fields/text_field.dart';
 import 'package:projetcx/app/widgets/page/options_button.dart';
@@ -160,8 +161,13 @@ class _PageManageFormState extends State<PageManageForm> {
             Strings.itemsButton,
           ),
           shape:
-          RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
-          onPressed: () => {},
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
+          onPressed: () {
+            Route route = MaterialPageRoute(
+              builder: (context) => PluginsScreen(),
+            );
+            Navigator.push(context, route);
+          },
         ),
       ),
     );

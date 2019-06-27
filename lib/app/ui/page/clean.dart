@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:projetcx/app/constants/strings.dart';
 import 'package:projetcx/app/ui/page/manage_form.dart';
 
 class PageClean extends StatefulWidget {
@@ -40,7 +41,7 @@ class _PageCleanState extends State<PageClean> {
                     height: 8.0,
                   ),
                   Text(
-                    'Add Page',
+                    Strings.addPage,
                     style: TextStyle(color: color),
                   ),
                 ],

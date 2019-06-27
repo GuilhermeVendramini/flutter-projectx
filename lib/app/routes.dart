@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:projetcx/app/ui/home/home.dart';
+import 'package:projetcx/app/ui/home/screen.dart';
 
 class Routes {
   Routes._();

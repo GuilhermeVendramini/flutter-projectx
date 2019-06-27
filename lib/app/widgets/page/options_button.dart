@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:projetcx/app/constants/strings.dart';
 import 'package:projetcx/app/controllers/page.dart' as p;
 import 'package:projetcx/app/models/page.dart';
-import 'package:projetcx/app/ui/home/home.dart';
+import 'package:projetcx/app/ui/home/screen.dart';
 import 'package:projetcx/app/ui/page/manage_form.dart';
 import 'package:projetcx/app/ui/page/reorder.dart';
 import 'package:provider/provider.dart';
