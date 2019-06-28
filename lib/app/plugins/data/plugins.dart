@@ -19,11 +19,11 @@ List<PluginsModel> pluginsData = [
     icon: Icons.video_library,
   ),
   PluginsModel(
-    name: "Maps",
-    icon: Icons.map,
-  ),
-  PluginsModel(
     name: "Galerry",
     icon: Icons.view_carousel,
+  ),
+  PluginsModel(
+    name: "Contacts",
+    icon: Icons.contact_phone,
   ),
 ];
