@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:projetcx/app/constants/app_colors.dart';
 import 'package:projetcx/app/constants/strings.dart';
 import 'package:projetcx/app/controllers/page.dart' as p;
 import 'package:projetcx/app/models/page.dart';
@@ -66,22 +67,32 @@ class _PageReorderState extends State<PageReorder> {
   Widget _buildListTile(BuildContext context, PageModel item) {
     return ListTile(
       key: Key(item.id.toString()),
-      title: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      title: Wrap(
+        alignment: WrapAlignment.spaceBetween,
+        crossAxisAlignment: WrapCrossAlignment.center,
         children: <Widget>[
-          Text(
-            item.name,
-            style: TextStyle(
-              color: _color,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-          Text(
-            '${item.weight}',
-            style: TextStyle(
-              color: _color,
-              fontWeight: FontWeight.w600,
-            ),
+          Wrap(
+            crossAxisAlignment: WrapCrossAlignment.center,
+            children: <Widget>[
+              Container(
+                width: 20.0,
+                height: 20.0,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: AppColors.getColorFrom(id: item.color),
+                ),
+              ),
+              SizedBox(
+                width: 10.0,
+              ),
+              Text(
+                item.name,
+                style: TextStyle(
+                  color: _color,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ],
           ),
           Icon(
             Icons.drag_handle,

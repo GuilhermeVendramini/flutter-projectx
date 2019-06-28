@@ -154,14 +154,12 @@ class _PageManageFormState extends State<PageManageForm> {
   Widget _addItems(BuildContext context) {
     return Center(
       child: Container(
-        height: 50.0,
+        height: 60.0,
         width: 300.0,
         child: RaisedButton(
           child: Text(
             Strings.itemsButton,
           ),
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
           onPressed: () {
             Route route = MaterialPageRoute(
               builder: (context) => PluginsScreen(),
