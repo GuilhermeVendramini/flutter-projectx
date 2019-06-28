@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:projetcx/app/plugins/controllers/plugins.dart';
 import 'package:projetcx/app/plugins/data/plugins.dart';
 
 class PluginsScreen extends StatefulWidget {
@@ -34,26 +35,37 @@ class _PluginsScreenState extends State<PluginsScreen> {
   Widget pluginsCard(int index) {
     final Color color = Colors.blueGrey;
     return Card(
-      child: Container(
-        padding: EdgeInsets.all(20.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            Icon(
-              pluginsData[index].icon,
-              color: color,
-              size: 48.0,
+      child: InkWell(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => PluginsController.action(
+                  pluginType: pluginsData[index].pluginType),
             ),
-            Text(
-              pluginsData[index].name,
-              style: TextStyle(
+          );
+        },
+        child: Container(
+          padding: EdgeInsets.all(20.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              Icon(
+                pluginsData[index].icon,
                 color: color,
-                fontSize: 18.0,
+                size: 48.0,
               ),
-              textAlign: TextAlign.center,
-            ),
-          ],
+              Text(
+                pluginsData[index].name,
+                style: TextStyle(
+                  color: color,
+                  fontSize: 18.0,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ],
+          ),
         ),
       ),
     );

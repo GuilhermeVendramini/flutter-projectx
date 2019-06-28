@@ -137,10 +137,9 @@ class _PageManageFormState extends State<PageManageForm> {
                 },
               ),
               SizedBox(
-                height: 20.0,
+                height: 40.0,
               ),
               _addItems(context),
-              Spacer(),
               SizedBox(
                 height: 20.0,
               ),
@@ -155,7 +154,7 @@ class _PageManageFormState extends State<PageManageForm> {
     return Center(
       child: Container(
         height: 60.0,
-        width: 300.0,
+        width: 200.0,
         child: RaisedButton(
           child: Text(
             Strings.itemsButton,
