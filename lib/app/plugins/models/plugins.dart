@@ -11,5 +11,4 @@ class PluginsModel {
     @required this.name,
     @required this.icon,
   });
-
 }

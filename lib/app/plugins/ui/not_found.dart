@@ -6,7 +6,6 @@ class PluginNotFound extends StatefulWidget {
 }
 
 class _PluginNotFoundState extends State<PluginNotFound> {
-
   final Color color = Colors.blueGrey;
 
   @override

@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 
 class PluginTypeTextArea extends StatefulWidget {
   @override
-  _PluginTypeTextAreaState createState() =>
-      _PluginTypeTextAreaState();
+  _PluginTypeTextAreaState createState() => _PluginTypeTextAreaState();
 }
 
 class _PluginTypeTextAreaState extends State<PluginTypeTextArea> {

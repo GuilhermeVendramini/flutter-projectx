@@ -55,8 +55,8 @@ class PageService extends Page {
     return result;
   }
 
-  updateItemList(PageModel page){
-    int index =_items.indexWhere((item) => item.id == page.id);
+  updateItemList(PageModel page) {
+    int index = _items.indexWhere((item) => item.id == page.id);
     _items.removeWhere((item) => item.id == page.id);
     _items.insert(index, page);
   }
