@@ -9,6 +9,10 @@ import 'package:projetcx/app/widgets/utils/gradient_background.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
+  final int pageIndex;
+
+  HomeScreen({this.pageIndex = 0});
+
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -18,7 +22,7 @@ class _HomeScreenState extends State<HomeScreen>
   AnimationController _controller;
   Animation<double> _animation;
   PageController _pageController;
-  int _pageIndex = 0;
+  int _pageIndex;
   bool _fullScreen = true;
   int _addPage = 1;
 
@@ -30,7 +34,9 @@ class _HomeScreenState extends State<HomeScreen>
       duration: Duration(milliseconds: 300),
     );
     _animation = Tween<double>(begin: 0.0, end: 1.0).animate(_controller);
-    _pageController = PageController(initialPage: 0, viewportFraction: 1.0);
+    _pageIndex = widget.pageIndex;
+    _pageController = PageController(
+        initialPage: _pageIndex, keepPage: true, viewportFraction: 1.0);
   }
 
   @override
@@ -92,7 +98,6 @@ class _HomeScreenState extends State<HomeScreen>
               _screen.setFullScreen(_fullScreen);
               setState(() {
                 _addPage = _fullScreen ? 0 : 1;
-                print(_addPage);
               });
             },
           ),
@@ -115,6 +120,23 @@ class _HomeScreenState extends State<HomeScreen>
               : Center(
                   child: CircularProgressIndicator(),
                 ),
+          floatingActionButton:
+              _screen.isFullScreen || _pageIndex == _pages.length
+                  ? Container()
+                  : FloatingActionButton(
+                      heroTag: 'fullScreen',
+                      onPressed: () {
+                        setState(() {
+                          _addPage = 0;
+                        });
+                        _screen.setFullScreen(true);
+                      },
+                      child: Icon(
+                        Icons.fullscreen,
+                      ),
+                      backgroundColor: Colors.transparent,
+                      elevation: 0.0,
+                    ),
         ),
       ),
     );

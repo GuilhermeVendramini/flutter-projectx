@@ -4,6 +4,7 @@ final ThemeData themeData = new ThemeData(
   fontFamily: 'ProductSans',
   cursorColor: Colors.white,
   floatingActionButtonTheme: FloatingActionButtonThemeData(
+    elevation: 2.0,
     backgroundColor: Colors.blueGrey.withOpacity(0.4),
   ),
   buttonTheme: ButtonThemeData(

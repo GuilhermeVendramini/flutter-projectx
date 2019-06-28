@@ -181,7 +181,6 @@ class _PageDeleteButtonState extends State<PageDeleteButton> {
       },
       child: Icon(
         Icons.delete_outline,
-        size: 40.0,
       ),
     );
   }

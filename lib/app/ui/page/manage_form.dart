@@ -96,7 +96,6 @@ class _PageManageFormState extends State<PageManageForm> {
       onPressed: () => _submitForm(_page, context),
       child: Icon(
         Icons.done,
-        size: 40.0,
       ),
     );
   }
@@ -171,6 +170,8 @@ class _PageManageFormState extends State<PageManageForm> {
   }
 
   void _submitForm(PageService page, BuildContext context) async {
+    final _page = Provider.of<PageService>(context);
+    final _pages = _page.getItems;
     _formKey.currentState.save();
     if (widget.item != null) {
       PageModel updatedItem = PageModel(
@@ -185,7 +186,9 @@ class _PageManageFormState extends State<PageManageForm> {
       await page.addItem(_formData);
     }
     Route route = MaterialPageRoute(
-      builder: (context) => HomeScreen(),
+      builder: (context) => HomeScreen(
+            pageIndex: _pages.length - 1,
+          ),
     );
     Navigator.push(context, route);
   }
