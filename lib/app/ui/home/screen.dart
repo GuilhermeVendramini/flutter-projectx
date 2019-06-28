@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:projetcx/app/controllers/page.dart' as p;
+import 'package:projetcx/app/controllers/screen.dart' as s;
 import 'package:projetcx/app/models/page.dart';
 import 'package:projetcx/app/ui/page/clean.dart';
 import 'package:projetcx/app/ui/page/screen.dart';
 import 'package:projetcx/app/utils/dynamic_color.dart';
-import 'package:projetcx/app/utils/full_screen.dart';
 import 'package:projetcx/app/widgets/utils/gradient_background.dart';
 import 'package:provider/provider.dart';
 
@@ -20,6 +20,7 @@ class _HomeScreenState extends State<HomeScreen>
   PageController _pageController;
   int _pageIndex = 0;
   bool _fullScreen = true;
+  int _addPage = 1;
 
   @override
   void initState() {
@@ -35,7 +36,7 @@ class _HomeScreenState extends State<HomeScreen>
   @override
   Widget build(BuildContext context) {
     final p.PageService _page = Provider.of<p.PageService>(context);
-
+    final s.ScreenService _screen = Provider.of<s.ScreenService>(context);
     Color _backgroundColor = Colors.blueGrey;
 
     if (_page.isItemsLoaded == null) {
@@ -65,7 +66,7 @@ class _HomeScreenState extends State<HomeScreen>
                   return PageScreen(_pages[index]);
                 }
               },
-              itemCount: _pages.length + 1,
+              itemCount: _pages.length + _addPage,
             ),
           ),
         ],
@@ -88,7 +89,11 @@ class _HomeScreenState extends State<HomeScreen>
             child: _pageBuilder(),
             onDoubleTap: () {
               _fullScreen = _fullScreen ? false : true;
-              FullScreen.setFullScreen(_fullScreen);
+              _screen.setFullScreen(_fullScreen);
+              setState(() {
+                _addPage = _fullScreen ? 0 : 1;
+                print(_addPage);
+              });
             },
           ),
         ),
@@ -99,7 +104,8 @@ class _HomeScreenState extends State<HomeScreen>
       color: _backgroundColor,
       child: WillPopScope(
         onWillPop: () async {
-          FullScreen.setFullScreen(false);
+          _addPage = 1;
+          _screen.setFullScreen(false);
           return false;
         },
         child: Scaffold(

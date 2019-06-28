@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:projetcx/app/constants/app_theme.dart';
 import 'package:projetcx/app/constants/strings.dart';
 import 'package:projetcx/app/controllers/page.dart';
+import 'package:projetcx/app/controllers/screen.dart';
 import 'package:projetcx/app/routes.dart';
 import 'package:projetcx/app/ui/home/screen.dart';
 import 'package:provider/provider.dart';
@@ -12,6 +13,7 @@ class App extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<PageService>(builder: (_) => PageService()),
+        ChangeNotifierProvider<ScreenService>(builder: (_) => ScreenService()),
       ],
       child: _runMaterialApp(),
     );

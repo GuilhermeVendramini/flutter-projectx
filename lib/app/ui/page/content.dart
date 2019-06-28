@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:projetcx/app/controllers/screen.dart' as s;
 import 'package:projetcx/app/models/page.dart';
 import 'package:projetcx/app/widgets/page/options_button.dart';
+import 'package:provider/provider.dart';
 
 class PageContent extends StatefulWidget {
   final PageModel _page;
@@ -25,17 +27,24 @@ class _PageContentState extends State<PageContent>
 
   @override
   Widget build(BuildContext context) {
+    final s.ScreenService _screen = Provider.of<s.ScreenService>(context);
     return Container(
       padding: EdgeInsets.all(20.0),
-      child: Stack(
-        children: <Widget>[
-          PageOptionsButton(_controller),
-          PageOptionEditButton(_controller, widget._page),
-          PageOptionReorderButton(_controller),
-          PageOptionDeleteButton(_controller, widget._page),
-          _content(),
-        ],
-      ),
+      child: _screen.isFullScreen == false
+          ? Stack(
+              children: <Widget>[
+                PageOptionsButton(_controller),
+                PageOptionEditButton(_controller, widget._page),
+                PageOptionReorderButton(_controller),
+                PageOptionDeleteButton(_controller, widget._page),
+                _content()
+              ],
+            )
+          : Stack(
+              children: <Widget>[
+                _content(),
+              ],
+            ),
     );
   }
 
