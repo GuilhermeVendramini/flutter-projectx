@@ -121,7 +121,7 @@ class _HomeScreenState extends State<HomeScreen>
                   child: CircularProgressIndicator(),
                 ),
           floatingActionButton:
-              _screen.isFullScreen || _pageIndex == _pages.length
+              _screen.isFullScreen || _pageIndex == _pages?.length
                   ? Container()
                   : FloatingActionButton(
                       heroTag: 'fullScreen',
