@@ -45,7 +45,6 @@ class _PageManageFormState extends State<PageManageForm> {
 
   @override
   Widget build(BuildContext context) {
-    print('Print id ${widget.item.id}');
     final _page = Provider.of<PageService>(context);
     return WillPopScope(
       onWillPop: () async {
@@ -79,7 +78,7 @@ class _PageManageFormState extends State<PageManageForm> {
                 : Container(),
             Align(
               alignment: Alignment.bottomRight,
-              child: _saveButton(_page),
+              child: _saveButton(),
             ),
           ],
         ),
@@ -87,12 +86,16 @@ class _PageManageFormState extends State<PageManageForm> {
     );
   }
 
-  Widget _saveButton(PageService _page) {
+  Widget _saveButton() {
+    final _page = Provider.of<PageService>(context);
     return FloatingActionButton(
       heroTag: 'save',
       onPressed: () async {
-        await _submitFormSave(_page);
-        _submitFormRedirect(context);
+        Future<PageModel> result = _submitFormSave();
+        result.then((item) {
+          int pageIndex = _page.getItemIndex(item);
+          _submitFormRedirect(context, pageIndex);
+        });
       },
       child: Icon(
         Icons.done,
@@ -159,17 +162,10 @@ class _PageManageFormState extends State<PageManageForm> {
             Strings.itemsButton,
           ),
           onPressed: () async {
-            Future<int> result = _submitFormSave(page);
-            result.then((id) {
+            Future<PageModel> result = _submitFormSave();
+            result.then((item) {
               Route route = MaterialPageRoute(
-                builder: (context) => PluginsScreen(
-                      PageModel(
-                        id: id,
-                        name: _formData['name'],
-                        color: _pageColor.value,
-                        weight: 0,
-                      ),
-                    ),
+                builder: (context) => PluginsScreen(item),
               );
               Navigator.push(context, route);
             });
@@ -179,20 +175,20 @@ class _PageManageFormState extends State<PageManageForm> {
     );
   }
 
-  void _submitFormRedirect(BuildContext context) {
-    final _page = Provider.of<PageService>(context);
-    final _pages = _page.getItems;
+  void _submitFormRedirect(BuildContext context, int pageIndex) {
     Route route = MaterialPageRoute(
       builder: (context) => HomeScreen(
-            pageIndex: _pages.length - 1,
+            pageIndex: pageIndex,
           ),
     );
     Navigator.push(context, route);
   }
 
-  Future<int> _submitFormSave(PageService page) async {
+  Future<PageModel> _submitFormSave() async {
+    final _page = Provider.of<PageService>(context);
     _formKey.currentState.save();
-    Future<int> result;
+    PageModel result;
+    Future<int> itemResult;
     if (widget.item != null) {
       PageModel updatedItem = PageModel(
         id: widget.item.id,
@@ -200,10 +196,21 @@ class _PageManageFormState extends State<PageManageForm> {
         color: _pageColor.value,
         weight: widget.item.weight,
       );
-      result = page.updateItem(updatedItem);
-      page.updateItemList(updatedItem);
+      itemResult = _page.updateItem(updatedItem);
+      await itemResult.then((_) {
+        result = updatedItem;
+      });
+      _page.updateItemList(updatedItem);
     } else {
-      result = page.addItem(_formData);
+      itemResult = _page.addItem(_formData);
+      await itemResult.then((itemId) {
+        result = PageModel(
+          id: itemId,
+          name: _formData['name'],
+          color: _pageColor.value,
+          weight: 0,
+        );
+      });
     }
     return result;
   }

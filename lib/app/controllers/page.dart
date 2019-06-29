@@ -36,7 +36,7 @@ class PageService extends Page {
     return null;
   }
 
-  Future<int> addItem(Map<String, dynamic> item) {
+  Future<int> addItem(Map<String, dynamic> item) async {
     PageModel page = PageModel(
       name: item['name'] != '' ? item['name'] : 'Page',
       color: item['color'],
@@ -67,6 +67,11 @@ class PageService extends Page {
       _items.removeWhere((item) => item.id == page.id);
     });
     return result;
+  }
+
+  int getItemIndex(PageModel page) {
+    int index = _items.indexWhere((item) => item.id == page.id);
+    return index;
   }
 
   void notifyChange() {
