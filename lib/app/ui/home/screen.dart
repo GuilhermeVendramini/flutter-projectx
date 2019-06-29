@@ -133,6 +133,7 @@ class _HomeScreenState extends State<HomeScreen>
                       },
                       child: Icon(
                         Icons.fullscreen,
+                        color: Colors.white.withOpacity(0.8),
                       ),
                       backgroundColor: Colors.transparent,
                       elevation: 0.0,
