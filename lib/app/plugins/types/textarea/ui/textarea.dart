@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class PluginTypeTextField extends StatefulWidget {
+class PluginTextArea extends StatefulWidget {
   @override
-  _PluginTypeTextFieldState createState() => _PluginTypeTextFieldState();
+  _PluginTextAreaState createState() => _PluginTextAreaState();
 }
 
-class _PluginTypeTextFieldState extends State<PluginTypeTextField> {
+class _PluginTextAreaState extends State<PluginTextArea> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -15,7 +15,7 @@ class _PluginTypeTextFieldState extends State<PluginTypeTextField> {
       child: Scaffold(
         backgroundColor: Colors.grey[100],
         body: SafeArea(
-          child: Text('Text Field'),
+          child: Text('Text Area'),
         ),
       ),
     );

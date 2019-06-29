@@ -3,6 +3,10 @@ import 'package:projetcx/app/plugins/controllers/plugins.dart';
 import 'package:projetcx/app/plugins/data/plugins.dart';
 
 class PluginsScreen extends StatefulWidget {
+  final dynamic item;
+
+  PluginsScreen(this.item);
+
   @override
   _PluginsScreenState createState() => _PluginsScreenState();
 }
@@ -41,7 +45,9 @@ class _PluginsScreenState extends State<PluginsScreen> {
             context,
             MaterialPageRoute(
               builder: (context) => PluginsController.action(
-                  pluginType: pluginsData[index].pluginType),
+                    pluginType: pluginsData[index].pluginType,
+                    item: widget.item,
+                  ),
             ),
           );
         },

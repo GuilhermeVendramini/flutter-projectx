@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:projetcx/app/plugins/constants/plugins.dart';
 
-class PluginsModel {
+class PluginModel {
   PluginsType pluginType;
   String name;
   IconData icon;
 
-  PluginsModel({
+  PluginModel({
     @required this.pluginType,
     @required this.name,
     @required this.icon,

@@ -33,6 +33,14 @@ class DBProvider {
           "color INTEGER,"
           "weight INTEGER"
           ")");
+
+      await db.execute("CREATE TABLE plugins ("
+          "id INTEGER PRIMARY KEY AUTOINCREMENT,"
+          "type TEXT,"
+          "parent INTEGER,"
+          "value TEXT,"
+          "weight INTEGER"
+          ")");
     });
   }
 

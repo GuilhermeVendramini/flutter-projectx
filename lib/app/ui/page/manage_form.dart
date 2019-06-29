@@ -18,15 +18,11 @@ class PageManageForm extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
-    return _PageManageFormState(item);
+    return _PageManageFormState();
   }
 }
 
 class _PageManageFormState extends State<PageManageForm> {
-  PageModel _item;
-
-  _PageManageFormState(this._item);
-
   final Map<String, dynamic> _formData = {
     'name': null,
     'color': null,
@@ -39,8 +35,8 @@ class _PageManageFormState extends State<PageManageForm> {
   void initState() {
     super.initState();
     setState(() {
-      if (_item != null) {
-        _pageColor = AppColors.getColorFrom(id: _item.color);
+      if (widget.item != null) {
+        _pageColor = AppColors.getColorFrom(id: widget.item.color);
       } else {
         _pageColor = AppColors.defaultColors[0];
       }
@@ -49,6 +45,7 @@ class _PageManageFormState extends State<PageManageForm> {
 
   @override
   Widget build(BuildContext context) {
+    print('Print id ${widget.item.id}');
     final _page = Provider.of<PageService>(context);
     return WillPopScope(
       onWillPop: () async {
@@ -62,7 +59,7 @@ class _PageManageFormState extends State<PageManageForm> {
                 child: ConstrainedBox(
                   constraints: BoxConstraints(minHeight: constraints.maxHeight),
                   child: IntrinsicHeight(
-                    child: _pageForm(context),
+                    child: _pageForm(_page, context),
                   ),
                 ),
               ),
@@ -93,14 +90,17 @@ class _PageManageFormState extends State<PageManageForm> {
   Widget _saveButton(PageService _page) {
     return FloatingActionButton(
       heroTag: 'save',
-      onPressed: () => _submitForm(_page, context),
+      onPressed: () async {
+        await _submitFormSave(_page);
+        _submitFormRedirect(context);
+      },
       child: Icon(
         Icons.done,
       ),
     );
   }
 
-  Widget _pageForm(BuildContext context) {
+  Widget _pageForm(PageService page, BuildContext context) {
     return GradientBackground(
       color: _pageColor,
       child: Padding(
@@ -138,7 +138,7 @@ class _PageManageFormState extends State<PageManageForm> {
               SizedBox(
                 height: 40.0,
               ),
-              _addItems(context),
+              _addItemsButton(page, context),
               SizedBox(
                 height: 20.0,
               ),
@@ -149,7 +149,7 @@ class _PageManageFormState extends State<PageManageForm> {
     );
   }
 
-  Widget _addItems(BuildContext context) {
+  Widget _addItemsButton(PageService page, BuildContext context) {
     return Center(
       child: Container(
         height: 60.0,
@@ -158,21 +158,41 @@ class _PageManageFormState extends State<PageManageForm> {
           child: Text(
             Strings.itemsButton,
           ),
-          onPressed: () {
-            Route route = MaterialPageRoute(
-              builder: (context) => PluginsScreen(),
-            );
-            Navigator.push(context, route);
+          onPressed: () async {
+            Future<int> result = _submitFormSave(page);
+            result.then((id) {
+              Route route = MaterialPageRoute(
+                builder: (context) => PluginsScreen(
+                      PageModel(
+                        id: id,
+                        name: _formData['name'],
+                        color: _pageColor.value,
+                        weight: 0,
+                      ),
+                    ),
+              );
+              Navigator.push(context, route);
+            });
           },
         ),
       ),
     );
   }
 
-  void _submitForm(PageService page, BuildContext context) async {
+  void _submitFormRedirect(BuildContext context) {
     final _page = Provider.of<PageService>(context);
     final _pages = _page.getItems;
+    Route route = MaterialPageRoute(
+      builder: (context) => HomeScreen(
+            pageIndex: _pages.length - 1,
+          ),
+    );
+    Navigator.push(context, route);
+  }
+
+  Future<int> _submitFormSave(PageService page) async {
     _formKey.currentState.save();
+    Future<int> result;
     if (widget.item != null) {
       PageModel updatedItem = PageModel(
         id: widget.item.id,
@@ -180,16 +200,11 @@ class _PageManageFormState extends State<PageManageForm> {
         color: _pageColor.value,
         weight: widget.item.weight,
       );
-      await page.updateItem(updatedItem);
+      result = page.updateItem(updatedItem);
       page.updateItemList(updatedItem);
     } else {
-      await page.addItem(_formData);
+      result = page.addItem(_formData);
     }
-    Route route = MaterialPageRoute(
-      builder: (context) => HomeScreen(
-            pageIndex: _pages.length - 1,
-          ),
-    );
-    Navigator.push(context, route);
+    return result;
   }
 }

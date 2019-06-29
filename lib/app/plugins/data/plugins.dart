@@ -1,34 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:projetcx/app/plugins/constants/plugins.dart';
-import 'package:projetcx/app/plugins/models/plugins.dart';
+import 'package:projetcx/app/plugins/models/plugin.dart';
 
-List<PluginsModel> pluginsData = [
-  PluginsModel(
+List<PluginModel> pluginsData = [
+  PluginModel(
     pluginType: PluginsType.TEXTFIELD,
     name: "Text Field",
     icon: Icons.title,
   ),
-  PluginsModel(
+  PluginModel(
     pluginType: PluginsType.TEXTAREA,
     name: "Text Area",
     icon: Icons.text_fields,
   ),
-  PluginsModel(
+  PluginModel(
     pluginType: PluginsType.IMAGE,
     name: "Image",
     icon: Icons.image,
   ),
-  PluginsModel(
+  PluginModel(
     pluginType: PluginsType.VIDEO,
     name: "Video",
     icon: Icons.video_library,
   ),
-  PluginsModel(
+  PluginModel(
     pluginType: PluginsType.GALLERY,
     name: "Gallery",
     icon: Icons.view_carousel,
   ),
-  PluginsModel(
+  PluginModel(
     pluginType: PluginsType.CONTACT,
     name: "Contacts",
     icon: Icons.contact_phone,
