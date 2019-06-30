@@ -16,12 +16,12 @@ class PluginDataModel {
   });
 
   Map<String, dynamic> toJson() => <String, dynamic>{
-    'id': this.id,
-    'type': this.type,
-    'parent': this.parent,
-    'value': this.value,
-    'weight': this.weight
-  };
+        'id': this.id,
+        'type': this.type,
+        'parent': this.parent,
+        'value': this.value,
+        'weight': this.weight
+      };
 
   factory PluginDataModel.fromJson(Map<String, dynamic> json) {
     return PluginDataModel(

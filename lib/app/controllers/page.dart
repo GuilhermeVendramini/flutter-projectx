@@ -17,6 +17,15 @@ class Page extends PageController {
     return _items;
   }
 
+  int getItemIndex(PageModel page) {
+    int index = _items.indexWhere((item) => item.id == page?.id);
+    return index;
+  }
+
+  void notifyChange() {
+    notifyListeners();
+  }
+
   bool get isItemsLoaded {
     return _isItemsLoaded;
   }
@@ -25,7 +34,7 @@ class Page extends PageController {
 class PageService extends Page {
   var db = DBPage();
 
-  loadItems() async {
+  void loadItems() async {
     if (_isItemsLoaded != null) {
       return null;
     }
@@ -33,7 +42,6 @@ class PageService extends Page {
     _items = await db.getAll;
     _isItemsLoaded = true;
     notifyListeners();
-    return null;
   }
 
   Future<int> addItem(Map<String, dynamic> item) async {
@@ -55,7 +63,7 @@ class PageService extends Page {
     return result;
   }
 
-  updateItemList(PageModel page) {
+  void reorderItemList(PageModel page) {
     int index = _items.indexWhere((item) => item.id == page.id);
     _items.removeWhere((item) => item.id == page.id);
     _items.insert(index, page);
@@ -67,14 +75,5 @@ class PageService extends Page {
       _items.removeWhere((item) => item.id == page.id);
     });
     return result;
-  }
-
-  int getItemIndex(PageModel page) {
-    int index = _items.indexWhere((item) => item.id == page.id);
-    return index;
-  }
-
-  void notifyChange() {
-    notifyListeners();
   }
 }

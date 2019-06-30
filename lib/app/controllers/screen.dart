@@ -12,7 +12,7 @@ class Screen extends ScreenController {
 }
 
 class ScreenService extends Screen {
-  setFullScreen(bool fullScreen) {
+  void setFullScreen(bool fullScreen) {
     if (fullScreen) {
       SystemChrome.setEnabledSystemUIOverlays([]);
       _isFullScreen = true;

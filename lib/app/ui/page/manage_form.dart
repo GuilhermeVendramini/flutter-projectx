@@ -3,11 +3,14 @@ import 'package:projetcx/app/constants/app_colors.dart';
 import 'package:projetcx/app/constants/strings.dart';
 import 'package:projetcx/app/controllers/page.dart';
 import 'package:projetcx/app/models/page.dart';
+import 'package:projetcx/app/plugins/controllers/plugins.dart';
+import 'package:projetcx/app/plugins/models/plugin_data.dart';
 import 'package:projetcx/app/plugins/ui/screen.dart';
 import 'package:projetcx/app/ui/home/screen.dart';
 import 'package:projetcx/app/widgets/fields/color_picker.dart';
 import 'package:projetcx/app/widgets/fields/text_field.dart';
 import 'package:projetcx/app/widgets/page/options_button.dart';
+import 'package:projetcx/app/widgets/page/reorder_items.dart';
 import 'package:projetcx/app/widgets/utils/gradient_background.dart';
 import 'package:provider/provider.dart';
 
@@ -30,6 +33,7 @@ class _PageManageFormState extends State<PageManageForm> {
   };
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   Color _pageColor;
+  int pageIndex;
 
   @override
   void initState() {
@@ -46,20 +50,28 @@ class _PageManageFormState extends State<PageManageForm> {
   @override
   Widget build(BuildContext context) {
     final _page = Provider.of<PageService>(context);
+    final PluginService _plugin = Provider.of<PluginService>(context);
+
+    if (_plugin.isItemsLoaded == null) {
+      _plugin.loadItems();
+    }
+
+    pageIndex = _page.getItemIndex(widget.item);
     return WillPopScope(
       onWillPop: () async {
-        return true;
+        Route route = MaterialPageRoute(
+          builder: (context) => HomeScreen(pageIndex: pageIndex),
+        );
+        Navigator.push(context, route);
       },
       child: Scaffold(
         body: LayoutBuilder(builder: (context, constraints) {
           return SafeArea(
             child: Center(
-              child: SingleChildScrollView(
-                child: ConstrainedBox(
-                  constraints: BoxConstraints(minHeight: constraints.maxHeight),
-                  child: IntrinsicHeight(
-                    child: _pageForm(_page, context),
-                  ),
+              child: ConstrainedBox(
+                constraints: BoxConstraints(minHeight: constraints.maxHeight),
+                child: IntrinsicHeight(
+                  child: _pageForm(_page, context),
                 ),
               ),
             ),
@@ -87,13 +99,11 @@ class _PageManageFormState extends State<PageManageForm> {
   }
 
   Widget _saveButton() {
-    final _page = Provider.of<PageService>(context);
     return FloatingActionButton(
       heroTag: 'save',
       onPressed: () async {
         Future<PageModel> result = _submitFormSave();
         result.then((item) {
-          int pageIndex = _page.getItemIndex(item);
           _submitFormRedirect(context, pageIndex);
         });
       },
@@ -104,6 +114,15 @@ class _PageManageFormState extends State<PageManageForm> {
   }
 
   Widget _pageForm(PageService page, BuildContext context) {
+    final PluginService _plugin = Provider.of<PluginService>(context);
+    List<PluginDataModel> _items;
+
+    if (_plugin.isItemsLoaded == null) {
+      _plugin.loadItems();
+    }
+
+    _items = _plugin.getItemsByParent(widget.item?.id);
+
     return GradientBackground(
       color: _pageColor,
       child: Padding(
@@ -142,6 +161,14 @@ class _PageManageFormState extends State<PageManageForm> {
                 height: 40.0,
               ),
               _addItemsButton(page, context),
+              _items != null
+                  ? Expanded(
+                      child: PageReorderItems(_items),
+                    )
+                  : Container(),
+              SizedBox(
+                height: 40.0,
+              ),
               SizedBox(
                 height: 20.0,
               ),
@@ -200,7 +227,7 @@ class _PageManageFormState extends State<PageManageForm> {
       await itemResult.then((_) {
         result = updatedItem;
       });
-      _page.updateItemList(updatedItem);
+      _page.reorderItemList(updatedItem);
     } else {
       itemResult = _page.addItem(_formData);
       await itemResult.then((itemId) {

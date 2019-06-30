@@ -51,7 +51,7 @@ class _HomeScreenState extends State<HomeScreen>
 
     final List<PageModel> _pages = _page.getItems;
 
-    if (_pages != null && _pages.length + 1 != _pageIndex) {
+    if (_pages != null && _pages.length + 1 != _pageIndex && _pageIndex != -1) {
       _backgroundColor = DynamicColor.getBackground(_pages, _pageIndex);
     }
 

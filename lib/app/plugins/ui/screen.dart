@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:projetcx/app/plugins/controllers/plugins.dart';
 import 'package:projetcx/app/plugins/data/plugins.dart';
+import 'package:provider/provider.dart';
 
 class PluginsScreen extends StatefulWidget {
   final dynamic item;
@@ -37,6 +38,7 @@ class _PluginsScreenState extends State<PluginsScreen> {
   }
 
   Widget pluginsCard(int index) {
+    final PluginService _plugin = Provider.of<PluginService>(context);
     final Color color = Colors.blueGrey;
     return Card(
       child: InkWell(
@@ -44,7 +46,7 @@ class _PluginsScreenState extends State<PluginsScreen> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => PluginsController.action(
+              builder: (context) => _plugin.action(
                     pluginType: pluginsData[index].pluginType,
                     item: widget.item,
                   ),
