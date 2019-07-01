@@ -55,44 +55,39 @@ class _PageManageFormState extends State<PageManageForm> {
     if (_plugin.isItemsLoaded == null) {
       _plugin.loadItems();
     }
-
     pageIndex = _page.getItemIndex(widget.item);
-    return WillPopScope(
-      onWillPop: () async {
-        Route route = MaterialPageRoute(
-          builder: (context) => HomeScreen(pageIndex: pageIndex),
-        );
-        Navigator.push(context, route);
-      },
-      child: Scaffold(
-        body: LayoutBuilder(builder: (context, constraints) {
-          return SafeArea(
-            child: Center(
-              child: ConstrainedBox(
-                constraints: BoxConstraints(minHeight: constraints.maxHeight),
-                child: IntrinsicHeight(
-                  child: _pageForm(_page, context),
-                ),
-              ),
-            ),
+
+    return GradientBackground(
+      color: _pageColor,
+      child: WillPopScope(
+        onWillPop: () async {
+          Route route = MaterialPageRoute(
+            builder: (context) => HomeScreen(pageIndex: pageIndex),
           );
-        }),
-        floatingActionButton: Stack(
-          children: <Widget>[
-            widget.item != null
-                ? Padding(
-                    padding: EdgeInsets.only(left: 31),
-                    child: Align(
-                      alignment: Alignment.bottomLeft,
-                      child: PageDeleteButton(widget.item),
-                    ),
-                  )
-                : Container(),
-            Align(
-              alignment: Alignment.bottomRight,
-              child: _saveButton(),
-            ),
-          ],
+          Navigator.push(context, route);
+        },
+        child: Scaffold(
+          backgroundColor: Colors.transparent,
+          body: SafeArea(
+            child: _pageForm(_page, context),
+          ),
+          floatingActionButton: Stack(
+            children: <Widget>[
+              widget.item != null
+                  ? Padding(
+                      padding: EdgeInsets.only(left: 31),
+                      child: Align(
+                        alignment: Alignment.bottomLeft,
+                        child: PageDeleteButton(widget.item),
+                      ),
+                    )
+                  : Container(),
+              Align(
+                alignment: Alignment.bottomRight,
+                child: _saveButton(),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -123,8 +118,7 @@ class _PageManageFormState extends State<PageManageForm> {
 
     _items = _plugin.getItemsByParent(widget.item?.id);
 
-    return GradientBackground(
-      color: _pageColor,
+    return SingleChildScrollView(
       child: Padding(
         padding: EdgeInsets.all(20.0),
         child: Form(
@@ -161,14 +155,7 @@ class _PageManageFormState extends State<PageManageForm> {
                 height: 40.0,
               ),
               _addItemsButton(page, context),
-              _items != null
-                  ? Expanded(
-                      child: PageReorderItems(_items),
-                    )
-                  : Container(),
-              SizedBox(
-                height: 40.0,
-              ),
+              _items != null ? PageReorderItems(_items) : Container(),
               SizedBox(
                 height: 20.0,
               ),

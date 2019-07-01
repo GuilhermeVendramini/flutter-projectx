@@ -15,6 +15,7 @@ class _PageReorderItemsState extends State<PageReorderItems> {
   Widget build(BuildContext context) {
     return ListView.builder(
       shrinkWrap: true,
+      physics: NeverScrollableScrollPhysics(),
       itemBuilder: _buildItem,
       itemCount: widget._items.length,
     );

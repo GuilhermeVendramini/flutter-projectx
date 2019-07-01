@@ -39,15 +39,12 @@ class _PluginTextFieldManageFormState extends State<PluginTextFieldManageForm> {
                   ? AppColors.getColorFrom(id: widget.item.color)
                   : Colors.blueGrey,
               child: Center(
-                child: SingleChildScrollView(
-                  child: ConstrainedBox(
-                    constraints:
-                        BoxConstraints(minHeight: constraints.maxHeight),
-                    child: IntrinsicHeight(
-                      child: Padding(
-                        padding: EdgeInsets.all(20.0),
-                        child: _pluginForm(),
-                      ),
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(minHeight: constraints.maxHeight),
+                  child: IntrinsicHeight(
+                    child: Padding(
+                      padding: EdgeInsets.all(20.0),
+                      child: _pluginForm(),
                     ),
                   ),
                 ),
@@ -82,10 +79,6 @@ class _PluginTextFieldManageFormState extends State<PluginTextFieldManageForm> {
           alignment: Alignment.bottomRight,
           child: FloatingActionButton(
             heroTag: 'save',
-            /*           onPressed: () async {
-              await _submitFormSave(context);
-              _submitFormRedirect(widget.item);
-            },*/
             onPressed: () async {
               Future<int> result = _submitFormSave(context);
               result.then((_) {
