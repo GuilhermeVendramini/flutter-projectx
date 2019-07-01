@@ -10,7 +10,6 @@ import 'package:projetcx/app/ui/home/screen.dart';
 import 'package:projetcx/app/widgets/fields/color_picker.dart';
 import 'package:projetcx/app/widgets/fields/text_field.dart';
 import 'package:projetcx/app/widgets/page/options_button.dart';
-import 'package:projetcx/app/widgets/page/reorder_items.dart';
 import 'package:projetcx/app/widgets/utils/gradient_background.dart';
 import 'package:provider/provider.dart';
 
@@ -26,6 +25,9 @@ class PageManageForm extends StatefulWidget {
 }
 
 class _PageManageFormState extends State<PageManageForm> {
+  PageService _page;
+  PluginService _plugin;
+  List<PluginDataModel> _items = [];
   final Map<String, dynamic> _formData = {
     'name': null,
     'color': null,
@@ -49,12 +51,14 @@ class _PageManageFormState extends State<PageManageForm> {
 
   @override
   Widget build(BuildContext context) {
-    final _page = Provider.of<PageService>(context);
-    final PluginService _plugin = Provider.of<PluginService>(context);
+    _page = Provider.of<PageService>(context);
+    _plugin = Provider.of<PluginService>(context);
 
     if (_plugin.isItemsLoaded == null) {
       _plugin.loadItems();
     }
+
+    _items = _plugin.getItemsByParent(widget.item?.id);
     pageIndex = _page.getItemIndex(widget.item);
 
     return GradientBackground(
@@ -69,27 +73,33 @@ class _PageManageFormState extends State<PageManageForm> {
         child: Scaffold(
           backgroundColor: Colors.transparent,
           body: SafeArea(
-            child: _pageForm(_page, context),
-          ),
-          floatingActionButton: Stack(
-            children: <Widget>[
-              widget.item != null
-                  ? Padding(
-                      padding: EdgeInsets.only(left: 31),
-                      child: Align(
-                        alignment: Alignment.bottomLeft,
-                        child: PageDeleteButton(widget.item),
-                      ),
-                    )
-                  : Container(),
-              Align(
-                alignment: Alignment.bottomRight,
-                child: _saveButton(),
-              ),
-            ],
-          ),
+              child: Container(
+            padding: EdgeInsets.all(20.0),
+            child: _reorderableListView(_page, context),
+          )),
+          floatingActionButton: _floatingButtons(),
         ),
       ),
+    );
+  }
+
+  Widget _floatingButtons() {
+    return Stack(
+      children: <Widget>[
+        widget.item != null
+            ? Padding(
+                padding: EdgeInsets.only(left: 31),
+                child: Align(
+                  alignment: Alignment.bottomLeft,
+                  child: PageDeleteButton(widget.item),
+                ),
+              )
+            : Container(),
+        Align(
+          alignment: Alignment.bottomRight,
+          child: _saveButton(),
+        ),
+      ],
     );
   }
 
@@ -108,60 +118,78 @@ class _PageManageFormState extends State<PageManageForm> {
     );
   }
 
-  Widget _pageForm(PageService page, BuildContext context) {
-    final PluginService _plugin = Provider.of<PluginService>(context);
-    List<PluginDataModel> _items;
+  Widget _reorderableListView(PageService page, BuildContext context) {
+    return ReorderableListView(
+      onReorder: _onReorder,
+      header: _formPage(page),
+      padding: EdgeInsets.symmetric(vertical: 8.0),
+      children: _items != null
+          ? _items
+              .map((PluginDataModel item) => _listTile(context, item))
+              .toList()
+          : List(),
+    );
+  }
 
-    if (_plugin.isItemsLoaded == null) {
-      _plugin.loadItems();
-    }
+  Widget _formPage(PageService page) {
+    return Form(
+      key: _formKey,
+      child: Column(
+        mainAxisSize: MainAxisSize.max,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(
+            height: 20.0,
+          ),
+          FieldColorPicker(
+              color: _pageColor,
+              onColorChanged: (color) {
+                setState(() {
+                  _pageColor = color;
+                  _formData['color'] = _pageColor.value;
+                });
+              }),
+          SizedBox(
+            height: 20.0,
+          ),
+          FieldTextField(
+            value: widget.item != null ? widget.item.name : null,
+            hintText: Strings.fieldPageName,
+            autoFocus: true,
+            onSaved: (name) {
+              setState(() {
+                _formData['name'] = name;
+              });
+            },
+          ),
+          SizedBox(
+            height: 40.0,
+          ),
+          _addItemsButton(page, context),
+          SizedBox(
+            height: 20.0,
+          ),
+        ],
+      ),
+    );
+  }
 
-    _items = _plugin.getItemsByParent(widget.item?.id);
-
-    return SingleChildScrollView(
-      child: Padding(
-        padding: EdgeInsets.all(20.0),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(
-                height: 20.0,
-              ),
-              FieldColorPicker(
-                  color: _pageColor,
-                  onColorChanged: (color) {
-                    setState(() {
-                      _pageColor = color;
-                      _formData['color'] = _pageColor.value;
-                    });
-                  }),
-              SizedBox(
-                height: 20.0,
-              ),
-              FieldTextField(
-                value: widget.item != null ? widget.item.name : null,
-                hintText: Strings.fieldPageName,
-                autoFocus: true,
-                onSaved: (name) {
-                  setState(() {
-                    _formData['name'] = name;
-                  });
-                },
-              ),
-              SizedBox(
-                height: 40.0,
-              ),
-              _addItemsButton(page, context),
-              _items != null ? PageReorderItems(_items) : Container(),
-              SizedBox(
-                height: 20.0,
+  Widget _listTile(BuildContext context, PluginDataModel item) {
+    return ListTile(
+      key: Key(item.id.toString()),
+      title: Wrap(
+        alignment: WrapAlignment.spaceBetween,
+        crossAxisAlignment: WrapCrossAlignment.center,
+        children: <Widget>[
+          Wrap(
+            crossAxisAlignment: WrapCrossAlignment.center,
+            children: <Widget>[
+              Text(
+                item.value,
               ),
             ],
           ),
-        ),
+        ],
       ),
     );
   }
@@ -187,15 +215,6 @@ class _PageManageFormState extends State<PageManageForm> {
         ),
       ),
     );
-  }
-
-  void _submitFormRedirect(BuildContext context, int pageIndex) {
-    Route route = MaterialPageRoute(
-      builder: (context) => HomeScreen(
-            pageIndex: pageIndex,
-          ),
-    );
-    Navigator.push(context, route);
   }
 
   Future<PageModel> _submitFormSave() async {
@@ -227,5 +246,29 @@ class _PageManageFormState extends State<PageManageForm> {
       });
     }
     return result;
+  }
+
+  void _submitFormRedirect(BuildContext context, int pageIndex) {
+    Route route = MaterialPageRoute(
+      builder: (context) => HomeScreen(
+            pageIndex: pageIndex,
+          ),
+    );
+    Navigator.push(context, route);
+  }
+
+  void _onReorder(int oldIndex, int newIndex) async {
+    PluginDataModel item;
+    if (newIndex > _items.length) newIndex = _items.length;
+    if (oldIndex < newIndex) newIndex--;
+    item = _items[oldIndex];
+    item.weight = newIndex;
+    Future<int> result = _plugin.updateItem(item);
+    result.then((_) {
+      setState(() {
+        _items.remove(item);
+        _items.insert(newIndex, item);
+      });
+    });
   }
 }

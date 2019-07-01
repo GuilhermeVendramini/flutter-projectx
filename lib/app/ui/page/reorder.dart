@@ -55,7 +55,7 @@ class _PageReorderState extends State<PageReorder> {
               onReorder: _onReorder,
               padding: EdgeInsets.symmetric(vertical: 8.0),
               children: _pages
-                  .map((PageModel item) => _buildListTile(context, item))
+                  .map((PageModel item) => _listTile(context, item))
                   .toList(),
             ),
           ),
@@ -64,7 +64,7 @@ class _PageReorderState extends State<PageReorder> {
     );
   }
 
-  Widget _buildListTile(BuildContext context, PageModel item) {
+  Widget _listTile(BuildContext context, PageModel item) {
     return ListTile(
       key: Key(item.id.toString()),
       title: Wrap(

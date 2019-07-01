@@ -82,4 +82,9 @@ class PluginService extends Plugin {
     });
     return result;
   }
+
+  Future<int> updateItem(PluginDataModel plugin) {
+    Future<int> result = db.update(plugin);
+    return result;
+  }
 }
