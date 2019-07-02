@@ -1,36 +1,40 @@
 import 'package:flutter/material.dart';
 
+final Color primaryColor = Colors.blueGrey;
+final Color secondaryColor = Colors.white;
+
 final ThemeData themeData = new ThemeData(
   fontFamily: 'ProductSans',
-  cursorColor: Colors.white,
+  cursorColor: secondaryColor,
   floatingActionButtonTheme: FloatingActionButtonThemeData(
     elevation: 2.0,
-    backgroundColor: Colors.blueGrey.withOpacity(0.4),
+    backgroundColor: primaryColor.withOpacity(0.4),
   ),
+  canvasColor: primaryColor,
   buttonTheme: ButtonThemeData(
     textTheme: ButtonTextTheme.primary,
-    buttonColor: Colors.blueGrey.withOpacity(0.4),
+    buttonColor: primaryColor.withOpacity(0.4),
   ),
-  buttonColor: Colors.blueGrey.withOpacity(0.4),
+  buttonColor: primaryColor.withOpacity(0.4),
   inputDecorationTheme: InputDecorationTheme(
     hintStyle: TextStyle(
-      color: Colors.white,
+      color: secondaryColor,
     ),
   ),
   appBarTheme: AppBarTheme(
-    color: Colors.blueGrey,
+    color: primaryColor,
   ),
   textTheme: TextTheme(
-    body1: TextStyle(color: Colors.white),
-    body2: TextStyle(color: Colors.white),
-    button: TextStyle(color: Colors.white),
-    caption: TextStyle(color: Colors.white),
-    display1: TextStyle(color: Colors.white),
-    display2: TextStyle(color: Colors.white),
-    display3: TextStyle(color: Colors.white),
-    display4: TextStyle(color: Colors.white),
-    headline: TextStyle(color: Colors.white),
-    subhead: TextStyle(color: Colors.white),
-    title: TextStyle(color: Colors.white),
+    body1: TextStyle(color: secondaryColor),
+    body2: TextStyle(color: secondaryColor),
+    button: TextStyle(color: secondaryColor),
+    caption: TextStyle(color: secondaryColor),
+    display1: TextStyle(color: secondaryColor),
+    display2: TextStyle(color: secondaryColor),
+    display3: TextStyle(color: secondaryColor),
+    display4: TextStyle(color: secondaryColor),
+    headline: TextStyle(color: secondaryColor),
+    subhead: TextStyle(color: secondaryColor),
+    title: TextStyle(color: secondaryColor),
   ),
 );
