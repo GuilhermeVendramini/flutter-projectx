@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:projetcx/app/plugins/constants/plugins.dart';
 
 class PluginModel {
-  PluginsType pluginType;
+  String pluginType;
   String name;
   IconData icon;
+  Function display;
+  Widget form;
 
   PluginModel({
     @required this.pluginType,
     @required this.name,
     @required this.icon,
+    @required this.display,
+    @required this.form,
   });
 }

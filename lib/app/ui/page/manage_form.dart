@@ -4,6 +4,7 @@ import 'package:projetcx/app/constants/strings.dart';
 import 'package:projetcx/app/controllers/page.dart';
 import 'package:projetcx/app/models/page.dart';
 import 'package:projetcx/app/plugins/controllers/plugins.dart';
+import 'package:projetcx/app/plugins/register.dart';
 import 'package:projetcx/app/plugins/models/plugin_data.dart';
 import 'package:projetcx/app/plugins/ui/screen.dart';
 import 'package:projetcx/app/ui/home/screen.dart';
@@ -181,14 +182,7 @@ class _PageManageFormState extends State<PageManageForm> {
         alignment: WrapAlignment.spaceBetween,
         crossAxisAlignment: WrapCrossAlignment.center,
         children: <Widget>[
-          Wrap(
-            crossAxisAlignment: WrapCrossAlignment.center,
-            children: <Widget>[
-              Text(
-                item.value,
-              ),
-            ],
-          ),
+          pluginsRegister[0].display(item.value),
         ],
       ),
     );

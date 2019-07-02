@@ -7,17 +7,28 @@ import 'package:projetcx/app/widgets/fields/text_field.dart';
 import 'package:projetcx/app/widgets/utils/gradient_background.dart';
 import 'package:provider/provider.dart';
 
-class PluginTextFieldManageForm extends StatefulWidget {
+/*
+class PluginTextFieldForm {
+
+  PluginTextFieldForm._();
+
+  static build(PageModel item) {
+    return PluginTextFieldForm;
+  }
+}
+*/
+
+class PluginTextFieldBuildForm extends StatefulWidget {
   final PageModel item;
 
-  PluginTextFieldManageForm({this.item});
+  PluginTextFieldBuildForm({this.item});
 
   @override
-  _PluginTextFieldManageFormState createState() =>
-      _PluginTextFieldManageFormState();
+  _PluginTextFieldBuildFormState createState() =>
+      _PluginTextFieldBuildFormState();
 }
 
-class _PluginTextFieldManageFormState extends State<PluginTextFieldManageForm> {
+class _PluginTextFieldBuildFormState extends State<PluginTextFieldBuildForm> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final Map<String, dynamic> _formData = {
     'parent': null,
@@ -98,7 +109,7 @@ class _PluginTextFieldManageFormState extends State<PluginTextFieldManageForm> {
   }
 
   Widget _pluginForm() {
-    _formData['parent'] = widget.item.id;
+    _formData['parent'] = widget.item?.id;
     return Form(
       key: _formKey,
       child: Column(

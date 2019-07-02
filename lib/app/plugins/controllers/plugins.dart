@@ -1,10 +1,6 @@
 import 'package:flutter/foundation.dart';
-import 'package:projetcx/app/plugins/constants/plugins.dart';
 import 'package:projetcx/app/plugins/db/plugins.dart';
 import 'package:projetcx/app/plugins/models/plugin_data.dart';
-import 'package:projetcx/app/plugins/types/textarea/ui/textarea.dart';
-import 'package:projetcx/app/plugins/types/textfield/ui/textfield.dart';
-import 'package:projetcx/app/plugins/ui/not_found.dart';
 
 class PluginController with ChangeNotifier {
   List<PluginDataModel> _items;
@@ -34,17 +30,11 @@ class Plugin extends PluginController {
 }
 
 class PluginService extends Plugin {
-  action({@required PluginsType pluginType, dynamic item}) {
-    switch (pluginType) {
-      case PluginsType.TEXTFIELD:
+  action({@required dynamic item}) {
+/*    switch (pluginType) {
+      case 'TEXTFIELD':
         {
           return PluginTextField(item: item);
-        }
-        break;
-
-      case PluginsType.TEXTAREA:
-        {
-          return PluginTextArea();
         }
         break;
 
@@ -53,7 +43,7 @@ class PluginService extends Plugin {
           return PluginNotFound();
         }
         break;
-    }
+    }*/
   }
 
   var db = DBPlugins();
@@ -70,7 +60,6 @@ class PluginService extends Plugin {
 
   Future<int> addItem(Map<String, dynamic> item) async {
     PluginDataModel plugin = PluginDataModel(
-      type: PluginsType.TEXTFIELD.toString(),
       parent: item['parent'],
       value: item['value'],
       weight: 0,

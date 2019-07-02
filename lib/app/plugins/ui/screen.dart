@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:projetcx/app/plugins/controllers/plugins.dart';
-import 'package:projetcx/app/plugins/data/plugins.dart';
+import 'package:projetcx/app/plugins/register.dart';
 import 'package:provider/provider.dart';
 
 class PluginsScreen extends StatefulWidget {
@@ -26,7 +26,7 @@ class _PluginsScreenState extends State<PluginsScreen> {
             shrinkWrap: true,
             crossAxisCount: 2,
             padding: EdgeInsets.all(10.0),
-            children: List.generate(pluginsData.length, (index) {
+            children: List.generate(pluginsRegister.length, (index) {
               return Center(
                 child: pluginsCard(index),
               );
@@ -38,7 +38,7 @@ class _PluginsScreenState extends State<PluginsScreen> {
   }
 
   Widget pluginsCard(int index) {
-    final PluginService _plugin = Provider.of<PluginService>(context);
+    //final PluginService _plugin = Provider.of<PluginService>(context);
     final Color color = Colors.blueGrey;
     return Card(
       child: InkWell(
@@ -46,10 +46,7 @@ class _PluginsScreenState extends State<PluginsScreen> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => _plugin.action(
-                    pluginType: pluginsData[index].pluginType,
-                    item: widget.item,
-                  ),
+              builder: (context) => pluginsRegister[index].form, // _plugin.action(item: widget.item),
             ),
           );
         },
@@ -60,12 +57,12 @@ class _PluginsScreenState extends State<PluginsScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
               Icon(
-                pluginsData[index].icon,
+                pluginsRegister[index].icon,
                 color: color,
                 size: 48.0,
               ),
               Text(
-                pluginsData[index].name,
+                pluginsRegister[index].name,
                 style: TextStyle(
                   color: color,
                   fontSize: 18.0,
