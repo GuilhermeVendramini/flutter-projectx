@@ -46,7 +46,7 @@ class PageService extends Page {
 
   Future<int> addItem(Map<String, dynamic> item) async {
     PageModel page = PageModel(
-      name: item['name'] != '' ? item['name'] : 'Page',
+      name: item['name'],
       color: item['color'],
       weight: 0,
     );

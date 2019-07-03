@@ -16,7 +16,7 @@ class PageReorder extends StatefulWidget {
 class _PageReorderState extends State<PageReorder> {
   List<PageModel> _pages = [];
   p.PageService _page;
-  final Color _color = Colors.blueGrey;
+  final Color _color = Colors.white;
 
   void _onReorder(int oldIndex, int newIndex) {
     PageModel item;
@@ -78,6 +78,7 @@ class _PageReorderState extends State<PageReorder> {
                 width: 20.0,
                 height: 20.0,
                 decoration: BoxDecoration(
+                  border: Border.all(color: _color),
                   borderRadius: BorderRadius.circular(10),
                   color: AppColors.getColorFrom(id: item.color),
                 ),

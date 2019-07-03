@@ -1,10 +1,12 @@
 import 'package:flutter/foundation.dart';
+import 'package:projetcx/app/models/page.dart';
 import 'package:projetcx/app/plugins/db/plugins.dart';
 import 'package:projetcx/app/plugins/models/plugin_data.dart';
 
 class PluginController with ChangeNotifier {
   List<PluginDataModel> _items;
   bool _isItemsLoaded;
+  PageModel _currentItem;
 }
 
 class Plugin extends PluginController {
@@ -27,25 +29,13 @@ class Plugin extends PluginController {
   bool get isItemsLoaded {
     return _isItemsLoaded;
   }
+
+  PageModel get getCurrentItem {
+    return _currentItem;
+  }
 }
 
 class PluginService extends Plugin {
-  action({@required dynamic item}) {
-/*    switch (pluginType) {
-      case 'TEXTFIELD':
-        {
-          return PluginTextField(item: item);
-        }
-        break;
-
-      default:
-        {
-          return PluginNotFound();
-        }
-        break;
-    }*/
-  }
-
   var db = DBPlugins();
 
   void loadItems() async {
@@ -58,8 +48,13 @@ class PluginService extends Plugin {
     notifyListeners();
   }
 
+  void setCurrentItem(PageModel item) {
+    _currentItem = item;
+  }
+
   Future<int> addItem(Map<String, dynamic> item) async {
     PluginDataModel plugin = PluginDataModel(
+      type: item['type'],
       parent: item['parent'],
       value: item['value'],
       weight: 0,

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
 class PluginModel {
-  String pluginType;
+  String type;
   String name;
   IconData icon;
   Function display;
   Widget form;
 
   PluginModel({
-    @required this.pluginType,
+    @required this.type,
     @required this.name,
     @required this.icon,
     @required this.display,

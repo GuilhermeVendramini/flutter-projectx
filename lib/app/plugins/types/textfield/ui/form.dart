@@ -7,22 +7,7 @@ import 'package:projetcx/app/widgets/fields/text_field.dart';
 import 'package:projetcx/app/widgets/utils/gradient_background.dart';
 import 'package:provider/provider.dart';
 
-/*
-class PluginTextFieldForm {
-
-  PluginTextFieldForm._();
-
-  static build(PageModel item) {
-    return PluginTextFieldForm;
-  }
-}
-*/
-
 class PluginTextFieldBuildForm extends StatefulWidget {
-  final PageModel item;
-
-  PluginTextFieldBuildForm({this.item});
-
   @override
   _PluginTextFieldBuildFormState createState() =>
       _PluginTextFieldBuildFormState();
@@ -31,13 +16,19 @@ class PluginTextFieldBuildForm extends StatefulWidget {
 class _PluginTextFieldBuildFormState extends State<PluginTextFieldBuildForm> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final Map<String, dynamic> _formData = {
+    'type': 'TEXTFIELD',
     'parent': null,
     'value': null,
     'weight': 0,
   };
+  PluginService _plugin;
+  PageModel _parent;
 
   @override
   Widget build(BuildContext context) {
+    _plugin = Provider.of<PluginService>(context);
+    _parent = _plugin.getCurrentItem;
+
     return WillPopScope(
       onWillPop: () async {
         return true;
@@ -46,8 +37,8 @@ class _PluginTextFieldBuildFormState extends State<PluginTextFieldBuildForm> {
         body: LayoutBuilder(builder: (context, constraints) {
           return SafeArea(
             child: GradientBackground(
-              color: widget.item?.color != null
-                  ? AppColors.getColorFrom(id: widget.item.color)
+              color: _parent?.color != null
+                  ? AppColors.getColorFrom(id: _parent.color)
                   : Colors.blueGrey,
               child: Center(
                 child: ConstrainedBox(
@@ -71,7 +62,7 @@ class _PluginTextFieldBuildFormState extends State<PluginTextFieldBuildForm> {
   Widget _floatingActionButton() {
     return Stack(
       children: <Widget>[
-        widget.item != null
+        _parent != null
             ? Padding(
                 padding: EdgeInsets.only(left: 31),
                 child: Align(
@@ -93,8 +84,9 @@ class _PluginTextFieldBuildFormState extends State<PluginTextFieldBuildForm> {
             onPressed: () async {
               Future<int> result = _submitFormSave(context);
               result.then((_) {
+                _plugin.setCurrentItem(null);
                 Route route = MaterialPageRoute(
-                  builder: (context) => PageManageForm(item: widget.item),
+                  builder: (context) => PageManageForm(item: _parent),
                 );
                 Navigator.push(context, route);
               });
@@ -109,7 +101,7 @@ class _PluginTextFieldBuildFormState extends State<PluginTextFieldBuildForm> {
   }
 
   Widget _pluginForm() {
-    _formData['parent'] = widget.item?.id;
+    _formData['parent'] = _parent?.id;
     return Form(
       key: _formKey,
       child: Column(

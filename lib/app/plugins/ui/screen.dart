@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:projetcx/app/models/page.dart';
 import 'package:projetcx/app/plugins/controllers/plugins.dart';
 import 'package:projetcx/app/plugins/register.dart';
 import 'package:provider/provider.dart';
 
 class PluginsScreen extends StatefulWidget {
-  final dynamic item;
+  final PageModel item;
 
   PluginsScreen(this.item);
 
@@ -28,7 +29,7 @@ class _PluginsScreenState extends State<PluginsScreen> {
             padding: EdgeInsets.all(10.0),
             children: List.generate(pluginsRegister.length, (index) {
               return Center(
-                child: pluginsCard(index),
+                child: _pluginsCard(index),
               );
             }),
           ),
@@ -37,16 +38,18 @@ class _PluginsScreenState extends State<PluginsScreen> {
     );
   }
 
-  Widget pluginsCard(int index) {
-    //final PluginService _plugin = Provider.of<PluginService>(context);
+  Widget _pluginsCard(int index) {
+    final PluginService _plugin = Provider.of<PluginService>(context);
     final Color color = Colors.blueGrey;
     return Card(
       child: InkWell(
         onTap: () {
+          _plugin.setCurrentItem(widget.item);
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => pluginsRegister[index].form, // _plugin.action(item: widget.item),
+              builder: (context) => pluginsRegister[index]
+                  .form, // _plugin.action(item: widget.item),
             ),
           );
         },

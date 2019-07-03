@@ -4,8 +4,9 @@ import 'package:projetcx/app/constants/strings.dart';
 import 'package:projetcx/app/controllers/page.dart';
 import 'package:projetcx/app/models/page.dart';
 import 'package:projetcx/app/plugins/controllers/plugins.dart';
-import 'package:projetcx/app/plugins/register.dart';
+import 'package:projetcx/app/plugins/models/plugin.dart';
 import 'package:projetcx/app/plugins/models/plugin_data.dart';
+import 'package:projetcx/app/plugins/register.dart';
 import 'package:projetcx/app/plugins/ui/screen.dart';
 import 'package:projetcx/app/ui/home/screen.dart';
 import 'package:projetcx/app/widgets/fields/color_picker.dart';
@@ -36,7 +37,7 @@ class _PageManageFormState extends State<PageManageForm> {
   };
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   Color _pageColor;
-  int pageIndex;
+  int _pageIndex;
 
   @override
   void initState() {
@@ -60,14 +61,18 @@ class _PageManageFormState extends State<PageManageForm> {
     }
 
     _items = _plugin.getItemsByParent(widget.item?.id);
-    pageIndex = _page.getItemIndex(widget.item);
+    _pageIndex = _page.getItemIndex(widget.item);
+
+    if (_pageIndex == -1) {
+      _pageIndex = _page.getItems.length;
+    }
 
     return GradientBackground(
       color: _pageColor,
       child: WillPopScope(
         onWillPop: () async {
           Route route = MaterialPageRoute(
-            builder: (context) => HomeScreen(pageIndex: pageIndex),
+            builder: (context) => HomeScreen(pageIndex: _pageIndex),
           );
           Navigator.push(context, route);
         },
@@ -110,7 +115,7 @@ class _PageManageFormState extends State<PageManageForm> {
       onPressed: () async {
         Future<PageModel> result = _submitFormSave();
         result.then((item) {
-          _submitFormRedirect(context, pageIndex);
+          _submitFormRedirect(context, _pageIndex);
         });
       },
       child: Icon(
@@ -159,7 +164,7 @@ class _PageManageFormState extends State<PageManageForm> {
             autoFocus: true,
             onSaved: (name) {
               setState(() {
-                _formData['name'] = name;
+                _formData['name'] = name != '' ? name : 'Page';
               });
             },
           ),
@@ -176,13 +181,16 @@ class _PageManageFormState extends State<PageManageForm> {
   }
 
   Widget _listTile(BuildContext context, PluginDataModel item) {
+    PluginModel _plugin =
+        pluginsRegister.where((plugin) => plugin.type == item.type).first;
+
     return ListTile(
       key: Key(item.id.toString()),
       title: Wrap(
         alignment: WrapAlignment.spaceBetween,
         crossAxisAlignment: WrapCrossAlignment.center,
         children: <Widget>[
-          pluginsRegister[0].display(item.value),
+          _plugin.display(item.value),
         ],
       ),
     );
