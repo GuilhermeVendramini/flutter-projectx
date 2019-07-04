@@ -4,10 +4,16 @@ class PluginTextAreaDisplay {
   PluginTextAreaDisplay._();
 
   static build(String value) {
-    return Text(
-      value,
-      style: TextStyle(
-        fontSize: 20.0,
+    return Padding(
+      padding: EdgeInsets.only(
+        top: 20,
+        bottom: 20,
+      ),
+      child: Text(
+        value,
+        style: TextStyle(
+          fontSize: 20.0,
+        ),
       ),
     );
   }

@@ -7,6 +7,12 @@ class PluginImageFieldDisplay {
 
   static build(String value) {
     final _file = File(value);
-    return Image.file(_file);
+    return Padding(
+      padding: EdgeInsets.only(
+        top: 20,
+        bottom: 20,
+      ),
+      child: Image.file(_file),
+    );
   }
 }
