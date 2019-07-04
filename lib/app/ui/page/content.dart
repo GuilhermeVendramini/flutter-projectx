@@ -5,6 +5,7 @@ import 'package:projetcx/app/plugins/controllers/plugins.dart';
 import 'package:projetcx/app/plugins/models/plugin.dart';
 import 'package:projetcx/app/plugins/models/plugin_data.dart';
 import 'package:projetcx/app/plugins/register.dart';
+import 'package:projetcx/app/ui/page/clean_items.dart';
 import 'package:projetcx/app/widgets/page/options_button.dart';
 import 'package:provider/provider.dart';
 
@@ -78,9 +79,7 @@ class _PageContentState extends State<PageContent>
           });
     }
 
-    return Center(
-      child: Text('Add items'),
-    );
+    return PageCleanItems(widget._page);
   }
 
   Widget _itemContent(PluginDataModel item) {
