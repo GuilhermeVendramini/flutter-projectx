@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:projetcx/app/controllers/screen.dart' as s;
 import 'package:projetcx/app/models/page.dart';
+import 'package:projetcx/app/plugins/controllers/plugins.dart';
+import 'package:projetcx/app/plugins/models/plugin.dart';
+import 'package:projetcx/app/plugins/models/plugin_data.dart';
+import 'package:projetcx/app/plugins/register.dart';
 import 'package:projetcx/app/widgets/page/options_button.dart';
 import 'package:provider/provider.dart';
 
@@ -37,22 +41,59 @@ class _PageContentState extends State<PageContent>
                 PageOptionEditButton(_controller, widget._page),
                 PageOptionReorderButton(_controller),
                 PageOptionDeleteButton(_controller, widget._page),
-                _content()
+                Positioned(
+                  child: _itemsList(),
+                ),
               ],
             )
           : Stack(
               children: <Widget>[
-                _content(),
+                Positioned(
+                  child: _itemsList(),
+                ),
               ],
             ),
     );
   }
 
-  Widget _content() {
-    return Positioned(
-      child: Container(
-        padding: EdgeInsets.all(40.0),
-        child: Text('Items display'),
+  Widget _itemsList() {
+    PluginService _plugin = Provider.of<PluginService>(context);
+
+    if (_plugin.isItemsLoaded == null) {
+      _plugin.loadItems();
+    }
+
+    List<PluginDataModel> _items = _plugin.getItemsByParent(widget._page.id);
+
+    if(_items?.length == 0) {
+      return Text('Add items');
+    }
+
+    if(_items != null) {
+      return ListView.builder(
+          shrinkWrap: true,
+          itemCount: _items.length,
+          itemBuilder: (BuildContext context, int index) {
+            return _itemContent(_items[index]);
+          }
+      );
+    }
+
+    return CircularProgressIndicator();
+  }
+
+  Widget _itemContent(PluginDataModel item) {
+    PluginModel _plugin =
+        pluginsRegister.where((plugin) => plugin.type == item.type).first;
+      //return Text('Teste');
+    return Container(
+      padding: EdgeInsets.all(40.0),
+      child:  Wrap(
+        alignment: WrapAlignment.center,
+        crossAxisAlignment: WrapCrossAlignment.center,
+        children: <Widget>[
+          _plugin.display(item.value),
+        ],
       ),
     );
   }

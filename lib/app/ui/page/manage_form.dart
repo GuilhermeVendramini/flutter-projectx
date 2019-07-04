@@ -131,7 +131,7 @@ class _PageManageFormState extends State<PageManageForm> {
       padding: EdgeInsets.symmetric(vertical: 8.0),
       children: _items != null
           ? _items
-              .map((PluginDataModel item) => _listTile(context, item))
+              .map((PluginDataModel item) => _listTile(item))
               .toList()
           : List(),
     );
@@ -169,25 +169,25 @@ class _PageManageFormState extends State<PageManageForm> {
             },
           ),
           SizedBox(
-            height: 40.0,
+            height: 20.0,
           ),
           _addItemsButton(page, context),
           SizedBox(
-            height: 20.0,
+            height: 40.0,
           ),
         ],
       ),
     );
   }
 
-  Widget _listTile(BuildContext context, PluginDataModel item) {
+  Widget _listTile(PluginDataModel item) {
     PluginModel _plugin =
         pluginsRegister.where((plugin) => plugin.type == item.type).first;
 
     return ListTile(
       key: Key(item.id.toString()),
       title: Wrap(
-        alignment: WrapAlignment.spaceBetween,
+        alignment: WrapAlignment.center,
         crossAxisAlignment: WrapCrossAlignment.center,
         children: <Widget>[
           _plugin.display(item.value),
