@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:projetcx/app/models/page.dart';
 import 'package:projetcx/app/plugins/controllers/plugins.dart';
-import 'package:provider/provider.dart';
 import 'package:projetcx/app/ui/page/manage_form.dart';
+import 'package:provider/provider.dart';
 
 class PluginsFloatingButtons extends StatelessWidget {
   final PageModel _parent;

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:projetcx/app/controllers/screen.dart' as s;
 import 'package:projetcx/app/constants/strings.dart';
+import 'package:projetcx/app/controllers/screen.dart' as s;
 import 'package:projetcx/app/models/page.dart';
 import 'package:projetcx/app/plugins/ui/screen.dart';
 import 'package:provider/provider.dart';
@@ -26,7 +26,8 @@ class _PageCleanItemsState extends State<PageCleanItems> {
       child: SafeArea(
         child: InkWell(
           onTap: () {
-            final s.ScreenService _screen = Provider.of<s.ScreenService>(context);
+            final s.ScreenService _screen =
+                Provider.of<s.ScreenService>(context);
             _screen.setFullScreen(false);
             Navigator.push(
               context,

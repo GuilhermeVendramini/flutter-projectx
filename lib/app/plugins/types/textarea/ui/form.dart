@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:projetcx/app/constants/app_colors.dart';
 import 'package:projetcx/app/models/page.dart';
 import 'package:projetcx/app/plugins/controllers/plugins.dart';
-import 'package:projetcx/app/widgets/fields/text_field.dart';
 import 'package:projetcx/app/widgets/plugins/floating_buttons.dart';
 import 'package:projetcx/app/widgets/utils/gradient_background.dart';
 import 'package:provider/provider.dart';
@@ -54,8 +53,8 @@ class _PluginTextAreaBuildFormState extends State<PluginTextAreaBuildForm> {
             ),
           );
         }),
-        floatingActionButton: PluginsFloatingButtons(
-            _parent, _formKey, _formData),
+        floatingActionButton:
+            PluginsFloatingButtons(_parent, _formKey, _formData),
       ),
     );
   }
@@ -71,9 +70,11 @@ class _PluginTextAreaBuildFormState extends State<PluginTextAreaBuildForm> {
           SizedBox(
             height: 20.0,
           ),
-          FieldTextField(
+          TextFormField(
             //value: widget.value != null ? widget.value : null,
-            autoFocus: true,
+            keyboardType: TextInputType.multiline,
+            autofocus: true,
+            maxLines: null,
             onSaved: (value) {
               setState(() {
                 _formData['value'] = value;

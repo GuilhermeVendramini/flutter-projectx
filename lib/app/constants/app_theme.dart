@@ -20,6 +20,16 @@ final ThemeData themeData = new ThemeData(
     hintStyle: TextStyle(
       color: secondaryColor,
     ),
+    border: UnderlineInputBorder(
+      borderSide: BorderSide(
+        color: secondaryColor,
+      ),
+    ),
+    focusedBorder: UnderlineInputBorder(
+      borderSide: BorderSide(
+        color: Colors.white,
+      ),
+    ),
   ),
   appBarTheme: AppBarTheme(
     color: primaryColor,

@@ -54,8 +54,8 @@ class _PluginTextFieldBuildFormState extends State<PluginTextFieldBuildForm> {
             ),
           );
         }),
-        floatingActionButton: PluginsFloatingButtons(
-            _parent, _formKey, _formData),
+        floatingActionButton:
+            PluginsFloatingButtons(_parent, _formKey, _formData),
       ),
     );
   }

@@ -72,11 +72,12 @@ class _PageContentState extends State<PageContent>
 
     if (_items != null) {
       return ListView.builder(
-          shrinkWrap: true,
-          itemCount: _items.length,
-          itemBuilder: (BuildContext context, int index) {
-            return _itemContent(_items[index]);
-          });
+        shrinkWrap: true,
+        itemCount: _items.length,
+        itemBuilder: (BuildContext context, int index) {
+          return _itemContent(_items[index]);
+        },
+      );
     }
 
     return PageCleanItems(widget._page);

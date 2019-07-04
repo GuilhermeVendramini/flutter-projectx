@@ -7,7 +7,7 @@ class PluginTextAreaDisplay {
     return Text(
       value,
       style: TextStyle(
-        fontSize: 80.0,
+        fontSize: 20.0,
       ),
     );
   }
