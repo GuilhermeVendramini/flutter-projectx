@@ -48,8 +48,7 @@ class _PluginsScreenState extends State<PluginsScreen> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => pluginsRegister[index]
-                  .form, // _plugin.action(item: widget.item),
+              builder: (context) => pluginsRegister[index].form,
             ),
           );
         },

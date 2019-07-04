@@ -79,10 +79,11 @@ class _PageManageFormState extends State<PageManageForm> {
         child: Scaffold(
           backgroundColor: Colors.transparent,
           body: SafeArea(
-              child: Container(
-            padding: EdgeInsets.all(20.0),
-            child: _reorderableListView(_page, context),
-          )),
+            child: Container(
+              padding: EdgeInsets.all(20.0),
+              child: _reorderableListView(_page, context),
+            ),
+          ),
           floatingActionButton: _floatingButtons(),
         ),
       ),
@@ -130,9 +131,7 @@ class _PageManageFormState extends State<PageManageForm> {
       header: _formPage(page),
       padding: EdgeInsets.symmetric(vertical: 8.0),
       children: _items != null
-          ? _items
-              .map((PluginDataModel item) => _listTile(item))
-              .toList()
+          ? _items.map((PluginDataModel item) => _listTile(item)).toList()
           : List(),
     );
   }

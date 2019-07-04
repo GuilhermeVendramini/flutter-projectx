@@ -37,19 +37,23 @@ class _PageContentState extends State<PageContent>
       child: _screen.isFullScreen == false
           ? Stack(
               children: <Widget>[
+                Positioned(
+                  child: Center(
+                    child: _itemsList(),
+                  ),
+                ),
                 PageOptionsButton(_controller),
                 PageOptionEditButton(_controller, widget._page),
                 PageOptionReorderButton(_controller),
                 PageOptionDeleteButton(_controller, widget._page),
-                Positioned(
-                  child: _itemsList(),
-                ),
               ],
             )
           : Stack(
               children: <Widget>[
                 Positioned(
-                  child: _itemsList(),
+                  child: Center(
+                    child: _itemsList(),
+                  ),
                 ),
               ],
             ),
@@ -65,36 +69,27 @@ class _PageContentState extends State<PageContent>
 
     List<PluginDataModel> _items = _plugin.getItemsByParent(widget._page.id);
 
-    if(_items?.length == 0) {
-      return Text('Add items');
-    }
-
-    if(_items != null) {
+    if (_items != null) {
       return ListView.builder(
           shrinkWrap: true,
           itemCount: _items.length,
           itemBuilder: (BuildContext context, int index) {
             return _itemContent(_items[index]);
-          }
-      );
+          });
     }
 
-    return CircularProgressIndicator();
+    return Center(
+      child: Text('Add items'),
+    );
   }
 
   Widget _itemContent(PluginDataModel item) {
     PluginModel _plugin =
         pluginsRegister.where((plugin) => plugin.type == item.type).first;
-      //return Text('Teste');
     return Container(
       padding: EdgeInsets.all(40.0),
-      child:  Wrap(
-        alignment: WrapAlignment.center,
-        crossAxisAlignment: WrapCrossAlignment.center,
-        children: <Widget>[
-          _plugin.display(item.value),
-        ],
-      ),
+      alignment: Alignment.center,
+      child: _plugin.display(item.value),
     );
   }
 

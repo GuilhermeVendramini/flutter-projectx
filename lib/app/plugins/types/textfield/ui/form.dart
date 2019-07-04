@@ -84,7 +84,6 @@ class _PluginTextFieldBuildFormState extends State<PluginTextFieldBuildForm> {
             onPressed: () async {
               Future<int> result = _submitFormSave(context);
               result.then((_) {
-                _plugin.setCurrentItem(null);
                 Route route = MaterialPageRoute(
                   builder: (context) => PageManageForm(item: _parent),
                 );
