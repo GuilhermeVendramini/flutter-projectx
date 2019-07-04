@@ -12,7 +12,7 @@ class PluginTextFieldDisplay {
       child: Text(
         value,
         style: TextStyle(
-          fontSize: 80.0,
+          fontSize: 60.0,
         ),
       ),
     );
