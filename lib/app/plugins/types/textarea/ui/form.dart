@@ -7,16 +7,16 @@ import 'package:projetcx/app/widgets/plugins/floating_buttons.dart';
 import 'package:projetcx/app/widgets/utils/gradient_background.dart';
 import 'package:provider/provider.dart';
 
-class PluginTextFieldBuildForm extends StatefulWidget {
+class PluginTextAreaBuildForm extends StatefulWidget {
   @override
-  _PluginTextFieldBuildFormState createState() =>
-      _PluginTextFieldBuildFormState();
+  _PluginTextAreaBuildFormState createState() =>
+      _PluginTextAreaBuildFormState();
 }
 
-class _PluginTextFieldBuildFormState extends State<PluginTextFieldBuildForm> {
+class _PluginTextAreaBuildFormState extends State<PluginTextAreaBuildForm> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final Map<String, dynamic> _formData = {
-    'type': 'TEXTFIELD',
+    'type': 'TEXTAREA',
     'parent': null,
     'value': null,
     'weight': 0,
