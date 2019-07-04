@@ -25,4 +25,9 @@ class DBPlugins {
     final db = await dbProvider.database;
     return db.delete('plugins', where: 'id = ?', whereArgs: [plugin.id]);
   }
+
+  Future<int> deleteByParent(int parent) async {
+    final db = await dbProvider.database;
+    return db.delete('plugins', where: 'parent = ?', whereArgs: [parent]);
+  }
 }

@@ -23,6 +23,11 @@ class DBPage {
 
   Future<int> delete(PageModel page) async {
     final db = await dbProvider.database;
-    return db.delete('page', where: 'id = ?', whereArgs: [page.id]);
+    Future<int> result;
+    result = db.delete('plugins', where: 'parent = ?', whereArgs: [page.id]);
+    await result.then((_) {
+      result = db.delete('page', where: 'id = ?', whereArgs: [page.id]);
+    });
+    return result;
   }
 }
