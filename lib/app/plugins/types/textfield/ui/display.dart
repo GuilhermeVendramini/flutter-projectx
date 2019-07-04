@@ -4,10 +4,16 @@ class PluginTextFieldDisplay {
   PluginTextFieldDisplay._();
 
   static build(String value) {
-    return Text(
-      value,
-      style: TextStyle(
-        fontSize: 80.0,
+    return Padding(
+      padding: EdgeInsets.only(
+        top: 20,
+        bottom: 20,
+      ),
+      child: Text(
+        value,
+        style: TextStyle(
+          fontSize: 80.0,
+        ),
       ),
     );
   }

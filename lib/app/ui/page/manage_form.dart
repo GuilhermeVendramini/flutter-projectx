@@ -80,7 +80,7 @@ class _PageManageFormState extends State<PageManageForm> {
           backgroundColor: Colors.transparent,
           body: SafeArea(
             child: Container(
-              padding: EdgeInsets.all(20.0),
+              padding: EdgeInsets.all(40.0),
               child: _reorderableListView(_page, context),
             ),
           ),
@@ -129,7 +129,6 @@ class _PageManageFormState extends State<PageManageForm> {
     return ReorderableListView(
       onReorder: _onReorder,
       header: _formPage(page),
-      padding: EdgeInsets.symmetric(vertical: 8.0),
       children: _items != null
           ? _items.map((PluginDataModel item) => _listTile(item)).toList()
           : List(),
@@ -185,12 +184,8 @@ class _PageManageFormState extends State<PageManageForm> {
 
     return ListTile(
       key: Key(item.id.toString()),
-      title: Wrap(
-        alignment: WrapAlignment.center,
-        crossAxisAlignment: WrapCrossAlignment.center,
-        children: <Widget>[
-          _plugin.display(item.value),
-        ],
+      title: Container(
+        child: _plugin.display(item.value),
       ),
     );
   }

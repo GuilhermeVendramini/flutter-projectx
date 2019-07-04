@@ -34,7 +34,7 @@ class _PageContentState extends State<PageContent>
   Widget build(BuildContext context) {
     final s.ScreenService _screen = Provider.of<s.ScreenService>(context);
     return Container(
-      padding: EdgeInsets.all(20.0),
+      padding: EdgeInsets.all(40.0),
       child: _screen.isFullScreen == false
           ? Stack(
               children: <Widget>[
@@ -87,7 +87,6 @@ class _PageContentState extends State<PageContent>
     PluginModel _plugin =
         pluginsRegister.where((plugin) => plugin.type == item.type).first;
     return Container(
-      padding: EdgeInsets.all(40.0),
       alignment: Alignment.center,
       child: _plugin.display(item.value),
     );
