@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/foundation.dart';
 import 'package:projetcx/app/models/page.dart';
 import 'package:projetcx/app/plugins/db/plugins.dart';
@@ -53,10 +55,13 @@ class PluginService extends Plugin {
   }
 
   Future<int> addItem(Map<String, dynamic> item) async {
+    print('--------i-----');
+    print(json.encode(item['data']).toString());
+    print('--------f-----');
     PluginDataModel plugin = PluginDataModel(
       type: item['type'],
       parent: item['parent'],
-      value: item['value'],
+      data: json.encode(item['data']).toString(),
       weight: 0,
     );
     Future<int> result = db.insert(plugin);

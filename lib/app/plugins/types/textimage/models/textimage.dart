@@ -9,7 +9,7 @@ class TextImageModel {
     this.image,
   });
 
-  Map<String, dynamic> toJson() => <String, dynamic>{
+  Map<String, dynamic> toJson() => <String, dynamic> {
         'title': this.title,
         'content': this.content,
         'image': this.image

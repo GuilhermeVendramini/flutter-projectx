@@ -185,7 +185,7 @@ class _PageManageFormState extends State<PageManageForm> {
     return ListTile(
       key: Key(item.id.toString()),
       title: Container(
-        child: _plugin.display(item.value),
+        child: _plugin.display(item.data),
       ),
     );
   }

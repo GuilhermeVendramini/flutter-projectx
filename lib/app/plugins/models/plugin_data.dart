@@ -4,14 +4,14 @@ class PluginDataModel {
   int id;
   String type;
   int parent;
-  dynamic value;
+  String data;
   int weight;
 
   PluginDataModel({
     this.id,
     @required this.type,
     @required this.parent,
-    @required this.value,
+    @required this.data,
     @required this.weight,
   });
 
@@ -19,7 +19,7 @@ class PluginDataModel {
         'id': this.id,
         'type': this.type,
         'parent': this.parent,
-        'value': this.value,
+        'data': this.data,
         'weight': this.weight
       };
 
@@ -28,7 +28,7 @@ class PluginDataModel {
       id: json['id'],
       type: json['type'],
       parent: json['parent'],
-      value: json['value'],
+      data: json['data'],
       weight: json['weight'],
     );
   }

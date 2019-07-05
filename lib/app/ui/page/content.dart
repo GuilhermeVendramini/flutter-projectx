@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:projetcx/app/controllers/screen.dart' as s;
 import 'package:projetcx/app/models/page.dart';
@@ -72,6 +74,9 @@ class _PageContentState extends State<PageContent>
     List<PluginDataModel> _items = _plugin.getItemsByParent(widget._page.id);
 
     if (_items != null) {
+      print('------content.dart i-----');
+      print(_items[0].data);
+      print('------content.dart f-----');
       return ListView.builder(
         shrinkWrap: true,
         itemCount: _items.length,
@@ -89,7 +94,7 @@ class _PageContentState extends State<PageContent>
         pluginsRegister.where((plugin) => plugin.type == item.type).first;
     return Container(
       alignment: Alignment.center,
-      child: _plugin.display(item.value),
+      child: _plugin.display(json.decode(item.data)),
     );
   }
 

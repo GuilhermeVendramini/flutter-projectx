@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:projetcx/app/constants/app_colors.dart';
 import 'package:projetcx/app/models/page.dart';
 import 'package:projetcx/app/plugins/controllers/plugins.dart';
+import 'package:projetcx/app/plugins/types/textfield/models/textfield.dart';
 import 'package:projetcx/app/widgets/plugins/floating_buttons.dart';
 import 'package:projetcx/app/widgets/utils/gradient_background.dart';
 import 'package:provider/provider.dart';
@@ -17,7 +18,9 @@ class _PluginTextFieldBuildFormState extends State<PluginTextFieldBuildForm> {
   final Map<String, dynamic> _formData = {
     'type': 'TEXTFIELD',
     'parent': null,
-    'value': null,
+    'data': TextFieldModel(
+      title: '',
+    ),
     'weight': 0,
   };
   PluginService _plugin;
@@ -77,7 +80,7 @@ class _PluginTextFieldBuildFormState extends State<PluginTextFieldBuildForm> {
             ),
             onSaved: (value) {
               setState(() {
-                _formData['value'] = value;
+                _formData['data'].title = value;
               });
             },
           ),

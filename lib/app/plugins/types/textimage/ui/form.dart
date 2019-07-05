@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -21,7 +22,11 @@ class _PluginTextImageBuildFormState extends State<PluginTextImageBuildForm> {
   final Map<String, dynamic> _formData = {
     'type': 'TEXTIMAGE',
     'parent': null,
-    'value': null,
+    'values': TextImageModel(
+      title: '',
+      content: '',
+      image: '',
+    ),
     'weight': 0,
   };
   PluginService _plugin;
@@ -39,14 +44,8 @@ class _PluginTextImageBuildFormState extends State<PluginTextImageBuildForm> {
   Widget build(BuildContext context) {
     _plugin = Provider.of<PluginService>(context);
     _parent = _plugin.getCurrentItem;
-
     _formData['parent'] = _parent?.id;
-    _formData['value'] = TextImageModel(
-      title: null,
-      content: null,
-      image: null,
-    ).toJson();
-    _formData['value']['image'] = _image?.path;
+    _formData['values'].image = _image?.path;
 
     return WillPopScope(
       onWillPop: () async {
@@ -123,7 +122,7 @@ class _PluginTextImageBuildFormState extends State<PluginTextImageBuildForm> {
           ),
           onSaved: (value) {
             setState(() {
-              _formData['value']['title'] = value;
+              _formData['values'].title = value;
             });
           },
         ),
@@ -139,7 +138,7 @@ class _PluginTextImageBuildFormState extends State<PluginTextImageBuildForm> {
           ),
           onSaved: (value) {
             setState(() {
-              _formData['value']['content'] = value;
+              _formData['values'].content = value;
             });
           },
         ),

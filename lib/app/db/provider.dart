@@ -38,7 +38,7 @@ class DBProvider {
           "id INTEGER PRIMARY KEY AUTOINCREMENT,"
           "type TEXT,"
           "parent INTEGER,"
-          "value TEXT,"
+          "data TEXT,"
           "weight INTEGER"
           ")");
     });
