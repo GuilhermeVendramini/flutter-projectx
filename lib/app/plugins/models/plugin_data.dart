@@ -4,7 +4,7 @@ class PluginDataModel {
   int id;
   String type;
   int parent;
-  String value;
+  dynamic value;
   int weight;
 
   PluginDataModel({

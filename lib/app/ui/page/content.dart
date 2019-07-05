@@ -66,6 +66,7 @@ class _PageContentState extends State<PageContent>
 
     if (_plugin.isItemsLoaded == null) {
       _plugin.loadItems();
+      return CircularProgressIndicator();
     }
 
     List<PluginDataModel> _items = _plugin.getItemsByParent(widget._page.id);

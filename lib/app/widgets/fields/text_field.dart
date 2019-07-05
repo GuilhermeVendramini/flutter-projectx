@@ -23,7 +23,6 @@ class FieldTextField extends StatelessWidget {
       autofocus: autoFocus,
       initialValue: value,
       decoration: InputDecoration(
-        border: InputBorder.none,
         hintText: hintText,
       ),
       onSaved: onSaved,

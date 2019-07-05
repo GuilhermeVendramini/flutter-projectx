@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:projetcx/app/constants/app_colors.dart';
 import 'package:projetcx/app/models/page.dart';
 import 'package:projetcx/app/plugins/controllers/plugins.dart';
-import 'package:projetcx/app/widgets/fields/text_field.dart';
 import 'package:projetcx/app/widgets/plugins/floating_buttons.dart';
 import 'package:projetcx/app/widgets/utils/gradient_background.dart';
 import 'package:provider/provider.dart';
@@ -71,9 +70,11 @@ class _PluginTextFieldBuildFormState extends State<PluginTextFieldBuildForm> {
           SizedBox(
             height: 20.0,
           ),
-          FieldTextField(
-            //value: widget.value != null ? widget.value : null,
-            autoFocus: true,
+          TextFormField(
+            autofocus: true,
+            decoration: InputDecoration(
+              hintText: 'Title',
+            ),
             onSaved: (value) {
               setState(() {
                 _formData['value'] = value;

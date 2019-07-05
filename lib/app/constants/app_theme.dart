@@ -18,7 +18,7 @@ final ThemeData themeData = new ThemeData(
   buttonColor: primaryColor.withOpacity(0.4),
   inputDecorationTheme: InputDecorationTheme(
     hintStyle: TextStyle(
-      color: secondaryColor,
+      color: secondaryColor.withOpacity(0.4),
     ),
     border: UnderlineInputBorder(
       borderSide: BorderSide(

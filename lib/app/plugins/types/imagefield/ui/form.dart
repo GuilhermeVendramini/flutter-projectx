@@ -54,7 +54,8 @@ class _PluginImageFieldBuildFormState extends State<PluginImageFieldBuildForm> {
               child: SingleChildScrollView(
                 child: Center(
                   child: ConstrainedBox(
-                    constraints: BoxConstraints(minHeight: constraints.maxHeight),
+                    constraints:
+                        BoxConstraints(minHeight: constraints.maxHeight),
                     child: IntrinsicHeight(
                       child: Padding(
                         padding: EdgeInsets.all(20.0),
@@ -68,7 +69,7 @@ class _PluginImageFieldBuildFormState extends State<PluginImageFieldBuildForm> {
           );
         }),
         floatingActionButton:
-        PluginsFloatingButtons(_parent, _formKey, _formData),
+            PluginsFloatingButtons(_parent, _formKey, _formData),
       ),
     );
   }

@@ -57,7 +57,6 @@ class PluginsFloatingButtons extends StatelessWidget {
     _formKey.currentState.save();
     Future<int> itemResult;
     int result;
-
     itemResult = _plugin.addItem(_formData);
     await itemResult.then((itemId) {
       result = itemId;

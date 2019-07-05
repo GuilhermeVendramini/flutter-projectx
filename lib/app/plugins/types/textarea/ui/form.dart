@@ -74,7 +74,10 @@ class _PluginTextAreaBuildFormState extends State<PluginTextAreaBuildForm> {
             //value: widget.value != null ? widget.value : null,
             keyboardType: TextInputType.multiline,
             autofocus: true,
-            maxLines: null,
+            maxLines: 5,
+            decoration: InputDecoration(
+              hintText: 'Long text',
+            ),
             onSaved: (value) {
               setState(() {
                 _formData['value'] = value;
