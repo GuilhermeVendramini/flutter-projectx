@@ -55,13 +55,10 @@ class PluginService extends Plugin {
   }
 
   Future<int> addItem(Map<String, dynamic> item) async {
-    print('--------i-----');
-    print(json.encode(item['data']).toString());
-    print('--------f-----');
     PluginDataModel plugin = PluginDataModel(
       type: item['type'],
       parent: item['parent'],
-      data: json.encode(item['data']).toString(),
+      data: json.decode(json.encode(item['data'])),
       weight: 0,
     );
     Future<int> result = db.insert(plugin);

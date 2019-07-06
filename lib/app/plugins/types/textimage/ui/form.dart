@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -22,9 +21,9 @@ class _PluginTextImageBuildFormState extends State<PluginTextImageBuildForm> {
   final Map<String, dynamic> _formData = {
     'type': 'TEXTIMAGE',
     'parent': null,
-    'values': TextImageModel(
+    'data': TextImageModel(
       title: '',
-      content: '',
+      text: '',
       image: '',
     ),
     'weight': 0,
@@ -45,7 +44,7 @@ class _PluginTextImageBuildFormState extends State<PluginTextImageBuildForm> {
     _plugin = Provider.of<PluginService>(context);
     _parent = _plugin.getCurrentItem;
     _formData['parent'] = _parent?.id;
-    _formData['values'].image = _image?.path;
+    _formData['data'].image = _image?.path;
 
     return WillPopScope(
       onWillPop: () async {
@@ -122,7 +121,7 @@ class _PluginTextImageBuildFormState extends State<PluginTextImageBuildForm> {
           ),
           onSaved: (value) {
             setState(() {
-              _formData['values'].title = value;
+              _formData['data'].title = value;
             });
           },
         ),
@@ -138,7 +137,7 @@ class _PluginTextImageBuildFormState extends State<PluginTextImageBuildForm> {
           ),
           onSaved: (value) {
             setState(() {
-              _formData['values'].content = value;
+              _formData['data'].text = value;
             });
           },
         ),

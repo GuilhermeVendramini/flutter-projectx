@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -7,10 +6,9 @@ import 'package:projetcx/app/plugins/types/textimage/models/textimage.dart';
 class PluginTextImageFieldDisplay {
   PluginTextImageFieldDisplay._();
 
-  static build(String value) {
-    Map<String, dynamic> _valueMap = json.decode(value);
-    final TextImageModel _textImage = TextImageModel.fromJson(_valueMap);
-    final _file = File(_textImage.image);
+  static build(Map<String, dynamic> data) {
+    final TextImageModel _data = TextImageModel.fromJson(data);
+    final _file = File(_data.image);
 
     Widget _titleDisplay() {
       return Padding(
@@ -19,7 +17,7 @@ class PluginTextImageFieldDisplay {
           bottom: 20,
         ),
         child: Text(
-          _textImage.title,
+          _data.title,
           style: TextStyle(
             fontSize: 40.0,
           ),
@@ -34,7 +32,7 @@ class PluginTextImageFieldDisplay {
           bottom: 20,
         ),
         child: Text(
-          _textImage.content,
+          _data.text,
           style: TextStyle(
             fontSize: 20.0,
           ),

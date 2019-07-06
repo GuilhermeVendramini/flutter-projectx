@@ -1,24 +1,24 @@
 class TextImageModel {
   String title;
-  String content;
+  String text;
   String image;
 
   TextImageModel({
     this.title,
-    this.content,
+    this.text,
     this.image,
   });
 
-  Map<String, dynamic> toJson() => <String, dynamic> {
+  Map<String, dynamic> toJson() => <String, dynamic>{
         'title': this.title,
-        'content': this.content,
+        'text': this.text,
         'image': this.image
       };
 
   factory TextImageModel.fromJson(Map<String, dynamic> json) {
     return TextImageModel(
       title: json['title'],
-      content: json['content'],
+      text: json['text'],
       image: json['image'],
     );
   }

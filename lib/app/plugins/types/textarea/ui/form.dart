@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:projetcx/app/constants/app_colors.dart';
 import 'package:projetcx/app/models/page.dart';
 import 'package:projetcx/app/plugins/controllers/plugins.dart';
+import 'package:projetcx/app/plugins/types/textarea/models/textarea.dart';
 import 'package:projetcx/app/widgets/plugins/floating_buttons.dart';
 import 'package:projetcx/app/widgets/utils/gradient_background.dart';
 import 'package:provider/provider.dart';
@@ -17,7 +18,9 @@ class _PluginTextAreaBuildFormState extends State<PluginTextAreaBuildForm> {
   final Map<String, dynamic> _formData = {
     'type': 'TEXTAREA',
     'parent': null,
-    'value': null,
+    'data': TextAreaModel(
+      text: '',
+    ),
     'weight': 0,
   };
   PluginService _plugin;
@@ -80,7 +83,7 @@ class _PluginTextAreaBuildFormState extends State<PluginTextAreaBuildForm> {
             ),
             onSaved: (value) {
               setState(() {
-                _formData['value'] = value;
+                _formData['data'].text = value;
               });
             },
           ),

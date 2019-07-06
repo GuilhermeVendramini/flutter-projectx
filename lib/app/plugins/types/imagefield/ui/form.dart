@@ -5,6 +5,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:projetcx/app/constants/app_colors.dart';
 import 'package:projetcx/app/models/page.dart';
 import 'package:projetcx/app/plugins/controllers/plugins.dart';
+import 'package:projetcx/app/plugins/types/imagefield/models/imagefield.dart';
 import 'package:projetcx/app/widgets/plugins/floating_buttons.dart';
 import 'package:projetcx/app/widgets/utils/gradient_background.dart';
 import 'package:provider/provider.dart';
@@ -20,7 +21,9 @@ class _PluginImageFieldBuildFormState extends State<PluginImageFieldBuildForm> {
   final Map<String, dynamic> _formData = {
     'type': 'IMAGEFIELD',
     'parent': null,
-    'value': null,
+    'data': ImageFieldModel(
+      image: null,
+    ),
     'weight': 0,
   };
   PluginService _plugin;
@@ -29,7 +32,7 @@ class _PluginImageFieldBuildFormState extends State<PluginImageFieldBuildForm> {
 
   Future getImage(ImageSource imageSource) async {
     var image = await ImagePicker.pickImage(source: imageSource);
-    _formData['value'] = image.path;
+    _formData['data'].image = image.path;
     setState(() {
       _image = image;
     });

@@ -1,10 +1,12 @@
+import 'dart:convert' as c;
+
 import 'package:flutter/material.dart';
 
 class PluginDataModel {
   int id;
   String type;
   int parent;
-  String data;
+  Map<String, dynamic> data;
   int weight;
 
   PluginDataModel({
@@ -19,7 +21,7 @@ class PluginDataModel {
         'id': this.id,
         'type': this.type,
         'parent': this.parent,
-        'data': this.data,
+        'data': c.json.encode(this.data),
         'weight': this.weight
       };
 
@@ -28,7 +30,7 @@ class PluginDataModel {
       id: json['id'],
       type: json['type'],
       parent: json['parent'],
-      data: json['data'],
+      data: c.json.decode(json['data']),
       weight: json['weight'],
     );
   }
