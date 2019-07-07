@@ -14,6 +14,7 @@ import 'package:projetcx/app/widgets/fields/text_field.dart';
 import 'package:projetcx/app/widgets/page/options_button.dart';
 import 'package:projetcx/app/widgets/utils/gradient_background.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 
 class PageManageForm extends StatefulWidget {
   final PageModel item;
@@ -183,11 +184,36 @@ class _PageManageFormState extends State<PageManageForm> {
     PluginModel _plugin =
         pluginsRegister.where((plugin) => plugin.type == item.type).first;
 
-    return ListTile(
+    /*return ListTile(
       key: Key(item.id.toString()),
       title: Container(
         child: _plugin.display(item.data),
       ),
+    );*/
+    return Slidable(
+      key: Key(item.id.toString()),
+      actionPane: SlidableDrawerActionPane(),
+      actionExtentRatio: 0.25,
+      child: ListTile(
+        key: Key(item.id.toString()),
+        title: Container(
+          child: _plugin.display(item.data),
+        ),
+      ),
+      secondaryActions: <Widget>[
+        IconSlideAction(
+          caption: 'Edit',
+          color: Colors.blue.withOpacity(0.4),
+          icon: Icons.edit,
+          onTap: () => {},
+        ),
+        IconSlideAction(
+          caption: 'Delete',
+          color: Colors.red.withOpacity(0.4),
+          icon: Icons.delete,
+          onTap: () => {},
+        ),
+      ],
     );
   }
 
