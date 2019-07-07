@@ -18,18 +18,21 @@ class _PageReorderState extends State<PageReorder> {
   p.PageService _page;
   final Color _color = Colors.white;
 
-  void _onReorder(int oldIndex, int newIndex) {
+  void _onReorder(int oldIndex, int newIndex) async {
     PageModel item;
-    setState(() {
-      // These two lines are workarounds for ReorderableListView problems
-      if (newIndex > _pages.length) newIndex = _pages.length;
-      if (oldIndex < newIndex) newIndex--;
-      item = _pages[oldIndex];
-      item.weight = newIndex;
-      _pages.remove(item);
-      _pages.insert(newIndex, item);
-    });
-    _page.updateItem(item);
+    if (newIndex > _pages.length) newIndex = _pages.length;
+    if (oldIndex < newIndex) newIndex--;
+
+    item = _pages[oldIndex];
+    _pages.remove(item);
+    _pages.insert(newIndex, item);
+
+    for (var i = 0; i < _pages.length; i++) {
+      _pages[i].weight = i;
+      await _page.updateItem(item);
+    }
+
+    setState(() {});
   }
 
   @override

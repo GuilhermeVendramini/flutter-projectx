@@ -61,6 +61,7 @@ class _PageManageFormState extends State<PageManageForm> {
     }
 
     _items = _plugin.getItemsByParent(widget.item?.id);
+
     _pageIndex = _page.getItemIndex(widget.item);
 
     if (_pageIndex == -1) {
@@ -257,14 +258,16 @@ class _PageManageFormState extends State<PageManageForm> {
     PluginDataModel item;
     if (newIndex > _items.length) newIndex = _items.length;
     if (oldIndex < newIndex) newIndex--;
+
     item = _items[oldIndex];
-    item.weight = newIndex;
-    Future<int> result = _plugin.updateItem(item);
-    result.then((_) {
-      setState(() {
-        _items.remove(item);
-        _items.insert(newIndex, item);
-      });
-    });
+    _items.remove(item);
+    _items.insert(newIndex, item);
+
+    for (var i = 0; i < _items.length; i++) {
+      _items[i].weight = i;
+      await _plugin.updateItem(item);
+    }
+
+    setState(() {});
   }
 }
