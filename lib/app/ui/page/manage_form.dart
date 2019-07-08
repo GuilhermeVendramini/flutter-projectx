@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:projetcx/app/constants/app_colors.dart';
 import 'package:projetcx/app/constants/strings.dart';
 import 'package:projetcx/app/controllers/page.dart';
@@ -12,9 +13,9 @@ import 'package:projetcx/app/ui/home/screen.dart';
 import 'package:projetcx/app/widgets/fields/color_picker.dart';
 import 'package:projetcx/app/widgets/fields/text_field.dart';
 import 'package:projetcx/app/widgets/page/options_button.dart';
+import 'package:projetcx/app/widgets/plugins/options_buttons.dart';
 import 'package:projetcx/app/widgets/utils/gradient_background.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
 
 class PageManageForm extends StatefulWidget {
   final PageModel item;
@@ -181,15 +182,15 @@ class _PageManageFormState extends State<PageManageForm> {
   }
 
   Widget _listTile(PluginDataModel item) {
-    PluginModel _plugin =
+    PluginModel _pluginRegister =
         pluginsRegister.where((plugin) => plugin.type == item.type).first;
 
-    /*return ListTile(
-      key: Key(item.id.toString()),
-      title: Container(
-        child: _plugin.display(item.data),
-      ),
-    );*/
+    void _actionDelete() async {
+      await _plugin.deleteItem(item);
+      setState(() {});
+      Navigator.pop(context);
+    }
+
     return Slidable(
       key: Key(item.id.toString()),
       actionPane: SlidableDrawerActionPane(),
@@ -197,7 +198,7 @@ class _PageManageFormState extends State<PageManageForm> {
       child: ListTile(
         key: Key(item.id.toString()),
         title: Container(
-          child: _plugin.display(item.data),
+          child: _pluginRegister.display(item.data),
         ),
       ),
       secondaryActions: <Widget>[
@@ -205,13 +206,15 @@ class _PageManageFormState extends State<PageManageForm> {
           caption: 'Edit',
           color: Colors.blue.withOpacity(0.4),
           icon: Icons.edit,
-          onTap: () => {},
+          onTap: () => _actionDelete,
         ),
         IconSlideAction(
           caption: 'Delete',
           color: Colors.red.withOpacity(0.4),
           icon: Icons.delete,
-          onTap: () => {},
+          onTap: () {
+            pluginsShowDialog(context, _actionDelete);
+          },
         ),
       ],
     );

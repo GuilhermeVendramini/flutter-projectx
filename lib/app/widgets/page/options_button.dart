@@ -218,7 +218,7 @@ class PageActionDelete extends StatelessWidget {
   }
 }
 
-void _pageShowDialog(context, actionDelete) {
+void _pageShowDialog(BuildContext context, Function actionDelete) {
   showDialog(
     context: context,
     builder: (BuildContext context) {

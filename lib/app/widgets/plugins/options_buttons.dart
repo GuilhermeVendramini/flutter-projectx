@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:projetcx/app/constants/strings.dart';
 import 'package:projetcx/app/models/page.dart';
 import 'package:projetcx/app/plugins/controllers/plugins.dart';
 import 'package:projetcx/app/ui/page/manage_form.dart';
 import 'package:provider/provider.dart';
+
+const Color color = Colors.white;
 
 class PluginsFloatingButtons extends StatelessWidget {
   final PageModel _parent;
@@ -63,4 +66,45 @@ class PluginsFloatingButtons extends StatelessWidget {
     });
     return result;
   }
+}
+
+class PluginsActionDelete extends StatelessWidget {
+  final Function _action;
+
+  PluginsActionDelete(this._action);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 50.0,
+      width: 100.0,
+      child: RaisedButton(
+        color: color,
+        child: Text(
+          Strings.yes,
+        ),
+        onPressed: _action,
+      ),
+    );
+  }
+}
+
+void pluginsShowDialog(BuildContext context, actionDelete) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        backgroundColor: Colors.black.withOpacity(0.2),
+        title: Center(
+          child: Text(Strings.confirmDeleteBox),
+        ),
+        content: Wrap(
+          alignment: WrapAlignment.center,
+          children: <Widget>[
+            PluginsActionDelete(actionDelete),
+          ],
+        ),
+      );
+    },
+  );
 }

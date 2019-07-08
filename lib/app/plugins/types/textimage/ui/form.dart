@@ -6,7 +6,7 @@ import 'package:projetcx/app/constants/app_colors.dart';
 import 'package:projetcx/app/models/page.dart';
 import 'package:projetcx/app/plugins/controllers/plugins.dart';
 import 'package:projetcx/app/plugins/types/textimage/models/textimage.dart';
-import 'package:projetcx/app/widgets/plugins/floating_buttons.dart';
+import 'package:projetcx/app/widgets/plugins/options_buttons.dart';
 import 'package:projetcx/app/widgets/utils/gradient_background.dart';
 import 'package:provider/provider.dart';
 

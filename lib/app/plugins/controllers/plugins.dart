@@ -73,4 +73,12 @@ class PluginService extends Plugin {
     Future<int> result = db.update(plugin);
     return result;
   }
+
+  Future<int> deleteItem(PluginDataModel plugin) {
+    Future<int> result = db.delete(plugin);
+    result.then((itemId) {
+      _items.removeWhere((item) => item.id == plugin.id);
+    });
+    return result;
+  }
 }
