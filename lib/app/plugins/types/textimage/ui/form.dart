@@ -71,15 +71,7 @@ class _PluginTextImageBuildFormState extends State<PluginTextImageBuildForm> {
                   padding: EdgeInsets.all(20.0),
                   child: Center(
                     child: SingleChildScrollView(
-                      child: Column(
-                        children: <Widget>[
-                          _imageButtons(),
-                          SizedBox(
-                            height: 20.0,
-                          ),
-                          _pluginGrid(),
-                        ],
-                      ),
+                      child: _pluginGrid(),
                     ),
                   ),
                 ),
@@ -110,10 +102,17 @@ class _PluginTextImageBuildFormState extends State<PluginTextImageBuildForm> {
   }
 
   Widget _imageColumn() {
-    return Container(
-      alignment: Alignment.center,
-      padding: EdgeInsets.all(20.0),
-      child: _image == null ? Text('No image selected.') : Image.file(_image),
+    return SingleChildScrollView(
+      child: Column(
+        children: <Widget>[
+          _imageButtons(),
+          Container(
+            alignment: Alignment.center,
+            padding: EdgeInsets.all(20.0),
+            child: _image == null ? Text('No image selected.') : Image.file(_image),
+          ),
+        ],
+      ),
     );
   }
 
@@ -156,32 +155,20 @@ class _PluginTextImageBuildFormState extends State<PluginTextImageBuildForm> {
   }
 
   Widget _imageButtons() {
-    return Column(
-      mainAxisSize: MainAxisSize.max,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        SizedBox(
-          height: 20.0,
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            RaisedButton(
-              onPressed: () => _getImage(ImageSource.camera),
-              child: Icon(Icons.add_a_photo),
-            ),
-            SizedBox(
-              width: 20.0,
-            ),
-            RaisedButton(
-              onPressed: () => _getImage(ImageSource.gallery),
-              child: Icon(Icons.image),
-            ),
-          ],
+    return Wrap(
+      crossAxisAlignment: WrapCrossAlignment.center,
+      runAlignment: WrapAlignment.center,
+      children: <Widget>[
+        RaisedButton(
+          onPressed: () => _getImage(ImageSource.camera),
+          child: Icon(Icons.add_a_photo),
         ),
         SizedBox(
-          height: 20.0,
+          width: 20.0,
+        ),
+        RaisedButton(
+          onPressed: () => _getImage(ImageSource.gallery),
+          child: Icon(Icons.image),
         ),
       ],
     );

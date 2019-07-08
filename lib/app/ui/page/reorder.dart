@@ -1,11 +1,14 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:projetcx/app/constants/app_colors.dart';
 import 'package:projetcx/app/constants/strings.dart';
 import 'package:projetcx/app/controllers/page.dart' as p;
 import 'package:projetcx/app/models/page.dart';
+import 'package:projetcx/app/ui/page/manage_form.dart';
 import 'package:projetcx/app/utils/device_media_query.dart';
+import 'package:projetcx/app/widgets/plugins/options_buttons.dart';
 import 'package:provider/provider.dart';
 
 class PageReorder extends StatefulWidget {
@@ -16,7 +19,9 @@ class PageReorder extends StatefulWidget {
 class _PageReorderState extends State<PageReorder> {
   List<PageModel> _pages = [];
   p.PageService _page;
+
   final Color _color = Colors.white;
+
 
   void _onReorder(int oldIndex, int newIndex) async {
     PageModel item;
@@ -58,12 +63,50 @@ class _PageReorderState extends State<PageReorder> {
               onReorder: _onReorder,
               padding: EdgeInsets.symmetric(vertical: 8.0),
               children: _pages
-                  .map((PageModel item) => _listTile(context, item))
+                  .map((PageModel item) => _slidable(context, item))
                   .toList(),
             ),
           ),
         ),
       ),
+    );
+  }
+
+  Widget _slidable(BuildContext context, PageModel item) {
+    void _actionDelete() async {
+      await _page.deleteItem(item);
+      setState(() {});
+      Navigator.pop(context);
+    }
+
+    return Slidable(
+      key: Key(item.id.toString()),
+      actionPane: SlidableDrawerActionPane(),
+      actionExtentRatio: 0.25,
+      child: _listTile(context, item),
+      secondaryActions: <Widget>[
+        IconSlideAction(
+          caption: 'Edit',
+          color: Colors.blue.withOpacity(0.4),
+          icon: Icons.edit,
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => PageManageForm(item: item),
+              ),
+            );
+          },
+        ),
+        IconSlideAction(
+          caption: 'Delete',
+          color: Colors.red.withOpacity(0.4),
+          icon: Icons.delete,
+          onTap: () {
+            pluginsShowDialog(context, _actionDelete);
+          },
+        ),
+      ],
     );
   }
 

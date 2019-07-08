@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:projetcx/app/models/page.dart';
 import 'package:projetcx/app/plugins/controllers/plugins.dart';
 import 'package:projetcx/app/plugins/register.dart';
+import 'package:projetcx/app/ui/page/manage_form.dart';
 import 'package:provider/provider.dart';
 
 class PluginsScreen extends StatefulWidget {
@@ -18,7 +19,12 @@ class _PluginsScreenState extends State<PluginsScreen> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        return true;
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => PageManageForm(item: widget.item),
+          ),
+        );
       },
       child: Scaffold(
         backgroundColor: Colors.grey[100],
