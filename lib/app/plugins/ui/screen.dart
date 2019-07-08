@@ -45,6 +45,7 @@ class _PluginsScreenState extends State<PluginsScreen> {
       child: InkWell(
         onTap: () {
           _plugin.setCurrentParent(widget.item);
+          _plugin.setCurrentItem(null);
           Navigator.push(
             context,
             MaterialPageRoute(

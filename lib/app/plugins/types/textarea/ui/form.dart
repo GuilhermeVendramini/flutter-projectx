@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:projetcx/app/constants/app_colors.dart';
 import 'package:projetcx/app/models/page.dart';
 import 'package:projetcx/app/plugins/controllers/plugins.dart';
+import 'package:projetcx/app/plugins/models/plugin_data.dart';
 import 'package:projetcx/app/plugins/types/textarea/models/textarea.dart';
 import 'package:projetcx/app/widgets/plugins/options_buttons.dart';
 import 'package:projetcx/app/widgets/utils/gradient_background.dart';
@@ -25,11 +26,13 @@ class _PluginTextAreaBuildFormState extends State<PluginTextAreaBuildForm> {
   };
   PluginService _plugin;
   PageModel _parent;
+  PluginDataModel _currentItem;
 
   @override
   Widget build(BuildContext context) {
     _plugin = Provider.of<PluginService>(context);
     _parent = _plugin.getCurrentParent;
+    _currentItem = _plugin.getCurrentItem;
 
     return WillPopScope(
       onWillPop: () async {
@@ -74,7 +77,8 @@ class _PluginTextAreaBuildFormState extends State<PluginTextAreaBuildForm> {
             height: 20.0,
           ),
           TextFormField(
-            //value: widget.value != null ? widget.value : null,
+            initialValue:
+                _currentItem != null ? _currentItem.data['text'] : null,
             keyboardType: TextInputType.multiline,
             autofocus: true,
             maxLines: 5,

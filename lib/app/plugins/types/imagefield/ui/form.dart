@@ -5,6 +5,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:projetcx/app/constants/app_colors.dart';
 import 'package:projetcx/app/models/page.dart';
 import 'package:projetcx/app/plugins/controllers/plugins.dart';
+import 'package:projetcx/app/plugins/models/plugin_data.dart';
 import 'package:projetcx/app/plugins/types/imagefield/models/imagefield.dart';
 import 'package:projetcx/app/widgets/plugins/options_buttons.dart';
 import 'package:projetcx/app/widgets/utils/gradient_background.dart';
@@ -22,17 +23,17 @@ class _PluginImageFieldBuildFormState extends State<PluginImageFieldBuildForm> {
     'type': 'IMAGEFIELD',
     'parent': null,
     'data': ImageFieldModel(
-      image: null,
+      image: '',
     ),
     'weight': 0,
   };
   PluginService _plugin;
   PageModel _parent;
+  PluginDataModel _currentItem;
   File _image;
 
   Future getImage(ImageSource imageSource) async {
     var image = await ImagePicker.pickImage(source: imageSource);
-    _formData['data'].image = image.path;
     setState(() {
       _image = image;
     });
@@ -41,7 +42,14 @@ class _PluginImageFieldBuildFormState extends State<PluginImageFieldBuildForm> {
   @override
   Widget build(BuildContext context) {
     _plugin = Provider.of<PluginService>(context);
+    _currentItem = _plugin.getCurrentItem;
     _parent = _plugin.getCurrentParent;
+    _formData['data'].image = _image?.path;
+
+    if (_currentItem != null && _image == null) {
+      _formData['data'].image = _currentItem.data['image'];
+      _image = File(_currentItem.data['image']);
+    }
 
     return WillPopScope(
       onWillPop: () async {

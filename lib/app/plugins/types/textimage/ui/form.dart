@@ -5,6 +5,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:projetcx/app/constants/app_colors.dart';
 import 'package:projetcx/app/models/page.dart';
 import 'package:projetcx/app/plugins/controllers/plugins.dart';
+import 'package:projetcx/app/plugins/models/plugin_data.dart';
 import 'package:projetcx/app/plugins/types/textimage/models/textimage.dart';
 import 'package:projetcx/app/widgets/plugins/options_buttons.dart';
 import 'package:projetcx/app/widgets/utils/gradient_background.dart';
@@ -30,6 +31,7 @@ class _PluginTextImageBuildFormState extends State<PluginTextImageBuildForm> {
   };
   PluginService _plugin;
   PageModel _parent;
+  PluginDataModel _currentItem;
   File _image;
 
   Future _getImage(ImageSource imageSource) async {
@@ -42,9 +44,15 @@ class _PluginTextImageBuildFormState extends State<PluginTextImageBuildForm> {
   @override
   Widget build(BuildContext context) {
     _plugin = Provider.of<PluginService>(context);
+    _currentItem = _plugin.getCurrentItem;
     _parent = _plugin.getCurrentParent;
     _formData['parent'] = _parent?.id;
     _formData['data'].image = _image?.path;
+
+    if (_currentItem != null && _image == null) {
+      _formData['data'].image = _currentItem.data['image'];
+      _image = File(_currentItem.data['image']);
+    }
 
     return WillPopScope(
       onWillPop: () async {
@@ -115,6 +123,8 @@ class _PluginTextImageBuildFormState extends State<PluginTextImageBuildForm> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         TextFormField(
+          initialValue:
+              _currentItem != null ? _currentItem.data['title'] : null,
           autofocus: true,
           decoration: InputDecoration(
             hintText: 'Title',
@@ -129,7 +139,7 @@ class _PluginTextImageBuildFormState extends State<PluginTextImageBuildForm> {
           height: 20.0,
         ),
         TextFormField(
-          //value: widget.value != null ? widget.value : null,
+          initialValue: _currentItem != null ? _currentItem.data['text'] : null,
           keyboardType: TextInputType.multiline,
           maxLines: 5,
           decoration: InputDecoration(
