@@ -8,7 +8,8 @@ import 'package:projetcx/app/plugins/models/plugin_data.dart';
 class PluginController with ChangeNotifier {
   List<PluginDataModel> _items;
   bool _isItemsLoaded;
-  PageModel _currentItem;
+  PageModel _currentParent;
+  PluginDataModel _currentItem;
 }
 
 class Plugin extends PluginController {
@@ -32,7 +33,11 @@ class Plugin extends PluginController {
     return _isItemsLoaded;
   }
 
-  PageModel get getCurrentItem {
+  PageModel get getCurrentParent {
+    return _currentParent;
+  }
+
+  PluginDataModel get getCurrentItem {
     return _currentItem;
   }
 }
@@ -50,7 +55,11 @@ class PluginService extends Plugin {
     notifyListeners();
   }
 
-  void setCurrentItem(PageModel item) {
+  void setCurrentParent(PageModel item) {
+    _currentParent = item;
+  }
+
+  void setCurrentItem(PluginDataModel item) {
     _currentItem = item;
   }
 
@@ -71,6 +80,11 @@ class PluginService extends Plugin {
 
   Future<int> updateItem(PluginDataModel plugin) {
     Future<int> result = db.update(plugin);
+    result.then((itemId) {
+      int index = _items.indexWhere((item) => item.id == plugin.id);
+      _items[index] = plugin;
+    });
+    _currentItem = null;
     return result;
   }
 

@@ -29,7 +29,7 @@ class _PluginTextAreaBuildFormState extends State<PluginTextAreaBuildForm> {
   @override
   Widget build(BuildContext context) {
     _plugin = Provider.of<PluginService>(context);
-    _parent = _plugin.getCurrentItem;
+    _parent = _plugin.getCurrentParent;
 
     return WillPopScope(
       onWillPop: () async {

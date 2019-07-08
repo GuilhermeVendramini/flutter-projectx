@@ -1,7 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:projetcx/app/constants/strings.dart';
 import 'package:projetcx/app/models/page.dart';
 import 'package:projetcx/app/plugins/controllers/plugins.dart';
+import 'package:projetcx/app/plugins/models/plugin_data.dart';
 import 'package:projetcx/app/ui/page/manage_form.dart';
 import 'package:provider/provider.dart';
 
@@ -16,23 +19,26 @@ class PluginsFloatingButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final PluginService _plugin = Provider.of<PluginService>(context);
+    final PluginDataModel _currentItem = _plugin.getCurrentItem;
+
     return Stack(
       children: <Widget>[
-        //_item != null?
-        Padding(
-          padding: EdgeInsets.only(left: 31),
-          child: Align(
-            alignment: Alignment.bottomLeft,
-            child: FloatingActionButton(
-              heroTag: 'delete',
-              onPressed: () {},
-              child: Icon(
-                Icons.delete_outline,
-              ),
-            ),
-          ),
-        ),
-        //: Container(),
+        _currentItem != null
+            ? Padding(
+                padding: EdgeInsets.only(left: 31),
+                child: Align(
+                  alignment: Alignment.bottomLeft,
+                  child: FloatingActionButton(
+                    heroTag: 'delete',
+                    onPressed: () {},
+                    child: Icon(
+                      Icons.delete_outline,
+                    ),
+                  ),
+                ),
+              )
+            : Container(),
         Align(
           alignment: Alignment.bottomRight,
           child: FloatingActionButton(
@@ -57,13 +63,30 @@ class PluginsFloatingButtons extends StatelessWidget {
 
   Future<int> _submitFormSave(BuildContext context) async {
     final _plugin = Provider.of<PluginService>(context);
+    final PluginDataModel _currentItem = _plugin.getCurrentItem;
+
     _formKey.currentState.save();
     Future<int> itemResult;
     int result;
-    itemResult = _plugin.addItem(_formData);
-    await itemResult.then((itemId) {
-      result = itemId;
-    });
+
+    if (_currentItem != null) {
+      PluginDataModel _updatedItem = PluginDataModel(
+        id: _currentItem.id,
+        type: _currentItem.type,
+        parent: _currentItem.parent,
+        data: json.decode(json.encode(_formData['data'])),
+        weight: _currentItem.weight,
+      );
+      itemResult = _plugin.updateItem(_updatedItem);
+      await itemResult.then((itemId) {
+        result = itemId;
+      });
+    } else {
+      itemResult = _plugin.addItem(_formData);
+      await itemResult.then((itemId) {
+        result = itemId;
+      });
+    }
     return result;
   }
 }

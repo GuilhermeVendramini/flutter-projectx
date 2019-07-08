@@ -191,6 +191,15 @@ class _PageManageFormState extends State<PageManageForm> {
       Navigator.pop(context);
     }
 
+    void _actionEdit() {
+      _plugin.setCurrentParent(widget.item);
+      _plugin.setCurrentItem(item);
+      Route route = MaterialPageRoute(
+        builder: (context) => _pluginRegister.form,
+      );
+      Navigator.push(context, route);
+    }
+
     return Slidable(
       key: Key(item.id.toString()),
       actionPane: SlidableDrawerActionPane(),
@@ -206,7 +215,7 @@ class _PageManageFormState extends State<PageManageForm> {
           caption: 'Edit',
           color: Colors.blue.withOpacity(0.4),
           icon: Icons.edit,
-          onTap: () => _actionDelete,
+          onTap: () => _actionEdit(),
         ),
         IconSlideAction(
           caption: 'Delete',

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:projetcx/app/constants/app_colors.dart';
 import 'package:projetcx/app/models/page.dart';
 import 'package:projetcx/app/plugins/controllers/plugins.dart';
+import 'package:projetcx/app/plugins/models/plugin_data.dart';
 import 'package:projetcx/app/plugins/types/textfield/models/textfield.dart';
 import 'package:projetcx/app/widgets/plugins/options_buttons.dart';
 import 'package:projetcx/app/widgets/utils/gradient_background.dart';
@@ -25,11 +26,13 @@ class _PluginTextFieldBuildFormState extends State<PluginTextFieldBuildForm> {
   };
   PluginService _plugin;
   PageModel _parent;
+  PluginDataModel _currentItem;
 
   @override
   Widget build(BuildContext context) {
     _plugin = Provider.of<PluginService>(context);
-    _parent = _plugin.getCurrentItem;
+    _parent = _plugin.getCurrentParent;
+    _currentItem = _plugin.getCurrentItem;
 
     return WillPopScope(
       onWillPop: () async {
@@ -74,6 +77,8 @@ class _PluginTextFieldBuildFormState extends State<PluginTextFieldBuildForm> {
             height: 20.0,
           ),
           TextFormField(
+            initialValue:
+                _currentItem != null ? _currentItem.data['title'] : null,
             autofocus: true,
             decoration: InputDecoration(
               hintText: 'Title',
