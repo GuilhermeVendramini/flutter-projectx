@@ -123,9 +123,7 @@ class _PluginImageFieldBuildFormState extends State<PluginImageFieldBuildForm> {
             height: 20.0,
           ),
           Container(
-            child: _image == null
-                ? Text(Strings.noImage)
-                : Image.file(_image),
+            child: _image == null ? Text(Strings.noImage) : Image.file(_image),
           ),
           SizedBox(
             height: 20.0,

@@ -1,14 +1,12 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:projetcx/app/plugins/types/textimage/models/textimage.dart';
+import 'package:projetcx/app/plugins/widgets/image/plugin_image_load.dart';
 
 class PluginTextImageFieldDisplay {
   PluginTextImageFieldDisplay._();
 
   static build(Map<String, dynamic> data) {
     final TextImageModel _data = TextImageModel.fromJson(data);
-    final _file = File(_data.image);
 
     Widget _titleDisplay() {
       return Padding(
@@ -52,15 +50,6 @@ class PluginTextImageFieldDisplay {
       );
     }
 
-    Widget _imageColumn() {
-      return Container(
-        padding: EdgeInsets.all(20.0),
-        child: Image(
-          image: FileImage(_file),
-        ),
-      );
-    }
-
     return GridView(
       shrinkWrap: true,
       physics: NeverScrollableScrollPhysics(),
@@ -68,7 +57,7 @@ class PluginTextImageFieldDisplay {
           SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
       children: <Widget>[
         _textColumn(),
-        _imageColumn(),
+        PluginImageLoad(_data.image),
       ],
     );
   }

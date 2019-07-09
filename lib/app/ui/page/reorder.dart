@@ -22,7 +22,6 @@ class _PageReorderState extends State<PageReorder> {
 
   final Color _color = Colors.white;
 
-
   void _onReorder(int oldIndex, int newIndex) async {
     PageModel item;
     if (newIndex > _pages.length) newIndex = _pages.length;

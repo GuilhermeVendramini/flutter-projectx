@@ -21,5 +21,6 @@ class Strings {
   static const String colorTitleBox = "CHOOSE A COLOR";
   static const String yes = "Yes";
   static const String unableSave = "Unable to save";
-  static const String unableSaveMessage = "Empty field or invalid input. Please, revise your information and try again.";
+  static const String unableSaveMessage =
+      "Empty field or invalid input. Please, revise your information and try again.";
 }

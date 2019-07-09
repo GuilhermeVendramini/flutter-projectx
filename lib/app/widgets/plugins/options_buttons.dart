@@ -92,7 +92,6 @@ class PluginsFloatingButtons extends StatelessWidget {
 }
 
 class PluginsFloatingButtonsDisable extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return Stack(
