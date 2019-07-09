@@ -57,7 +57,7 @@ class PluginTextImageFieldDisplay {
           SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
       children: <Widget>[
         _textColumn(),
-        PluginImageLoad(_data.image),
+        PluginImageLoad(image: _data.image),
       ],
     );
   }

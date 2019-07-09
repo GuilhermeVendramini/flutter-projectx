@@ -6,6 +6,6 @@ class PluginImageFieldDisplay {
 
   static build(Map<String, dynamic> data) {
     final ImageFieldModel _data = ImageFieldModel.fromJson(data);
-    return PluginImageLoad(_data.image);
+    return PluginImageLoad(image: _data.image);
   }
 }

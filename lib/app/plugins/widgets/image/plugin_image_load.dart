@@ -3,9 +3,9 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 
 class PluginImageLoad extends StatefulWidget {
-  final String _image;
+  final String image;
 
-  PluginImageLoad(this._image);
+  PluginImageLoad({@required this.image});
 
   @override
   _PluginImageLoadState createState() => _PluginImageLoadState();
@@ -18,14 +18,16 @@ class _PluginImageLoadState extends State<PluginImageLoad> {
 
   @override
   Widget build(BuildContext context) {
-    final Future<bool> _fileExists = File(widget._image).exists();
+    final Future<bool> _fileExists = File(widget.image).exists();
 
     if (_fileIsLoading) {
       _fileExists.then((result) {
         if (result) {
-          _file = File(widget._image);
+          _file = File(widget.image);
+          _fileIsLoading = false;
         } else {
           _fileNotExists = true;
+          _fileIsLoading = false;
         }
         setState(() {
           _fileIsLoading = false;

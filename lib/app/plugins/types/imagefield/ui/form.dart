@@ -32,11 +32,28 @@ class _PluginImageFieldBuildFormState extends State<PluginImageFieldBuildForm> {
   PageModel _parent;
   PluginDataModel _currentItem;
   File _image;
+  bool _currentFileVerified = false;
 
   Future getImage(ImageSource imageSource) async {
     var image = await ImagePicker.pickImage(source: imageSource);
     setState(() {
       _image = image;
+    });
+  }
+
+  _getCurrentFile() {
+    _currentFileVerified = true;
+    final Future<bool> _fileExists = File(_currentItem.data['image']).exists();
+    _fileExists.then((result) {
+      if (result) {
+        setState(() {
+          _image = File(_currentItem.data['image']);
+        });
+      } else {
+        setState(() {
+          _image = null;
+        });
+      }
     });
   }
 
@@ -47,9 +64,11 @@ class _PluginImageFieldBuildFormState extends State<PluginImageFieldBuildForm> {
     _parent = _plugin.getCurrentParent;
     _formData['data'].image = _image?.path;
 
-    if (_currentItem != null && _image == null) {
+    if (_currentItem != null &&
+        _image == null &&
+        _currentFileVerified == false) {
       _formData['data'].image = _currentItem.data['image'];
-      _image = File(_currentItem.data['image']);
+      _getCurrentFile();
     }
 
     return WillPopScope(
