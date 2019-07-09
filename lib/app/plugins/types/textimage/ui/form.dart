@@ -83,8 +83,9 @@ class _PluginTextImageBuildFormState extends State<PluginTextImageBuildForm> {
               );
             },
           ),
-          floatingActionButton:
-              PluginsFloatingButtons(_parent, _formKey, _formData),
+          floatingActionButton: _image != null
+              ? PluginsFloatingButtons(_parent, _formKey, _formData)
+              : PluginsFloatingButtonsDisable(),
         ),
       ),
     );

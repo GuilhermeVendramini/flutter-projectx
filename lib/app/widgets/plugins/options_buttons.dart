@@ -91,6 +91,62 @@ class PluginsFloatingButtons extends StatelessWidget {
   }
 }
 
+class PluginsFloatingButtonsDisable extends StatelessWidget {
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: <Widget>[
+        Align(
+          alignment: Alignment.bottomRight,
+          child: FloatingActionButton(
+            heroTag: 'saveDisable',
+            child: Icon(
+              Icons.done,
+              color: Colors.grey,
+            ),
+            onPressed: () {
+              pluginsShowDialog(context);
+            },
+          ),
+        ),
+      ],
+    );
+  }
+
+  void pluginsShowDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: Colors.black.withOpacity(0.2),
+          title: Center(
+            child: Text(Strings.unableSave),
+          ),
+          content: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Text(Strings.unableSaveMessage),
+              SizedBox(
+                height: 10.0,
+              ),
+              RaisedButton(
+                color: color,
+                child: Text('OK'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+}
+
 class PluginsActionDelete extends StatelessWidget {
   final Function _action;
 
