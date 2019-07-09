@@ -80,6 +80,10 @@ class _PageManageFormState extends State<PageManageForm> {
           Navigator.push(context, route);
         },
         child: Scaffold(
+          appBar: AppBar(
+            centerTitle: true,
+            title: Text(Strings.managerPage),
+          ),
           backgroundColor: Colors.transparent,
           body: SafeArea(
             child: Container(

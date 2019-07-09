@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:projetcx/app/constants/app_colors.dart';
+import 'package:projetcx/app/constants/strings.dart';
 import 'package:projetcx/app/models/page.dart';
 import 'package:projetcx/app/plugins/controllers/plugins.dart';
 import 'package:projetcx/app/plugins/models/plugin_data.dart';
@@ -56,6 +57,10 @@ class _PluginImageFieldBuildFormState extends State<PluginImageFieldBuildForm> {
         return true;
       },
       child: Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          title: Text(Strings.addImage),
+        ),
         body: LayoutBuilder(builder: (context, constraints) {
           return SafeArea(
             child: GradientBackground(
@@ -118,7 +123,7 @@ class _PluginImageFieldBuildFormState extends State<PluginImageFieldBuildForm> {
           ),
           Container(
             child: _image == null
-                ? Text('No image selected.')
+                ? Text(Strings.noImage)
                 : Image.file(_image),
           ),
           SizedBox(

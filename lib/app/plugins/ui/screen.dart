@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:projetcx/app/constants/strings.dart';
 import 'package:projetcx/app/models/page.dart';
 import 'package:projetcx/app/plugins/controllers/plugins.dart';
 import 'package:projetcx/app/plugins/register.dart';
@@ -27,6 +28,10 @@ class _PluginsScreenState extends State<PluginsScreen> {
         );
       },
       child: Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          title: Text(Strings.addItems),
+        ),
         backgroundColor: Colors.grey[100],
         body: SafeArea(
           child: GridView.count(

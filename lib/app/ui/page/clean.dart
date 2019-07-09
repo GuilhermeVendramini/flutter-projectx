@@ -40,7 +40,7 @@ class _PageCleanState extends State<PageClean> {
                     height: 8.0,
                   ),
                   Text(
-                    Strings.addPage,
+                    Strings.managerPage,
                     style: TextStyle(color: color),
                   ),
                 ],

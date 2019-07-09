@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:projetcx/app/constants/app_colors.dart';
+import 'package:projetcx/app/constants/strings.dart';
 import 'package:projetcx/app/models/page.dart';
 import 'package:projetcx/app/plugins/controllers/plugins.dart';
 import 'package:projetcx/app/plugins/models/plugin_data.dart';
@@ -63,6 +64,10 @@ class _PluginTextImageBuildFormState extends State<PluginTextImageBuildForm> {
             ? AppColors.getColorFrom(id: _parent.color)
             : Colors.blueGrey,
         child: Scaffold(
+          appBar: AppBar(
+            centerTitle: true,
+            title: Text(Strings.addTextImage),
+          ),
           backgroundColor: Colors.transparent,
           body: LayoutBuilder(
             builder: (context, constraints) {
@@ -109,7 +114,7 @@ class _PluginTextImageBuildFormState extends State<PluginTextImageBuildForm> {
           Container(
             alignment: Alignment.center,
             padding: EdgeInsets.all(20.0),
-            child: _image == null ? Text('No image selected.') : Image.file(_image),
+            child: _image == null ? Text(Strings.noImage) : Image.file(_image),
           ),
         ],
       ),
@@ -126,7 +131,7 @@ class _PluginTextImageBuildFormState extends State<PluginTextImageBuildForm> {
               _currentItem != null ? _currentItem.data['title'] : null,
           autofocus: true,
           decoration: InputDecoration(
-            hintText: 'Title',
+            hintText: Strings.title,
           ),
           onSaved: (value) {
             setState(() {
@@ -142,7 +147,7 @@ class _PluginTextImageBuildFormState extends State<PluginTextImageBuildForm> {
           keyboardType: TextInputType.multiline,
           maxLines: 5,
           decoration: InputDecoration(
-            hintText: 'Long text',
+            hintText: Strings.longText,
           ),
           onSaved: (value) {
             setState(() {

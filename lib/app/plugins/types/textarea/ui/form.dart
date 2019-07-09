@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:projetcx/app/constants/app_colors.dart';
+import 'package:projetcx/app/constants/strings.dart';
 import 'package:projetcx/app/models/page.dart';
 import 'package:projetcx/app/plugins/controllers/plugins.dart';
 import 'package:projetcx/app/plugins/models/plugin_data.dart';
@@ -39,6 +40,10 @@ class _PluginTextAreaBuildFormState extends State<PluginTextAreaBuildForm> {
         return true;
       },
       child: Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          title: Text(Strings.addLongText),
+        ),
         body: LayoutBuilder(builder: (context, constraints) {
           return SafeArea(
             child: GradientBackground(
@@ -83,7 +88,7 @@ class _PluginTextAreaBuildFormState extends State<PluginTextAreaBuildForm> {
             autofocus: true,
             maxLines: 5,
             decoration: InputDecoration(
-              hintText: 'Long text',
+              hintText: Strings.longText,
             ),
             onSaved: (value) {
               setState(() {

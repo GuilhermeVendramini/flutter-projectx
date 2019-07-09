@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:projetcx/app/constants/app_colors.dart';
+import 'package:projetcx/app/constants/strings.dart';
 import 'package:projetcx/app/models/page.dart';
 import 'package:projetcx/app/plugins/controllers/plugins.dart';
 import 'package:projetcx/app/plugins/models/plugin_data.dart';
@@ -39,6 +40,10 @@ class _PluginTextFieldBuildFormState extends State<PluginTextFieldBuildForm> {
         return true;
       },
       child: Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          title: Text(Strings.addTitle),
+        ),
         body: LayoutBuilder(builder: (context, constraints) {
           return SafeArea(
             child: GradientBackground(
@@ -81,7 +86,7 @@ class _PluginTextFieldBuildFormState extends State<PluginTextFieldBuildForm> {
                 _currentItem != null ? _currentItem.data['title'] : null,
             autofocus: true,
             decoration: InputDecoration(
-              hintText: 'Title',
+              hintText: Strings.title,
             ),
             onSaved: (value) {
               setState(() {
