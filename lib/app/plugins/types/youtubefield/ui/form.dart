@@ -110,6 +110,7 @@ class _PluginYoutubeFieldBuildFormState
             decoration: InputDecoration(
               hintText: Strings.youtubeWidth,
             ),
+            keyboardType: TextInputType.numberWithOptions(decimal: true),
             onSaved: (value) {
               setState(() {
                 _formData['data'].width =

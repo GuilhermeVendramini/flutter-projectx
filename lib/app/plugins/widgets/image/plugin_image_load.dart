@@ -4,8 +4,14 @@ import 'package:flutter/material.dart';
 
 class PluginImageLoad extends StatefulWidget {
   final String image;
+  final double height;
+  final double width;
 
-  PluginImageLoad({@required this.image});
+  PluginImageLoad({
+    @required this.image,
+    this.height,
+    this.width,
+  });
 
   @override
   _PluginImageLoadState createState() => _PluginImageLoadState();
@@ -51,6 +57,8 @@ class _PluginImageLoadState extends State<PluginImageLoad> {
             )
           : Image(
               image: FileImage(_file),
+              height: widget.height,
+              width: widget.width,
             ),
     );
   }

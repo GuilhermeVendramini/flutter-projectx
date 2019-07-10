@@ -16,6 +16,8 @@ class Strings {
   static const String addImage = "Add Image";
   static const String noImage = "No image selected";
   static const String image = "Image";
+  static const String imageWidth = "Image width. Ex: 90.0 or let empty";
+  static const String imageHeight = "Image height. Ex: 90.0 or let empty";
   static const String addTextImage = "Add Text and Image";
   static const String textColumns = "Text in 2 Columns";
   static const String addTextColumns = "Add Text in 2 Columns";

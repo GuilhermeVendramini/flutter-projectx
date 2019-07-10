@@ -25,6 +25,8 @@ class _PluginImageFieldBuildFormState extends State<PluginImageFieldBuildForm> {
     'parent': null,
     'data': ImageFieldModel(
       image: '',
+      height: null,
+      width: null,
     ),
     'weight': 0,
   };
@@ -35,7 +37,7 @@ class _PluginImageFieldBuildFormState extends State<PluginImageFieldBuildForm> {
   bool _currentFileVerified = false;
   Color _pageColor;
 
-  Future getImage(ImageSource imageSource) async {
+  Future _getImage(ImageSource imageSource) async {
     var image = await ImagePicker.pickImage(source: imageSource);
     setState(() {
       _image = image;
@@ -130,14 +132,14 @@ class _PluginImageFieldBuildFormState extends State<PluginImageFieldBuildForm> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               RaisedButton(
-                onPressed: () => getImage(ImageSource.camera),
+                onPressed: () => _getImage(ImageSource.camera),
                 child: Icon(Icons.add_a_photo),
               ),
               SizedBox(
                 width: 20.0,
               ),
               RaisedButton(
-                onPressed: () => getImage(ImageSource.gallery),
+                onPressed: () => _getImage(ImageSource.gallery),
                 child: Icon(Icons.image),
               ),
             ],
@@ -151,8 +153,51 @@ class _PluginImageFieldBuildFormState extends State<PluginImageFieldBuildForm> {
           SizedBox(
             height: 20.0,
           ),
+          _imageHeight(),
+          SizedBox(
+            height: 20.0,
+          ),
+          _imageWidth(),
+          SizedBox(
+            height: 80.0,
+          ),
         ],
       ),
+    );
+  }
+
+  Widget _imageHeight() {
+    return TextFormField(
+      initialValue: _currentItem != null && _currentItem.data['height'] != null
+          ? _currentItem.data['height'].toString()
+          : null,
+      decoration: InputDecoration(
+        hintText: Strings.imageHeight,
+      ),
+      keyboardType: TextInputType.numberWithOptions(decimal: true),
+      onSaved: (value) {
+        setState(() {
+          _formData['data'].height =
+              value == '' ? null : double.tryParse(value);
+        });
+      },
+    );
+  }
+
+  Widget _imageWidth() {
+    return TextFormField(
+      initialValue: _currentItem != null && _currentItem.data['width'] != null
+          ? _currentItem.data['width'].toString()
+          : null,
+      decoration: InputDecoration(
+        hintText: Strings.imageWidth,
+      ),
+      keyboardType: TextInputType.numberWithOptions(decimal: true),
+      onSaved: (value) {
+        setState(() {
+          _formData['data'].width = value == '' ? null : double.tryParse(value);
+        });
+      },
     );
   }
 }

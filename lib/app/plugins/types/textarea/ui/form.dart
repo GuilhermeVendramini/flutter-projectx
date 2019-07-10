@@ -53,13 +53,15 @@ class _PluginTextAreaBuildFormState extends State<PluginTextAreaBuildForm> {
           return SafeArea(
             child: GradientBackground(
               color: _pageColor,
-              child: Center(
-                child: ConstrainedBox(
-                  constraints: BoxConstraints(minHeight: constraints.maxHeight),
-                  child: IntrinsicHeight(
-                    child: Padding(
-                      padding: EdgeInsets.all(20.0),
-                      child: _pluginForm(),
+              child: SingleChildScrollView(
+                child: Center(
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints(minHeight: constraints.maxHeight),
+                    child: IntrinsicHeight(
+                      child: Padding(
+                        padding: EdgeInsets.all(20.0),
+                        child: _pluginForm(),
+                      ),
                     ),
                   ),
                 ),
@@ -88,7 +90,7 @@ class _PluginTextAreaBuildFormState extends State<PluginTextAreaBuildForm> {
             initialValue:
                 _currentItem != null ? _currentItem.data['text'] : null,
             keyboardType: TextInputType.multiline,
-            maxLines: 5,
+            maxLines: 10,
             decoration: InputDecoration(
               hintText: Strings.longText,
             ),
@@ -99,7 +101,7 @@ class _PluginTextAreaBuildFormState extends State<PluginTextAreaBuildForm> {
             },
           ),
           SizedBox(
-            height: 20.0,
+            height: 80.0,
           ),
         ],
       ),
