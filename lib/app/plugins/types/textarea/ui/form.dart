@@ -88,7 +88,6 @@ class _PluginTextAreaBuildFormState extends State<PluginTextAreaBuildForm> {
             initialValue:
                 _currentItem != null ? _currentItem.data['text'] : null,
             keyboardType: TextInputType.multiline,
-            autofocus: true,
             maxLines: 5,
             decoration: InputDecoration(
               hintText: Strings.longText,

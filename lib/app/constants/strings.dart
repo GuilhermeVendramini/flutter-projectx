@@ -17,6 +17,8 @@ class Strings {
   static const String noImage = "No image selected";
   static const String image = "Image";
   static const String addTextImage = "Add Text and Image";
+  static const String textColumns = "Text in 2 Columns";
+  static const String addTextColumns = "Add Text in 2 Columns";
   static const String textImage = "Text and Image";
   static const String fieldPageName = "Page name...";
   static const String pageTitleReorder = "Reorder pages";
