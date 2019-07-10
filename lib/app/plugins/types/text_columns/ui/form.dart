@@ -15,7 +15,8 @@ class PluginTextColumnsBuildForm extends StatefulWidget {
       _PluginTextColumnsBuildFormState();
 }
 
-class _PluginTextColumnsBuildFormState extends State<PluginTextColumnsBuildForm> {
+class _PluginTextColumnsBuildFormState
+    extends State<PluginTextColumnsBuildForm> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final Map<String, dynamic> _formData = {
     'type': 'TEXTCOLUMNS',
@@ -96,8 +97,7 @@ class _PluginTextColumnsBuildFormState extends State<PluginTextColumnsBuildForm>
 
   Widget _titleOne() {
     return TextFormField(
-      initialValue:
-      _currentItem != null ? _currentItem.data['titleOne'] : null,
+      initialValue: _currentItem != null ? _currentItem.data['titleOne'] : null,
       decoration: InputDecoration(
         hintText: Strings.title,
       ),
@@ -111,8 +111,7 @@ class _PluginTextColumnsBuildFormState extends State<PluginTextColumnsBuildForm>
 
   Widget _textOne() {
     return TextFormField(
-      initialValue:
-      _currentItem != null ? _currentItem.data['textOne'] : null,
+      initialValue: _currentItem != null ? _currentItem.data['textOne'] : null,
       keyboardType: TextInputType.multiline,
       maxLines: 5,
       decoration: InputDecoration(
@@ -145,9 +144,7 @@ class _PluginTextColumnsBuildFormState extends State<PluginTextColumnsBuildForm>
 
   Widget _titleTwo() {
     return TextFormField(
-      initialValue:
-      _currentItem != null ? _currentItem.data['titleTwo'] : null,
-      autofocus: true,
+      initialValue: _currentItem != null ? _currentItem.data['titleTwo'] : null,
       decoration: InputDecoration(
         hintText: Strings.title,
       ),
@@ -161,8 +158,7 @@ class _PluginTextColumnsBuildFormState extends State<PluginTextColumnsBuildForm>
 
   Widget _textTwo() {
     return TextFormField(
-      initialValue:
-      _currentItem != null ? _currentItem.data['textTwo'] : null,
+      initialValue: _currentItem != null ? _currentItem.data['textTwo'] : null,
       keyboardType: TextInputType.multiline,
       maxLines: 5,
       decoration: InputDecoration(

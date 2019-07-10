@@ -7,7 +7,7 @@ import 'package:projetcx/app/plugins/types/text_columns/ui/form.dart';
 final PluginModel pluginTextColumns = PluginModel(
   type: 'TEXTCOLUMNS',
   name: Strings.textColumns,
-  icon: Icons.border_vertical,
+  icon: Icons.pause,
   display: PluginTextColumnsFieldDisplay.build,
   form: PluginTextColumnsBuildForm(),
 );

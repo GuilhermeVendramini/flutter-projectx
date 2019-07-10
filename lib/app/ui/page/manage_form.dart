@@ -214,12 +214,10 @@ class _PageManageFormState extends State<PageManageForm> {
         key: Key(item.id.toString()),
         title: Container(
           decoration: BoxDecoration(
-            border: Border(
-              right: BorderSide(
-                color: Colors.white.withOpacity(0.4),
-              )
-            )
-          ),
+              border: Border(
+                  right: BorderSide(
+            color: Colors.white.withOpacity(0.4),
+          ))),
           child: _pluginRegister.display(item.data),
         ),
       ),

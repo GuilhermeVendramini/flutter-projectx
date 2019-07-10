@@ -11,12 +11,12 @@ class TextColumnsModel {
     this.textTwo,
   });
 
-  Map<String, dynamic> toJson() => <String, dynamic> {
-    'titleOne': this.titleOne,
-    'textOne': this.textOne,
-    'titleTwo': this.titleTwo,
-    'textTwo': this.textTwo,
-  };
+  Map<String, dynamic> toJson() => <String, dynamic>{
+        'titleOne': this.titleOne,
+        'textOne': this.textOne,
+        'titleTwo': this.titleTwo,
+        'textTwo': this.textTwo,
+      };
 
   factory TextColumnsModel.fromJson(Map<String, dynamic> json) {
     return TextColumnsModel(

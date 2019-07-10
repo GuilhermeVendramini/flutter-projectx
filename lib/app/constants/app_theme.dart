@@ -17,6 +17,22 @@ final ThemeData themeData = new ThemeData(
   ),
   buttonColor: primaryColor.withOpacity(0.4),
   inputDecorationTheme: InputDecorationTheme(
+    helperStyle: TextStyle(
+      color: secondaryColor,
+    ),
+    focusColor: secondaryColor,
+    hoverColor: secondaryColor,
+    counterStyle: TextStyle(color: secondaryColor),
+    labelStyle: TextStyle(
+      color: secondaryColor,
+    ),
+    suffixStyle: TextStyle(
+      color: secondaryColor,
+    ),
+    prefixStyle: TextStyle(
+      color: secondaryColor,
+    ),
+    fillColor: secondaryColor,
     hintStyle: TextStyle(
       color: secondaryColor.withOpacity(0.4),
     ),
@@ -25,9 +41,19 @@ final ThemeData themeData = new ThemeData(
         color: secondaryColor,
       ),
     ),
+    enabledBorder: UnderlineInputBorder(
+      borderSide: BorderSide(
+        color: secondaryColor.withOpacity(0.4),
+      ),
+    ),
+    disabledBorder: UnderlineInputBorder(
+      borderSide: BorderSide(
+        color: secondaryColor.withOpacity(0.4),
+      ),
+    ),
     focusedBorder: UnderlineInputBorder(
       borderSide: BorderSide(
-        color: Colors.white,
+        color: secondaryColor,
       ),
     ),
   ),
@@ -46,5 +72,7 @@ final ThemeData themeData = new ThemeData(
     headline: TextStyle(color: secondaryColor),
     subhead: TextStyle(color: secondaryColor),
     title: TextStyle(color: secondaryColor),
+    subtitle: TextStyle(color: secondaryColor),
+    overline: TextStyle(color: secondaryColor),
   ),
 );
