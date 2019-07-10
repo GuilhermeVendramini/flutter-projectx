@@ -7,6 +7,10 @@ class Strings {
   static const String addItems = "Add Items";
   static const String addTitle = "Add Title";
   static const String title = "Title";
+  static const String addYoutube = "Add Youtube Video";
+  static const String youtubeId = "Youtube Video ID";
+  static const String youtubeWidth = "Video width. Ex: 200.0 or let empty";
+  static const String youtube = "Youtube video";
   static const String addLongText = "Add Long text";
   static const String longText = "Long text";
   static const String addImage = "Add Image";

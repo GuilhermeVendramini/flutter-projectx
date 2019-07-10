@@ -28,12 +28,16 @@ class _PluginTextAreaBuildFormState extends State<PluginTextAreaBuildForm> {
   PluginService _plugin;
   PageModel _parent;
   PluginDataModel _currentItem;
+  Color _pageColor;
 
   @override
   Widget build(BuildContext context) {
     _plugin = Provider.of<PluginService>(context);
     _parent = _plugin.getCurrentParent;
     _currentItem = _plugin.getCurrentItem;
+    _pageColor = _parent?.color != null
+        ? AppColors.getColorFrom(id: _parent.color)
+        : Colors.blueGrey;
 
     return WillPopScope(
       onWillPop: () async {
@@ -41,15 +45,14 @@ class _PluginTextAreaBuildFormState extends State<PluginTextAreaBuildForm> {
       },
       child: Scaffold(
         appBar: AppBar(
+          backgroundColor: _pageColor,
           centerTitle: true,
           title: Text(Strings.addLongText),
         ),
         body: LayoutBuilder(builder: (context, constraints) {
           return SafeArea(
             child: GradientBackground(
-              color: _parent?.color != null
-                  ? AppColors.getColorFrom(id: _parent.color)
-                  : Colors.blueGrey,
+              color: _pageColor,
               child: Center(
                 child: ConstrainedBox(
                   constraints: BoxConstraints(minHeight: constraints.maxHeight),

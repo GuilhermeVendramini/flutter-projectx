@@ -33,6 +33,7 @@ class _PluginImageFieldBuildFormState extends State<PluginImageFieldBuildForm> {
   PluginDataModel _currentItem;
   File _image;
   bool _currentFileVerified = false;
+  Color _pageColor;
 
   Future getImage(ImageSource imageSource) async {
     var image = await ImagePicker.pickImage(source: imageSource);
@@ -71,21 +72,24 @@ class _PluginImageFieldBuildFormState extends State<PluginImageFieldBuildForm> {
       _getCurrentFile();
     }
 
+    _pageColor = _parent?.color != null
+        ? AppColors.getColorFrom(id: _parent.color)
+        : Colors.blueGrey;
+
     return WillPopScope(
       onWillPop: () async {
         return true;
       },
       child: Scaffold(
         appBar: AppBar(
+          backgroundColor: _pageColor,
           centerTitle: true,
           title: Text(Strings.addImage),
         ),
         body: LayoutBuilder(builder: (context, constraints) {
           return SafeArea(
             child: GradientBackground(
-              color: _parent?.color != null
-                  ? AppColors.getColorFrom(id: _parent.color)
-                  : Colors.blueGrey,
+              color: _pageColor,
               child: SingleChildScrollView(
                 child: Center(
                   child: ConstrainedBox(

@@ -16,6 +16,7 @@ class PluginTextFieldDisplay {
         style: TextStyle(
           fontSize: 60.0,
         ),
+        textAlign: TextAlign.center,
       ),
     );
   }

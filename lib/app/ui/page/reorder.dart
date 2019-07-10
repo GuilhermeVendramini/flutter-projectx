@@ -33,7 +33,7 @@ class _PageReorderState extends State<PageReorder> {
 
     for (var i = 0; i < _pages.length; i++) {
       _pages[i].weight = i;
-      await _page.updateItem(item);
+      await _page.updateItem(_pages[i]);
     }
 
     setState(() {});
@@ -140,6 +140,7 @@ class _PageReorderState extends State<PageReorder> {
               ),
             ],
           ),
+          Text(item.weight.toString()),
           Icon(
             Icons.drag_handle,
             color: _color,

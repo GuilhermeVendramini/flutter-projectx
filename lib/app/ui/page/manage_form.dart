@@ -73,6 +73,7 @@ class _PageManageFormState extends State<PageManageForm> {
     return GradientBackground(
       color: _pageColor,
       child: WillPopScope(
+        // ignore: missing_return
         onWillPop: () async {
           Route route = MaterialPageRoute(
             builder: (context) => HomeScreen(pageIndex: _pageIndex),
@@ -81,6 +82,7 @@ class _PageManageFormState extends State<PageManageForm> {
         },
         child: Scaffold(
           appBar: AppBar(
+            backgroundColor: _pageColor,
             centerTitle: true,
             title: Text(Strings.managerPage),
           ),
@@ -290,8 +292,8 @@ class _PageManageFormState extends State<PageManageForm> {
   void _submitFormRedirect(BuildContext context, int pageIndex) {
     Route route = MaterialPageRoute(
       builder: (context) => HomeScreen(
-            pageIndex: pageIndex,
-          ),
+        pageIndex: pageIndex,
+      ),
     );
     Navigator.push(context, route);
   }
@@ -307,7 +309,7 @@ class _PageManageFormState extends State<PageManageForm> {
 
     for (var i = 0; i < _items.length; i++) {
       _items[i].weight = i;
-      await _plugin.updateItem(item);
+      await _plugin.updateItem(_items[i]);
     }
 
     setState(() {});

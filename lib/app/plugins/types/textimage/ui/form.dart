@@ -35,6 +35,7 @@ class _PluginTextImageBuildFormState extends State<PluginTextImageBuildForm> {
   PluginDataModel _currentItem;
   File _image;
   bool _currentFileVerified = false;
+  Color _pageColor;
 
   Future _getImage(ImageSource imageSource) async {
     var image = await ImagePicker.pickImage(source: imageSource);
@@ -75,16 +76,19 @@ class _PluginTextImageBuildFormState extends State<PluginTextImageBuildForm> {
       _getCurrentFile();
     }
 
+    _pageColor = _parent?.color != null
+        ? AppColors.getColorFrom(id: _parent.color)
+        : Colors.blueGrey;
+
     return WillPopScope(
       onWillPop: () async {
         return true;
       },
       child: GradientBackground(
-        color: _parent?.color != null
-            ? AppColors.getColorFrom(id: _parent.color)
-            : Colors.blueGrey,
+        color: _pageColor,
         child: Scaffold(
           appBar: AppBar(
+            backgroundColor: _pageColor,
             centerTitle: true,
             title: Text(Strings.addTextImage),
           ),
@@ -143,40 +147,43 @@ class _PluginTextImageBuildFormState extends State<PluginTextImageBuildForm> {
   }
 
   Widget _textColumn() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        TextFormField(
-          initialValue:
-              _currentItem != null ? _currentItem.data['title'] : null,
-          autofocus: true,
-          decoration: InputDecoration(
-            hintText: Strings.title,
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          TextFormField(
+            initialValue:
+                _currentItem != null ? _currentItem.data['title'] : null,
+            autofocus: true,
+            decoration: InputDecoration(
+              hintText: Strings.title,
+            ),
+            onSaved: (value) {
+              setState(() {
+                _formData['data'].title = value;
+              });
+            },
           ),
-          onSaved: (value) {
-            setState(() {
-              _formData['data'].title = value;
-            });
-          },
-        ),
-        SizedBox(
-          height: 20.0,
-        ),
-        TextFormField(
-          initialValue: _currentItem != null ? _currentItem.data['text'] : null,
-          keyboardType: TextInputType.multiline,
-          maxLines: 5,
-          decoration: InputDecoration(
-            hintText: Strings.longText,
+          SizedBox(
+            height: 20.0,
           ),
-          onSaved: (value) {
-            setState(() {
-              _formData['data'].text = value;
-            });
-          },
-        ),
-      ],
+          TextFormField(
+            initialValue:
+                _currentItem != null ? _currentItem.data['text'] : null,
+            keyboardType: TextInputType.multiline,
+            maxLines: 5,
+            decoration: InputDecoration(
+              hintText: Strings.longText,
+            ),
+            onSaved: (value) {
+              setState(() {
+                _formData['data'].text = value;
+              });
+            },
+          ),
+        ],
+      ),
     );
   }
 
