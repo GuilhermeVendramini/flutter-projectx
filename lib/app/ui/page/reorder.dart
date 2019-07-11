@@ -140,7 +140,6 @@ class _PageReorderState extends State<PageReorder> {
               ),
             ],
           ),
-          Text(item.weight.toString()),
           Icon(
             Icons.drag_handle,
             color: _color,

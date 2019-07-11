@@ -48,7 +48,7 @@ class PageService extends Page {
     PageModel page = PageModel(
       name: item['name'],
       color: item['color'],
-      weight: 0,
+      weight: item['weight'],
     );
     Future<int> result = db.insert(page);
     result.then((itemId) {

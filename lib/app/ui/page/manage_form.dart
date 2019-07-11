@@ -35,7 +35,7 @@ class _PageManageFormState extends State<PageManageForm> {
   final Map<String, dynamic> _formData = {
     'name': null,
     'color': null,
-    'weight': 0,
+    'weight': 99,
   };
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   Color _pageColor;
