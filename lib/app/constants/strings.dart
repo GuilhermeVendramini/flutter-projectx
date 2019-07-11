@@ -4,6 +4,7 @@ class Strings {
   static const String appName = "Project X";
   static const String addPage = "Add Page";
   static const String managerPage = "Page";
+  static const String formError = "Please, review the form and try again";
   static const String addItems = "Add Items";
   static const String addTitle = "Add Title";
   static const String title = "Title";
@@ -19,6 +20,10 @@ class Strings {
   static const String imageWidth = "Image width. Ex: 90.0 or let empty";
   static const String imageHeight = "Image height. Ex: 90.0 or let empty";
   static const String addTextImage = "Add Text and Image";
+  static const String url = "URL";
+  static const String addUrl = "URL";
+  static const String urlValidate = "Please enter a valid URL";
+  static const String urlHintText = "Ex: https://www.google.com";
   static const String textColumns = "Text in 2 Columns";
   static const String addTextColumns = "Add Text in 2 Columns";
   static const String textImage = "Text and Image";

@@ -45,11 +45,17 @@ class PluginsFloatingButtons extends StatelessWidget {
             heroTag: 'save',
             onPressed: () async {
               Future<int> result = _submitFormSave(context);
-              result.then((_) {
-                Route route = MaterialPageRoute(
-                  builder: (context) => PageManageForm(item: _parent),
-                );
-                Navigator.push(context, route);
+              result.then((value) {
+                if(value == null) {
+                  Scaffold.of(context)
+                      .showSnackBar(SnackBar(content: Text(Strings.formError)));
+                } else {
+                  Route route = MaterialPageRoute(
+                    builder: (context) => PageManageForm(item: _parent),
+                  );
+                  Navigator.push(context, route);
+                }
+
               });
             },
             child: Icon(
@@ -64,30 +70,32 @@ class PluginsFloatingButtons extends StatelessWidget {
   Future<int> _submitFormSave(BuildContext context) async {
     final _plugin = Provider.of<PluginService>(context);
     final PluginDataModel _currentItem = _plugin.getCurrentItem;
+    if (_formKey.currentState.validate()) {
+      _formKey.currentState.save();
+      Future<int> itemResult;
+      int result;
 
-    _formKey.currentState.save();
-    Future<int> itemResult;
-    int result;
-
-    if (_currentItem != null) {
-      PluginDataModel _updatedItem = PluginDataModel(
-        id: _currentItem.id,
-        type: _currentItem.type,
-        parent: _currentItem.parent,
-        data: json.decode(json.encode(_formData['data'])),
-        weight: _currentItem.weight,
-      );
-      itemResult = _plugin.updateItem(_updatedItem);
-      await itemResult.then((itemId) {
-        result = itemId;
-      });
-    } else {
-      itemResult = _plugin.addItem(_formData);
-      await itemResult.then((itemId) {
-        result = itemId;
-      });
+      if (_currentItem != null) {
+        PluginDataModel _updatedItem = PluginDataModel(
+          id: _currentItem.id,
+          type: _currentItem.type,
+          parent: _currentItem.parent,
+          data: json.decode(json.encode(_formData['data'])),
+          weight: _currentItem.weight,
+        );
+        itemResult = _plugin.updateItem(_updatedItem);
+        await itemResult.then((itemId) {
+          result = itemId;
+        });
+      } else {
+        itemResult = _plugin.addItem(_formData);
+        await itemResult.then((itemId) {
+          result = itemId;
+        });
+      }
+      return result;
     }
-    return result;
+    return null;
   }
 }
 

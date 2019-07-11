@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:projetcx/app/plugins/types/youtubefield/models/youtubefield.dart';
-import 'package:youtube_player/youtube_player.dart';
+// import 'package:youtube_player/youtube_player.dart';
 
 class PluginYoutubeFieldDisplay {
   PluginYoutubeFieldDisplay._();
@@ -24,7 +24,8 @@ class YoutubeApp extends StatefulWidget {
 class _YoutubeAppState extends State<YoutubeApp> {
   @override
   Widget build(BuildContext context) {
-    return YoutubePlayer(
+    return null;
+/*    return YoutubePlayer(
       context: context,
       source: widget.data.videoId,
       quality: YoutubeQuality.MEDIUM,
@@ -36,6 +37,6 @@ class _YoutubeAppState extends State<YoutubeApp> {
       controlsActiveBackgroundOverlay: false,
       controlsTimeOut: Duration(seconds: 4),
       playerMode: YoutubePlayerMode.DEFAULT,
-    );
+    );*/
   }
 }
