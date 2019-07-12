@@ -6,8 +6,8 @@ class WebViewModel {
   });
 
   Map<String, dynamic> toJson() => <String, dynamic>{
-    'url': this.url,
-  };
+        'url': this.url,
+      };
 
   factory WebViewModel.fromJson(Map<String, dynamic> json) {
     return WebViewModel(

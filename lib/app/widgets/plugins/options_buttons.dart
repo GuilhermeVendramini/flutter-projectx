@@ -46,7 +46,7 @@ class PluginsFloatingButtons extends StatelessWidget {
             onPressed: () async {
               Future<int> result = _submitFormSave(context);
               result.then((value) {
-                if(value == null) {
+                if (value == null) {
                   Scaffold.of(context)
                       .showSnackBar(SnackBar(content: Text(Strings.formError)));
                 } else {
@@ -55,7 +55,6 @@ class PluginsFloatingButtons extends StatelessWidget {
                   );
                   Navigator.push(context, route);
                 }
-
               });
             },
             child: Icon(

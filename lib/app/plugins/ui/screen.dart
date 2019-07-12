@@ -19,9 +19,8 @@ class _PluginsScreenState extends State<PluginsScreen> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      // ignore: missing_return
-      onWillPop: () async {
-        Navigator.push(
+      onWillPop: () {
+        return Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) => PageManageForm(item: widget.item),

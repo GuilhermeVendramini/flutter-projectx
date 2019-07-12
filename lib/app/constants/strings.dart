@@ -2,8 +2,8 @@ class Strings {
   Strings._();
 
   static const String appName = "Project X";
-  static const String addPage = "Add Page";
-  static const String managerPage = "Page";
+  static const String addPage = "Add Slider";
+  static const String managerPage = "Slider";
   static const String formError = "Please, review the form and try again";
   static const String addItems = "Add Items";
   static const String addTitle = "Add Title";
@@ -27,8 +27,8 @@ class Strings {
   static const String textColumns = "Text in 2 Columns";
   static const String addTextColumns = "Add Text in 2 Columns";
   static const String textImage = "Text and Image";
-  static const String fieldPageName = "Page name...";
-  static const String pageTitleReorder = "Reorder pages";
+  static const String fieldPageName = "Slider name...";
+  static const String pageTitleReorder = "Reorder sliders";
   static const String confirmDeleteBox = "Confirm delete";
   static const String itemsButton = "Save and add items";
   static const String colorTitleBox = "CHOOSE A COLOR";

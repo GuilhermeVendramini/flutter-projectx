@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:validators/validators.dart';
 import 'package:projetcx/app/constants/app_colors.dart';
 import 'package:projetcx/app/constants/strings.dart';
 import 'package:projetcx/app/models/page.dart';
@@ -9,6 +8,7 @@ import 'package:projetcx/app/plugins/types/webview/models/webview.dart';
 import 'package:projetcx/app/widgets/plugins/options_buttons.dart';
 import 'package:projetcx/app/widgets/utils/gradient_background.dart';
 import 'package:provider/provider.dart';
+import 'package:validators/validators.dart';
 
 class PluginWebViewBuildForm extends StatefulWidget {
   @override
@@ -98,7 +98,7 @@ class _PluginWebViewBuildFormState extends State<PluginWebViewBuildForm> {
             },
             validator: (value) {
               if (isURL(value, requireProtocol: true) == false) {
-               return Strings.urlValidate;
+                return Strings.urlValidate;
               }
               return null;
             },

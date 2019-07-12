@@ -73,12 +73,13 @@ class _PageManageFormState extends State<PageManageForm> {
     return GradientBackground(
       color: _pageColor,
       child: WillPopScope(
-        // ignore: missing_return
-        onWillPop: () async {
-          Route route = MaterialPageRoute(
-            builder: (context) => HomeScreen(pageIndex: _pageIndex),
+        onWillPop: () {
+          return Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => HomeScreen(pageIndex: _pageIndex),
+            ),
           );
-          Navigator.push(context, route);
         },
         child: Scaffold(
           appBar: AppBar(
@@ -264,7 +265,6 @@ class _PageManageFormState extends State<PageManageForm> {
   }
 
   Future<PageModel> _submitFormSave() async {
-    final _page = Provider.of<PageService>(context);
     _formKey.currentState.save();
     PageModel result;
     Future<int> itemResult;
