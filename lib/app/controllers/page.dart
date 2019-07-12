@@ -22,10 +22,6 @@ class Page extends PageController {
     return index;
   }
 
-  void notifyChange() {
-    notifyListeners();
-  }
-
   bool get isItemsLoaded {
     return _isItemsLoaded;
   }
@@ -73,6 +69,7 @@ class PageService extends Page {
     Future<int> result = db.delete(page);
     result.then((itemId) {
       _items.removeWhere((item) => item.id == page.id);
+      notifyListeners();
     });
     return result;
   }

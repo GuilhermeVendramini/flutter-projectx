@@ -157,7 +157,6 @@ class _PageOptionDeleteButtonState extends State<PageOptionDeleteButton> {
   void _actionDelete() async {
     final p.PageService _page = Provider.of<p.PageService>(context);
     await _page.deleteItem(widget._item);
-    _page.notifyChange();
     Navigator.of(context).pop();
   }
 }
