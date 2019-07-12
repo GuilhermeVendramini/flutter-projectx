@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:projetcx/app/models/page.dart';
-import 'package:projetcx/app/ui/page/content.dart';
+import 'package:simpleslider/app/models/page.dart';
+import 'package:simpleslider/app/ui/page/content.dart';
 
 class PageScreen extends StatefulWidget {
   final Color gradientStart = Colors.purple[600];

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:projetcx/app/plugins/types/text_columns/models/text_columns.dart';
+import 'package:simpleslider/app/plugins/types/text_columns/models/text_columns.dart';
 
 class PluginTextColumnsFieldDisplay {
   PluginTextColumnsFieldDisplay._();

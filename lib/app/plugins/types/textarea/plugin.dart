@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:projetcx/app/constants/strings.dart';
-import 'package:projetcx/app/plugins/models/plugin.dart';
-import 'package:projetcx/app/plugins/types/textarea/ui/display.dart';
-import 'package:projetcx/app/plugins/types/textarea/ui/form.dart';
+import 'package:simpleslider/app/constants/strings.dart';
+import 'package:simpleslider/app/plugins/models/plugin.dart';
+import 'package:simpleslider/app/plugins/types/textarea/ui/display.dart';
+import 'package:simpleslider/app/plugins/types/textarea/ui/form.dart';
 
 final PluginModel pluginTextArea = PluginModel(
   type: 'TEXTAREA',

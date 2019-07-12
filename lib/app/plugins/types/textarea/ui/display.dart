@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:projetcx/app/plugins/types/textarea/models/textarea.dart';
+import 'package:simpleslider/app/plugins/types/textarea/models/textarea.dart';
 
 class PluginTextAreaDisplay {
   PluginTextAreaDisplay._();

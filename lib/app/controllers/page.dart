@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:projetcx/app/db/page.dart';
-import 'package:projetcx/app/models/page.dart';
+import 'package:simpleslider/app/db/page.dart';
+import 'package:simpleslider/app/models/page.dart';
 
 class PageController with ChangeNotifier {
   List<PageModel> _items;

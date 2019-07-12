@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:projetcx/app/plugins/types/youtubefield/models/youtubefield.dart';
+import 'package:simpleslider/app/plugins/types/youtubefield/models/youtubefield.dart';
 // import 'package:youtube_player/youtube_player.dart';
 
 class PluginYoutubeFieldDisplay {

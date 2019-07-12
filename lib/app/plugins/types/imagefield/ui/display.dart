@@ -1,5 +1,5 @@
-import 'package:projetcx/app/plugins/types/imagefield/models/imagefield.dart';
-import 'package:projetcx/app/plugins/widgets/image/plugin_image_load.dart';
+import 'package:simpleslider/app/plugins/types/imagefield/models/imagefield.dart';
+import 'package:simpleslider/app/plugins/widgets/image/plugin_image_load.dart';
 
 class PluginImageFieldDisplay {
   PluginImageFieldDisplay._();

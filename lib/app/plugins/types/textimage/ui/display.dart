@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:projetcx/app/plugins/types/textimage/models/textimage.dart';
-import 'package:projetcx/app/plugins/widgets/image/plugin_image_load.dart';
+import 'package:simpleslider/app/plugins/types/textimage/models/textimage.dart';
+import 'package:simpleslider/app/plugins/widgets/image/plugin_image_load.dart';
 
 class PluginTextImageFieldDisplay {
   PluginTextImageFieldDisplay._();

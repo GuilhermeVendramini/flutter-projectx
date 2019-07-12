@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:projetcx/app/constants/app_theme.dart';
-import 'package:projetcx/app/constants/strings.dart';
-import 'package:projetcx/app/controllers/page.dart';
-import 'package:projetcx/app/controllers/screen.dart';
-import 'package:projetcx/app/plugins/controllers/plugins.dart';
-import 'package:projetcx/app/routes.dart';
-import 'package:projetcx/app/ui/home/screen.dart';
+import 'package:simpleslider/app/constants/app_theme.dart';
+import 'package:simpleslider/app/constants/strings.dart';
+import 'package:simpleslider/app/controllers/page.dart';
+import 'package:simpleslider/app/controllers/screen.dart';
+import 'package:simpleslider/app/plugins/controllers/plugins.dart';
+import 'package:simpleslider/app/routes.dart';
+import 'package:simpleslider/app/ui/home/screen.dart';
 import 'package:provider/provider.dart';
 
 class App extends StatelessWidget {

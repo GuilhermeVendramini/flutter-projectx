@@ -2,13 +2,13 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:projetcx/app/constants/app_colors.dart';
-import 'package:projetcx/app/constants/strings.dart';
-import 'package:projetcx/app/controllers/page.dart' as p;
-import 'package:projetcx/app/models/page.dart';
-import 'package:projetcx/app/ui/page/manage_form.dart';
-import 'package:projetcx/app/utils/device_media_query.dart';
-import 'package:projetcx/app/widgets/plugins/options_buttons.dart';
+import 'package:simpleslider/app/constants/app_colors.dart';
+import 'package:simpleslider/app/constants/strings.dart';
+import 'package:simpleslider/app/controllers/page.dart' as p;
+import 'package:simpleslider/app/models/page.dart';
+import 'package:simpleslider/app/ui/page/manage_form.dart';
+import 'package:simpleslider/app/utils/device_media_query.dart';
+import 'package:simpleslider/app/widgets/plugins/options_buttons.dart';
 import 'package:provider/provider.dart';
 
 class PageReorder extends StatefulWidget {

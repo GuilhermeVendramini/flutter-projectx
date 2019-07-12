@@ -1,12 +1,12 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
-import 'package:projetcx/app/constants/strings.dart';
-import 'package:projetcx/app/controllers/page.dart' as p;
-import 'package:projetcx/app/models/page.dart';
-import 'package:projetcx/app/ui/home/screen.dart';
-import 'package:projetcx/app/ui/page/manage_form.dart';
-import 'package:projetcx/app/ui/page/reorder.dart';
+import 'package:simpleslider/app/constants/strings.dart';
+import 'package:simpleslider/app/controllers/page.dart' as p;
+import 'package:simpleslider/app/models/page.dart';
+import 'package:simpleslider/app/ui/home/screen.dart';
+import 'package:simpleslider/app/ui/page/manage_form.dart';
+import 'package:simpleslider/app/ui/page/reorder.dart';
 import 'package:provider/provider.dart';
 
 const Color color = Colors.white;

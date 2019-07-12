@@ -1,11 +1,11 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:projetcx/app/constants/strings.dart';
-import 'package:projetcx/app/models/page.dart';
-import 'package:projetcx/app/plugins/controllers/plugins.dart';
-import 'package:projetcx/app/plugins/models/plugin_data.dart';
-import 'package:projetcx/app/ui/page/manage_form.dart';
+import 'package:simpleslider/app/constants/strings.dart';
+import 'package:simpleslider/app/models/page.dart';
+import 'package:simpleslider/app/plugins/controllers/plugins.dart';
+import 'package:simpleslider/app/plugins/models/plugin_data.dart';
+import 'package:simpleslider/app/ui/page/manage_form.dart';
 import 'package:provider/provider.dart';
 
 const Color color = Colors.white;

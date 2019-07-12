@@ -1,9 +1,9 @@
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
-import 'package:projetcx/app/models/page.dart';
-import 'package:projetcx/app/plugins/db/plugins.dart';
-import 'package:projetcx/app/plugins/models/plugin_data.dart';
+import 'package:simpleslider/app/models/page.dart';
+import 'package:simpleslider/app/plugins/db/plugins.dart';
+import 'package:simpleslider/app/plugins/models/plugin_data.dart';
 
 class PluginController with ChangeNotifier {
   List<PluginDataModel> _items;

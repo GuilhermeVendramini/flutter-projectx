@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/block_picker.dart';
-import 'package:projetcx/app/constants/app_colors.dart';
-import 'package:projetcx/app/constants/strings.dart';
+import 'package:simpleslider/app/constants/app_colors.dart';
+import 'package:simpleslider/app/constants/strings.dart';
 
 class FieldColorPicker extends StatelessWidget {
   final Color color;

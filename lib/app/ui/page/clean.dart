@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:projetcx/app/constants/strings.dart';
-import 'package:projetcx/app/ui/page/manage_form.dart';
+import 'package:simpleslider/app/constants/strings.dart';
+import 'package:simpleslider/app/ui/page/manage_form.dart';
 
 class PageClean extends StatefulWidget {
   @override

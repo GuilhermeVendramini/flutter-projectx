@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:projetcx/app/constants/app_colors.dart';
+import 'package:simpleslider/app/constants/app_colors.dart';
 
 class DynamicColor {
   DynamicColor._();

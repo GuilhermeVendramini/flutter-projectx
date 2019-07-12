@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:projetcx/app/plugins/types/textfield/models/textfield.dart';
+import 'package:simpleslider/app/plugins/types/textfield/models/textfield.dart';
 
 class PluginTextFieldDisplay {
   PluginTextFieldDisplay._();

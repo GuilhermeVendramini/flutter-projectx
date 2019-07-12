@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:projetcx/app/controllers/page.dart' as p;
-import 'package:projetcx/app/controllers/screen.dart' as s;
-import 'package:projetcx/app/models/page.dart';
-import 'package:projetcx/app/ui/page/clean.dart';
-import 'package:projetcx/app/ui/page/screen.dart';
-import 'package:projetcx/app/utils/dynamic_color.dart';
-import 'package:projetcx/app/widgets/utils/gradient_background.dart';
+import 'package:simpleslider/app/controllers/page.dart' as p;
+import 'package:simpleslider/app/controllers/screen.dart' as s;
+import 'package:simpleslider/app/models/page.dart';
+import 'package:simpleslider/app/ui/page/clean.dart';
+import 'package:simpleslider/app/ui/page/screen.dart';
+import 'package:simpleslider/app/utils/dynamic_color.dart';
+import 'package:simpleslider/app/widgets/utils/gradient_background.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {

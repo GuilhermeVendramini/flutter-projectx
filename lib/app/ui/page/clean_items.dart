@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:projetcx/app/constants/strings.dart';
-import 'package:projetcx/app/controllers/screen.dart' as s;
-import 'package:projetcx/app/models/page.dart';
-import 'package:projetcx/app/plugins/ui/screen.dart';
+import 'package:simpleslider/app/constants/strings.dart';
+import 'package:simpleslider/app/controllers/screen.dart' as s;
+import 'package:simpleslider/app/models/page.dart';
+import 'package:simpleslider/app/plugins/ui/screen.dart';
 import 'package:provider/provider.dart';
 
 class PageCleanItems extends StatefulWidget {

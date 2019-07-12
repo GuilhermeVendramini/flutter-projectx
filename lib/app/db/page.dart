@@ -1,5 +1,5 @@
-import 'package:projetcx/app/db/provider.dart';
-import 'package:projetcx/app/models/page.dart';
+import 'package:simpleslider/app/db/provider.dart';
+import 'package:simpleslider/app/models/page.dart';
 
 class DBPage {
   DBProvider dbProvider = new DBProvider();

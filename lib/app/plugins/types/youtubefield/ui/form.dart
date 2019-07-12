@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:projetcx/app/constants/app_colors.dart';
-import 'package:projetcx/app/constants/strings.dart';
-import 'package:projetcx/app/models/page.dart';
-import 'package:projetcx/app/plugins/controllers/plugins.dart';
-import 'package:projetcx/app/plugins/models/plugin_data.dart';
-import 'package:projetcx/app/plugins/types/youtubefield/models/youtubefield.dart';
-import 'package:projetcx/app/widgets/plugins/options_buttons.dart';
-import 'package:projetcx/app/widgets/utils/gradient_background.dart';
+import 'package:simpleslider/app/constants/app_colors.dart';
+import 'package:simpleslider/app/constants/strings.dart';
+import 'package:simpleslider/app/models/page.dart';
+import 'package:simpleslider/app/plugins/controllers/plugins.dart';
+import 'package:simpleslider/app/plugins/models/plugin_data.dart';
+import 'package:simpleslider/app/plugins/types/youtubefield/models/youtubefield.dart';
+import 'package:simpleslider/app/widgets/plugins/options_buttons.dart';
+import 'package:simpleslider/app/widgets/utils/gradient_background.dart';
 import 'package:provider/provider.dart';
 
 class PluginYoutubeFieldBuildForm extends StatefulWidget {

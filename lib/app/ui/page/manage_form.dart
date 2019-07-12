@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:projetcx/app/constants/app_colors.dart';
-import 'package:projetcx/app/constants/strings.dart';
-import 'package:projetcx/app/controllers/page.dart';
-import 'package:projetcx/app/models/page.dart';
-import 'package:projetcx/app/plugins/controllers/plugins.dart';
-import 'package:projetcx/app/plugins/models/plugin.dart';
-import 'package:projetcx/app/plugins/models/plugin_data.dart';
-import 'package:projetcx/app/plugins/register.dart';
-import 'package:projetcx/app/plugins/ui/screen.dart';
-import 'package:projetcx/app/ui/home/screen.dart';
-import 'package:projetcx/app/widgets/fields/color_picker.dart';
-import 'package:projetcx/app/widgets/fields/text_field.dart';
-import 'package:projetcx/app/widgets/page/options_button.dart';
-import 'package:projetcx/app/widgets/plugins/options_buttons.dart';
-import 'package:projetcx/app/widgets/utils/gradient_background.dart';
+import 'package:simpleslider/app/constants/app_colors.dart';
+import 'package:simpleslider/app/constants/strings.dart';
+import 'package:simpleslider/app/controllers/page.dart';
+import 'package:simpleslider/app/models/page.dart';
+import 'package:simpleslider/app/plugins/controllers/plugins.dart';
+import 'package:simpleslider/app/plugins/models/plugin.dart';
+import 'package:simpleslider/app/plugins/models/plugin_data.dart';
+import 'package:simpleslider/app/plugins/register.dart';
+import 'package:simpleslider/app/plugins/ui/screen.dart';
+import 'package:simpleslider/app/ui/home/screen.dart';
+import 'package:simpleslider/app/widgets/fields/color_picker.dart';
+import 'package:simpleslider/app/widgets/fields/text_field.dart';
+import 'package:simpleslider/app/widgets/page/options_button.dart';
+import 'package:simpleslider/app/widgets/plugins/options_buttons.dart';
+import 'package:simpleslider/app/widgets/utils/gradient_background.dart';
 import 'package:provider/provider.dart';
 
 class PageManageForm extends StatefulWidget {

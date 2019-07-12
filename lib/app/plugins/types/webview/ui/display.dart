@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
-import 'package:projetcx/app/plugins/types/webview/models/webview.dart';
+import 'package:simpleslider/app/plugins/types/webview/models/webview.dart';
 
 class PluginWebViewDisplay {
   PluginWebViewDisplay._();
