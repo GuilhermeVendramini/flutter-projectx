@@ -29,6 +29,7 @@ class DBProvider {
         onCreate: (Database db, int version) async {
       await db.execute("CREATE TABLE page ("
           "id INTEGER PRIMARY KEY AUTOINCREMENT,"
+          "category INTEGER,"
           "name TEXT,"
           "color INTEGER,"
           "weight INTEGER"
@@ -40,6 +41,13 @@ class DBProvider {
           "parent INTEGER,"
           "data TEXT,"
           "weight INTEGER"
+          ")");
+
+      await db.execute("CREATE TABLE category ("
+          "id INTEGER PRIMARY KEY AUTOINCREMENT,"
+          "name TEXT,"
+          "color INTEGER,"
+          "icon INTEGER"
           ")");
     });
   }

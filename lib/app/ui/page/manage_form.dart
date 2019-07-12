@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:projetcx/app/constants/app_colors.dart';
 import 'package:projetcx/app/constants/strings.dart';
+import 'package:projetcx/app/controllers/category.dart';
 import 'package:projetcx/app/controllers/page.dart';
 import 'package:projetcx/app/models/page.dart';
 import 'package:projetcx/app/plugins/controllers/plugins.dart';
@@ -9,7 +10,7 @@ import 'package:projetcx/app/plugins/models/plugin.dart';
 import 'package:projetcx/app/plugins/models/plugin_data.dart';
 import 'package:projetcx/app/plugins/register.dart';
 import 'package:projetcx/app/plugins/ui/screen.dart';
-import 'package:projetcx/app/ui/home/screen.dart';
+import 'package:projetcx/app/ui/page/list.dart';
 import 'package:projetcx/app/widgets/fields/color_picker.dart';
 import 'package:projetcx/app/widgets/fields/text_field.dart';
 import 'package:projetcx/app/widgets/page/options_button.dart';
@@ -29,10 +30,13 @@ class PageManageForm extends StatefulWidget {
 }
 
 class _PageManageFormState extends State<PageManageForm> {
+  CategoryService _category;
   PageService _page;
   PluginService _plugin;
   List<PluginDataModel> _items = [];
+
   final Map<String, dynamic> _formData = {
+    'category': null,
     'name': null,
     'color': null,
     'weight': 99,
@@ -57,17 +61,18 @@ class _PageManageFormState extends State<PageManageForm> {
   Widget build(BuildContext context) {
     _page = Provider.of<PageService>(context);
     _plugin = Provider.of<PluginService>(context);
-
-    if (_plugin.isItemsLoaded == null) {
-      _plugin.loadItems();
-    }
+    _category = Provider.of<CategoryService>(context);
 
     _items = _plugin.getItemsByParent(widget.item?.id);
 
-    _pageIndex = _page.getItemIndex(widget.item);
-
+    List<PageModel> _pages = _page.getItemsByCategory(_category.getCurrentCategory.id);
+    _pageIndex = _pages?.length;
     if (_pageIndex == -1) {
       _pageIndex = _page.getItems.length;
+    }
+
+    if(widget.item != null) {
+      _pageIndex--;
     }
 
     return GradientBackground(
@@ -76,7 +81,8 @@ class _PageManageFormState extends State<PageManageForm> {
         // ignore: missing_return
         onWillPop: () async {
           Route route = MaterialPageRoute(
-            builder: (context) => HomeScreen(pageIndex: _pageIndex),
+            builder: (context) => PageList(
+                pageIndex: _pageIndex, category: _category.getCurrentCategory),
           );
           Navigator.push(context, route);
         },
@@ -178,7 +184,7 @@ class _PageManageFormState extends State<PageManageForm> {
           SizedBox(
             height: 20.0,
           ),
-          _addItemsButton(page, context),
+          widget.item != null ? _addItemsButton(page, context) : Container(),
           SizedBox(
             height: 40.0,
           ),
@@ -264,13 +270,14 @@ class _PageManageFormState extends State<PageManageForm> {
   }
 
   Future<PageModel> _submitFormSave() async {
-    final _page = Provider.of<PageService>(context);
+    _formData['category'] = _category.getCurrentCategory.id;
     _formKey.currentState.save();
     PageModel result;
     Future<int> itemResult;
     if (widget.item != null) {
       PageModel updatedItem = PageModel(
         id: widget.item.id,
+        category: _formData['category'],
         name: _formData['name'],
         color: _pageColor.value,
         weight: widget.item.weight,
@@ -285,6 +292,7 @@ class _PageManageFormState extends State<PageManageForm> {
       await itemResult.then((itemId) {
         result = PageModel(
           id: itemId,
+          category: _formData['category'],
           name: _formData['name'],
           color: _pageColor.value,
           weight: 0,
@@ -296,7 +304,8 @@ class _PageManageFormState extends State<PageManageForm> {
 
   void _submitFormRedirect(BuildContext context, int pageIndex) {
     Route route = MaterialPageRoute(
-      builder: (context) => HomeScreen(
+      builder: (context) => PageList(
+        category: _category.getCurrentCategory,
         pageIndex: pageIndex,
       ),
     );

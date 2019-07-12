@@ -35,13 +35,13 @@ class FieldColorPicker extends StatelessWidget {
         );
       },
       child: Container(
-        height: 50.0,
-        width: 50.0,
+        height: 48.0,
+        width: 48.0,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(24.0),
+          shape: BoxShape.circle,
           border: Border.all(
             color: Colors.white,
-            width: 4.0,
+            width: 2.0,
           ),
           color: color,
         ),

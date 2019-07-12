@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:projetcx/app/constants/strings.dart';
-import 'package:projetcx/app/ui/page/manage_form.dart';
+import 'package:projetcx/app/ui/category/manage_form.dart';
 
-class PageClean extends StatefulWidget {
+class CategoryClean extends StatefulWidget {
   @override
-  _PageCleanState createState() => _PageCleanState();
+  _CategoryCleanState createState() => _CategoryCleanState();
 }
 
-class _PageCleanState extends State<PageClean> {
+class _CategoryCleanState extends State<CategoryClean> {
   Color color = Colors.white;
 
   @override
@@ -22,7 +22,7 @@ class _PageCleanState extends State<PageClean> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => PageManageForm(),
+                  builder: (context) => CategoryManageForm(),
                 ),
               );
             },
@@ -40,7 +40,7 @@ class _PageCleanState extends State<PageClean> {
                     height: 40.0,
                   ),
                   Text(
-                    Strings.addPage.toUpperCase(),
+                    Strings.addCategory.toUpperCase(),
                     style: TextStyle(
                       fontSize: 20.0,
                       fontWeight: FontWeight.w600,

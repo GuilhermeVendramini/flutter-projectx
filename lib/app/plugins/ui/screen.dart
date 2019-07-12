@@ -3,7 +3,6 @@ import 'package:projetcx/app/constants/strings.dart';
 import 'package:projetcx/app/models/page.dart';
 import 'package:projetcx/app/plugins/controllers/plugins.dart';
 import 'package:projetcx/app/plugins/register.dart';
-import 'package:projetcx/app/ui/page/manage_form.dart';
 import 'package:provider/provider.dart';
 
 class PluginsScreen extends StatefulWidget {
@@ -21,12 +20,13 @@ class _PluginsScreenState extends State<PluginsScreen> {
     return WillPopScope(
       // ignore: missing_return
       onWillPop: () async {
-        Navigator.push(
+        return true;
+/*        Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) => PageManageForm(item: widget.item),
           ),
-        );
+        );*/
       },
       child: Scaffold(
         appBar: AppBar(
@@ -74,13 +74,13 @@ class _PluginsScreenState extends State<PluginsScreen> {
               Icon(
                 pluginsRegister[index].icon,
                 color: color,
-                size: 48.0,
+                size: 52.0,
               ),
               Text(
-                pluginsRegister[index].name,
+                pluginsRegister[index].name.toUpperCase(),
                 style: TextStyle(
                   color: color,
-                  fontSize: 18.0,
+                  fontSize: 20.0,
                 ),
                 textAlign: TextAlign.center,
               ),

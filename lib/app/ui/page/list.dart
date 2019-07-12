@@ -1,30 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:projetcx/app/controllers/category.dart';
 import 'package:projetcx/app/controllers/page.dart' as p;
 import 'package:projetcx/app/controllers/screen.dart' as s;
+import 'package:projetcx/app/models/category.dart';
 import 'package:projetcx/app/models/page.dart';
+import 'package:projetcx/app/ui/category/list.dart';
 import 'package:projetcx/app/ui/page/clean.dart';
 import 'package:projetcx/app/ui/page/screen.dart';
 import 'package:projetcx/app/utils/dynamic_color.dart';
 import 'package:projetcx/app/widgets/utils/gradient_background.dart';
 import 'package:provider/provider.dart';
 
-class HomeScreen extends StatefulWidget {
+class PageList extends StatefulWidget {
   final int pageIndex;
+  final CategoryModel category;
 
-  HomeScreen({this.pageIndex = 0});
+  PageList({this.pageIndex = 0, @required this.category});
 
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  _PageListState createState() => _PageListState();
 }
 
-class _HomeScreenState extends State<HomeScreen>
+class _PageListState extends State<PageList>
     with SingleTickerProviderStateMixin {
   AnimationController _controller;
   Animation<double> _animation;
   PageController _pageController;
-  int _pageIndex;
+  int _pageIndex, _addPage = 1, _categoryIndex;
   bool _fullScreen = true;
-  int _addPage = 1;
 
   @override
   void initState() {
@@ -41,15 +44,19 @@ class _HomeScreenState extends State<HomeScreen>
 
   @override
   Widget build(BuildContext context) {
+    final CategoryService _category = Provider.of<CategoryService>(context);
     final p.PageService _page = Provider.of<p.PageService>(context);
     final s.ScreenService _screen = Provider.of<s.ScreenService>(context);
     Color _backgroundColor = Colors.blueGrey;
+    _category.setCurrentCategory(widget.category);
+    _categoryIndex = _category.getItemIndex(widget.category);
 
     if (_page.isItemsLoaded == null) {
       _page.loadItems();
+      return CircularProgressIndicator();
     }
 
-    final List<PageModel> _pages = _page.getItems;
+    final List<PageModel> _pages = _page.getItemsByCategory(widget.category.id);
 
     if (_pages != null && _pages.length + 1 != _pageIndex && _pageIndex != -1) {
       _backgroundColor = DynamicColor.getBackground(_pages, _pageIndex);
@@ -63,17 +70,23 @@ class _HomeScreenState extends State<HomeScreen>
         mainAxisSize: MainAxisSize.max,
         children: <Widget>[
           Expanded(
-            child: PageView.builder(
-              controller: _pageController,
-              itemBuilder: (BuildContext context, int index) {
-                if (index == _pages.length) {
-                  return PageClean();
-                } else {
-                  return PageScreen(_pages[index]);
-                }
-              },
-              itemCount: _pages.length + _addPage,
-            ),
+            child: _pages == null
+                ? PageView(
+                    children: <Widget>[
+                      PageClean(),
+                    ],
+                  )
+                : PageView.builder(
+                    controller: _pageController,
+                    itemBuilder: (BuildContext context, int index) {
+                      if (index == _pages.length) {
+                        return PageClean();
+                      } else {
+                        return PageScreen(page: _pages[index]);
+                      }
+                    },
+                    itemCount: _pages.length + _addPage,
+                  ),
           ),
         ],
       );
@@ -83,6 +96,7 @@ class _HomeScreenState extends State<HomeScreen>
       return FadeTransition(
         opacity: _animation,
         child: NotificationListener<ScrollNotification>(
+          // ignore: missing_return
           onNotification: (notification) {
             if (notification is ScrollEndNotification) {
               int currentPage = _pageController.page.round().toInt();
@@ -108,36 +122,39 @@ class _HomeScreenState extends State<HomeScreen>
     return GradientBackground(
       color: _backgroundColor,
       child: WillPopScope(
+        // ignore: missing_return
         onWillPop: () async {
           _addPage = 1;
           _screen.setFullScreen(false);
-          return false;
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => CategoryList(categoryIndex: _categoryIndex),
+            ),
+          );
         },
         child: Scaffold(
           backgroundColor: Colors.transparent,
-          body: _pages != null
-              ? _fadeTransition()
-              : Center(
-                  child: CircularProgressIndicator(),
+          body: _fadeTransition(),
+          floatingActionButton: _screen.isFullScreen ||
+                  _pages == null ||
+                  _pageIndex == _pages.length
+              ? Container()
+              : FloatingActionButton(
+                  heroTag: 'fullScreen',
+                  onPressed: () {
+                    setState(() {
+                      _addPage = 0;
+                    });
+                    _screen.setFullScreen(true);
+                  },
+                  child: Icon(
+                    Icons.fullscreen,
+                    color: Colors.white.withOpacity(0.8),
+                  ),
+                  backgroundColor: Colors.transparent,
+                  elevation: 0.0,
                 ),
-          floatingActionButton:
-              _screen.isFullScreen || _pageIndex == _pages?.length
-                  ? Container()
-                  : FloatingActionButton(
-                      heroTag: 'fullScreen',
-                      onPressed: () {
-                        setState(() {
-                          _addPage = 0;
-                        });
-                        _screen.setFullScreen(true);
-                      },
-                      child: Icon(
-                        Icons.fullscreen,
-                        color: Colors.white.withOpacity(0.8),
-                      ),
-                      backgroundColor: Colors.transparent,
-                      elevation: 0.0,
-                    ),
         ),
       ),
     );

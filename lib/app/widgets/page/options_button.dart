@@ -2,9 +2,10 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:projetcx/app/constants/strings.dart';
+import 'package:projetcx/app/controllers/category.dart';
 import 'package:projetcx/app/controllers/page.dart' as p;
 import 'package:projetcx/app/models/page.dart';
-import 'package:projetcx/app/ui/home/screen.dart';
+import 'package:projetcx/app/ui/page/list.dart';
 import 'package:projetcx/app/ui/page/manage_form.dart';
 import 'package:projetcx/app/ui/page/reorder.dart';
 import 'package:provider/provider.dart';
@@ -187,11 +188,12 @@ class _PageDeleteButtonState extends State<PageDeleteButton> {
 
   void _actionDelete() async {
     final p.PageService _page = Provider.of<p.PageService>(context);
+    final CategoryService _category = Provider.of<CategoryService>(context);
     await _page.deleteItem(widget.item);
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => HomeScreen(),
+        builder: (context) => PageList(category: _category.getCurrentCategory),
       ),
     );
   }

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:projetcx/app/ui/home/screen.dart';
+import 'package:projetcx/app/ui/category/list.dart';
 
 class Routes {
   Routes._();
 
   //static variables
-  static const String home = '/home';
+  static const String categories = '/categories';
 
   static final routes = <String, WidgetBuilder>{
-    home: (BuildContext context) => HomeScreen(),
+    categories: (BuildContext context) => CategoryList(),
   };
 }
