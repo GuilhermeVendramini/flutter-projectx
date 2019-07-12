@@ -90,6 +90,7 @@ class _HomeScreenState extends State<HomeScreen>
                 setState(() => _pageIndex = currentPage);
               }
             }
+            return true;
           },
           child: GestureDetector(
             child: _pageBuilder(),

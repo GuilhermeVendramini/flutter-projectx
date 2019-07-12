@@ -287,7 +287,7 @@ class _PageManageFormState extends State<PageManageForm> {
           id: itemId,
           name: _formData['name'],
           color: _pageColor.value,
-          weight: 0,
+          weight: 99,
         );
       });
     }
