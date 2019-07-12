@@ -57,7 +57,7 @@ class PluginTextColumnsFieldDisplay {
           bottom: 20,
         ),
         child: Text(
-          _data.titleOne,
+          _data.titleTwo,
           style: TextStyle(
             fontSize: 40.0,
           ),
@@ -72,7 +72,7 @@ class PluginTextColumnsFieldDisplay {
           bottom: 20,
         ),
         child: Text(
-          _data.textOne,
+          _data.textTwo,
           style: TextStyle(
             fontSize: 20.0,
           ),

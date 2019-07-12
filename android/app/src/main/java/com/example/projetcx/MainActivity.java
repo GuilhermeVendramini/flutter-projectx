@@ -1,4 +1,4 @@
-package com.example.projetcx;
+package vendramini.simpleslider;
 
 import android.os.Bundle;
 import io.flutter.app.FlutterActivity;
